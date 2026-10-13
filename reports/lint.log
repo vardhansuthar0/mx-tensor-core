@@ -1,0 +1,31 @@
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.058 MB sources in 4 modules, into 0.455 MB in 3 C++ files needing 0.000 MB
+- Verilator: Walltime 0.068 s (elab=0.004, cvt=0.048, bld=0.000); cpu 0.068 s on 1 threads; allocated 25.332 MB
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.058 MB sources in 4 modules, into 0.275 MB in 3 C++ files needing 0.000 MB
+- Verilator: Walltime 0.079 s (elab=0.006, cvt=0.054, bld=0.000); cpu 0.079 s on 1 threads; allocated 23.664 MB
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.058 MB sources in 4 modules, into 0.277 MB in 3 C++ files needing 0.000 MB
+- Verilator: Walltime 0.054 s (elab=0.004, cvt=0.039, bld=0.000); cpu 0.053 s on 1 threads; allocated 23.688 MB
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.058 MB sources in 4 modules, into 0.851 MB in 4 C++ files needing 0.000 MB
+- Verilator: Walltime 0.151 s (elab=0.007, cvt=0.100, bld=0.000); cpu 0.150 s on 1 threads; allocated 29.547 MB
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.058 MB sources in 4 modules, into 0.493 MB in 3 C++ files needing 0.000 MB
+- Verilator: Walltime 0.075 s (elab=0.005, cvt=0.055, bld=0.000); cpu 0.075 s on 1 threads; allocated 26.309 MB
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.058 MB sources in 4 modules, into 0.495 MB in 3 C++ files needing 0.000 MB
+- Verilator: Walltime 0.121 s (elab=0.006, cvt=0.096, bld=0.000); cpu 0.121 s on 1 threads; allocated 26.312 MB
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.058 MB sources in 4 modules, into 1.679 MB in 6 C++ files needing 0.000 MB
+- Verilator: Walltime 0.286 s (elab=0.014, cvt=0.210, bld=0.000); cpu 0.286 s on 1 threads; allocated 37.949 MB
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.058 MB sources in 4 modules, into 0.928 MB in 4 C++ files needing 0.000 MB
+- Verilator: Walltime 0.294 s (elab=0.010, cvt=0.259, bld=0.000); cpu 0.294 s on 1 threads; allocated 31.594 MB
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.058 MB sources in 4 modules, into 0.931 MB in 4 C++ files needing 0.000 MB
+- Verilator: Walltime 0.216 s (elab=0.012, cvt=0.166, bld=0.000); cpu 0.216 s on 1 threads; allocated 31.664 MB
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.086 MB sources in 5 modules, into 2.918 MB in 11 C++ files needing 0.000 MB
+- Verilator: Walltime 1.200 s (elab=0.053, cvt=0.978, bld=0.000); cpu 1.196 s on 1 threads; allocated 70.988 MB
+Verilator warning-clean: nine PE configurations and 4x4 engine. Yosys hierarchy/process/check passed.

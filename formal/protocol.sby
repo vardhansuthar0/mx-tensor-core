@@ -1,0 +1,13 @@
+[options]
+mode prove
+depth 12
+[engines]
+smtbmc z3
+[script]
+read_slang -j 1 --top protocol_proof mx_csa.sv mx_pe.sv protocol.sv
+prep -top protocol_proof
+chformal -lower
+[files]
+../rtl/mx_csa.sv
+../rtl/mx_pe.sv
+protocol.sv

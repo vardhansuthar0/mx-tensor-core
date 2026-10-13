@@ -1,0 +1,170 @@
+python3 -m pytest -q tb/test_model.py --junitxml=reports/model.xml
+.....                                                                    [100%]
+5 passed in 0.28s
+python3 scripts/lint.py
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.058 MB sources in 4 modules, into 0.455 MB in 3 C++ files needing 0.000 MB
+- Verilator: Walltime 0.059 s (elab=0.005, cvt=0.041, bld=0.000); cpu 0.059 s on 1 threads; allocated 25.332 MB
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.058 MB sources in 4 modules, into 0.275 MB in 3 C++ files needing 0.000 MB
+- Verilator: Walltime 0.061 s (elab=0.006, cvt=0.040, bld=0.000); cpu 0.061 s on 1 threads; allocated 23.664 MB
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.058 MB sources in 4 modules, into 0.277 MB in 3 C++ files needing 0.000 MB
+- Verilator: Walltime 0.047 s (elab=0.004, cvt=0.033, bld=0.000); cpu 0.047 s on 1 threads; allocated 23.691 MB
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.058 MB sources in 4 modules, into 0.851 MB in 4 C++ files needing 0.000 MB
+- Verilator: Walltime 0.105 s (elab=0.008, cvt=0.074, bld=0.000); cpu 0.105 s on 1 threads; allocated 29.551 MB
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.058 MB sources in 4 modules, into 0.493 MB in 3 C++ files needing 0.000 MB
+- Verilator: Walltime 0.080 s (elab=0.005, cvt=0.057, bld=0.000); cpu 0.080 s on 1 threads; allocated 26.305 MB
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.058 MB sources in 4 modules, into 0.495 MB in 3 C++ files needing 0.000 MB
+- Verilator: Walltime 0.076 s (elab=0.006, cvt=0.055, bld=0.000); cpu 0.076 s on 1 threads; allocated 26.305 MB
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.058 MB sources in 4 modules, into 1.679 MB in 6 C++ files needing 0.000 MB
+- Verilator: Walltime 0.182 s (elab=0.007, cvt=0.139, bld=0.000); cpu 0.182 s on 1 threads; allocated 37.949 MB
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.058 MB sources in 4 modules, into 0.928 MB in 4 C++ files needing 0.000 MB
+- Verilator: Walltime 0.149 s (elab=0.007, cvt=0.118, bld=0.000); cpu 0.149 s on 1 threads; allocated 31.594 MB
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.058 MB sources in 4 modules, into 0.931 MB in 4 C++ files needing 0.000 MB
+- Verilator: Walltime 0.143 s (elab=0.007, cvt=0.111, bld=0.000); cpu 0.143 s on 1 threads; allocated 31.668 MB
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.086 MB sources in 5 modules, into 2.918 MB in 11 C++ files needing 0.000 MB
+- Verilator: Walltime 0.541 s (elab=0.010, cvt=0.459, bld=0.000); cpu 0.541 s on 1 threads; allocated 70.984 MB
+Verilator warning-clean: nine PE configurations and 4x4 engine. Yosys hierarchy/process/check passed.
+python3 scripts/formal.py
+csa True
+protocol True
+python3 scripts/mutate.py
+{
+  "baseline": "pass",
+  "mutants": [
+    {
+      "name": "broken_backpressure",
+      "status": "killed",
+      "reason": "scoreboard/protocol assertion",
+      "log": "reports/mutant-broken_backpressure.log"
+    },
+    {
+      "name": "scale_bias",
+      "status": "killed",
+      "reason": "scoreboard/protocol assertion",
+      "log": "reports/mutant-scale_bias.log"
+    },
+    {
+      "name": "subnormal_exponent",
+      "status": "killed",
+      "reason": "scoreboard/protocol assertion",
+      "log": "reports/mutant-subnormal_exponent.log"
+    },
+    {
+      "name": "e4m3_max_is_nan",
+      "status": "killed",
+      "reason": "scoreboard/protocol assertion",
+      "log": "reports/mutant-e4m3_max_is_nan.log"
+    },
+    {
+      "name": "product_sign",
+      "status": "killed",
+      "reason": "scoreboard/protocol assertion",
+      "log": "reports/mutant-product_sign.log"
+    },
+    {
+      "name": "round_ties_up",
+      "status": "killed",
+      "reason": "scoreboard/protocol assertion",
+      "log": "reports/mutant-round_ties_up.log"
+    },
+    {
+      "name": "ignore_nan_scale",
+      "status": "killed",
+      "reason": "scoreboard/protocol assertion",
+      "log": "reports/mutant-ignore_nan_scale.log"
+    },
+    {
+      "name": "drop_prior_beats",
+      "status": "killed",
+      "reason": "scoreboard/protocol assertion",
+      "log": "reports/mutant-drop_prior_beats.log"
+    },
+    {
+      "name": "disable_truncation",
+      "status": "killed",
+      "reason": "scoreboard/protocol assertion",
+      "log": "reports/mutant-disable_truncation.log"
+    }
+  ],
+  "killed": 9,
+  "total": 9
+}
+python3 scripts/summarize.py
+{
+  "generated_utc": "2026-10-11T02:33:47.520093+00:00",
+  "verification_status": "pass",
+  "model": {
+    "test_functions": 5,
+    "element_codes_crosschecked": 656,
+    "rounding_checks": 44000
+  },
+  "pe_configurations": 9,
+  "pe_blocks_checked": 48180,
+  "functional_coverage": {
+    "contract_bins_per_configuration": 160,
+    "rounding_bins_per_configuration": 7,
+    "scope": "Declared bins only; not exhaustive arithmetic or code coverage"
+  },
+  "array_tiles_checked": 90,
+  "array_results_checked": 630,
+  "formal": [
+    {
+      "name": "csa",
+      "status": "pass",
+      "method": "combinational SAT",
+      "scope": "70-bit 3:2 compressor equivalence modulo 2^70",
+      "log": "reports/formal-csa.log"
+    },
+    {
+      "name": "protocol",
+      "status": "pass",
+      "method": "unbounded temporal induction",
+      "scope": "8-lane four-stage PE reset and output stability under backpressure; not arithmetic equivalence",
+      "log": "reports/formal-protocol.log"
+    }
+  ],
+  "mutations": {
+    "killed": 9,
+    "total": 9
+  },
+  "physical": {
+    "status": "blocked",
+    "missing": [
+      "OpenLane 2 executable (with its OpenROAD/OpenSTA tool environment)",
+      "PDK_ROOT pointing to a versioned SKY130 installation"
+    ],
+    "area_um2": null,
+    "worst_slack_ns": null,
+    "power_mw": null,
+    "configuration": "8-lane, 4-stage PE; sky130A/sky130_fd_sc_hd; 50 ns requested clock",
+    "warning": "Configuration prepared but not validated by a physical run. No measured PPA is available."
+  },
+  "github": "not published; connection required",
+  "tools": {
+    "numpy": "2.3.5",
+    "ml_dtypes": "0.6.0",
+    "cocotb": "2.1.0",
+    "pyuvm": "5.0.0",
+    "cocotb-coverage": "2.0",
+    "verilator": "5.48.0",
+    "yowasp-yosys": "0.69.0.0.post1233"
+  },
+  "python": "3.12.14",
+  "limitations": [
+    "No SKY130 PPA or routed layout",
+    "No cross-block K accumulation; K=32 tiles only",
+    "Formal does not prove end-to-end floating-point correctness",
+    "No measured code coverage",
+    "Runtime truncation retains 70-bit hardware width",
+    "Full native SystemVerilog UVM not implemented"
+  ]
+}

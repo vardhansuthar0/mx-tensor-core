@@ -1,0 +1,16 @@
+[
+  {
+    "name": "csa",
+    "status": "pass",
+    "method": "combinational SAT",
+    "scope": "70-bit 3:2 compressor equivalence modulo 2^70",
+    "log": "reports/formal-csa.log"
+  },
+  {
+    "name": "protocol",
+    "status": "pass",
+    "method": "unbounded temporal induction",
+    "scope": "8-lane four-stage PE reset and output stability under backpressure; not arithmetic equivalence",
+    "log": "reports/formal-protocol.log"
+  }
+]

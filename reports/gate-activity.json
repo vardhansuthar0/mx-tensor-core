@@ -1,0 +1,24 @@
+{
+  "activity_window_ns": 180600.0,
+  "achieved_million_blocks_per_second": 1.1074197120708749,
+  "seed": 20261013,
+  "blocks_checked": 200,
+  "period_ns": 200,
+  "frequency_mhz": 5.0,
+  "formats": 5,
+  "finite_uniform_codes": true,
+  "scale_codes": [
+    120,
+    134
+  ],
+  "trunc": [
+    0,
+    2,
+    7,
+    15
+  ],
+  "simulation": "zero-delay gate-level; no glitch/SDF power claim",
+  "vcd_scope": "power_tb/dut",
+  "vcd": "/workspace/scratch/a8bd4c2725ec/mx-tensor/build/gate-power/activity.vcd",
+  "netlist": "/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/runs/native/53-openroad-fillinsertion/mx_pe_sky130.nl.v"
+}

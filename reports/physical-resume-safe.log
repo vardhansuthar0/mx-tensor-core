@@ -1,0 +1,119 @@
+[05:41:02] [I] Using existing run at 'native' with the 'Classic'     flow.py:578
+               flow.                                                            
+[05:41:02] [V] Using state at                                        flow.py:617
+               '/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/r            
+               uns/native/33-openroad-detailedplacement/state_out.js            
+               on'.                                                             
+[05:41:02] [I] Starting…                                       sequential.py:294
+[05:41:02] [I] Skipping step 'Verilator Lint'…                 sequential.py:325
+[05:41:02] [I] Skipping step 'Lint Timing Error Checker'…      sequential.py:325
+[05:41:02] [I] Skipping step 'Lint Errors Checker'…            sequential.py:325
+[05:41:02] [I] Skipping step 'Lint Warnings Checker'…          sequential.py:325
+[05:41:02] [I] Skipping step 'Generate JSON Header'…           sequential.py:325
+[05:41:02] [I] Skipping step 'Synthesis'…                      sequential.py:325
+[05:41:02] [I] Skipping step 'Unmapped Cells Checker'…         sequential.py:325
+[05:41:02] [I] Skipping step 'Yosys Synth Checks'…             sequential.py:325
+[05:41:02] [I] Skipping step 'Netlist Assign Statement         sequential.py:325
+               Checker'…                                                        
+[05:41:02] [I] Skipping step 'Check SDC Files'…                sequential.py:325
+[05:41:02] [I] Skipping step 'Check Macro Instances'…          sequential.py:325
+[05:41:02] [I] Skipping step 'STA (Pre-PnR)'…                  sequential.py:325
+[05:41:02] [I] Skipping step 'Floorplan Init'…                 sequential.py:325
+[05:41:02] [I] Skipping step 'Check Antenna Properties of      sequential.py:325
+               Macros Pins in Their LEF Views'…                                 
+[05:41:02] [I] Skipping step 'Set Power Connections'…          sequential.py:325
+[05:41:02] [I] Skipping step 'Manual Macro Placement'…         sequential.py:325
+[05:41:02] [I] Skipping step 'Cut Rows'…                       sequential.py:325
+[05:41:02] [I] Skipping step 'Tap/Decap Insertion'…            sequential.py:325
+[05:41:02] [I] Skipping step 'Add PDN obstructions'…           sequential.py:325
+[05:41:02] [I] Skipping step 'Generate PDN'…                   sequential.py:325
+[05:41:02] [I] Skipping step 'Remove PDN obstructions'…        sequential.py:325
+[05:41:02] [I] Skipping step 'Add Obstructions'…               sequential.py:325
+[05:41:02] [I] Skipping step 'Global Placement Skip IO'…       sequential.py:325
+[05:41:02] [I] Skipping step 'I/O Placement'…                  sequential.py:325
+[05:41:02] [I] Skipping step 'Custom I/O Placement'…           sequential.py:325
+[05:41:02] [I] Skipping step 'Apply DEF Template'…             sequential.py:325
+[05:41:02] [I] Skipping step 'Global Placement'…               sequential.py:325
+[05:41:02] [I] Skipping step 'Write Verilog Header'…           sequential.py:325
+[05:41:02] [I] Skipping step 'Power Grid Violation Checker'…   sequential.py:325
+[05:41:02] [I] Skipping step 'STA (Mid-PnR)'…                  sequential.py:325
+[05:41:02] [I] Skipping step 'Repair Design (Post-Global       sequential.py:325
+               Placement)'…                                                     
+[05:41:02] [I] Skipping step 'Manual Global Placement'…        sequential.py:325
+[05:41:02] [I] Skipping step 'Detailed Placement'…             sequential.py:325
+[05:41:02] [V] Running 'OpenROAD.CTS' at                            step.py:1122
+               'physical/runs/native/36-openroad-cts'…                          
+[05:41:02] [V] Logging subprocess to                                step.py:1318
+               'physical/runs/native/36-openroad-cts/openroad-cts.l             
+               og'…                                                             
+[05:41:17] [V] Running 'OpenROAD.STAMidPNR-1' at                    step.py:1122
+               'physical/runs/native/37-openroad-stamidpnr-1'…                  
+[05:41:17] [V] Logging subprocess to                                step.py:1318
+               'physical/runs/native/37-openroad-stamidpnr-1/openro             
+               ad-stamidpnr-1.log'…                                             
+[05:41:18] [W] [GRT-0097] No global routing found for nets.      openroad.py:235
+[05:41:26] [V] Running 'OpenROAD.ResizerTimingPostCTS' at           step.py:1122
+               'physical/runs/native/38-openroad-resizertimingpostc             
+               ts'…                                                             
+[05:41:26] [V] Logging subprocess to                                step.py:1318
+               'physical/runs/native/38-openroad-resizertimingpostc             
+               ts/openroad-resizertimingpostcts.log'…                           
+[05:42:23] [W] [RSZ-0062] Unable to repair all setup violations. openroad.py:235
+[05:43:19] [V] Running 'OpenROAD.STAMidPNR-2' at                    step.py:1122
+               'physical/runs/native/39-openroad-stamidpnr-2'…                  
+[05:43:19] [V] Logging subprocess to                                step.py:1318
+               'physical/runs/native/39-openroad-stamidpnr-2/openro             
+               ad-stamidpnr-2.log'…                                             
+[05:43:20] [W] [GRT-0097] No global routing found for nets.      openroad.py:235
+[05:43:27] [V] Running 'OpenROAD.GlobalRouting' at                  step.py:1122
+               'physical/runs/native/40-openroad-globalrouting'…                
+[05:43:27] [V] Logging subprocess to                                step.py:1318
+               'physical/runs/native/40-openroad-globalrouting/open             
+               road-globalrouting.log'…                                         
+[05:43:47] [V] Running 'OpenROAD.CheckAntennas' at                  step.py:1122
+               'physical/runs/native/41-openroad-checkantennas'…                
+[05:43:47] [V] Logging subprocess to                                step.py:1318
+               'physical/runs/native/41-openroad-checkantennas/open             
+               road-checkantennas.log'…                                         
+[05:44:02] [I] Gating variable for step                        sequential.py:317
+               'OpenROAD.RepairDesignPostGRT' set to 'False'-                   
+               the step will be skipped.                                        
+[05:44:02] [I] Skipping step 'Repair Design (Post-Global       sequential.py:325
+               Routing)'…                                                       
+[05:44:02] [V] Running 'Odb.DiodesOnPorts' at                       step.py:1122
+               'physical/runs/native/42-odb-diodesonports'…                     
+[05:44:02] [I] 'DIODE_ON_PORTS' is set to 'none': skipping…           odb.py:762
+[05:44:02] [I] Gating variable for step                        sequential.py:317
+               'Odb.HeuristicDiodeInsertion' set to 'False'-                    
+               the step will be skipped.                                        
+[05:44:02] [I] Skipping step 'Heuristic Diode Insertion'…      sequential.py:325
+[05:44:02] [V] Running 'OpenROAD.RepairAntennas' at                 step.py:1122
+               'physical/runs/native/43-openroad-repairantennas'…               
+[05:44:02] [V] Running 'DiodeInsertion' at                          step.py:1122
+               'physical/runs/native/43-openroad-repairantennas/1-d             
+               iodeinsertion'…                                                  
+[05:44:02] [V] Logging subprocess to                                step.py:1318
+               'physical/runs/native/43-openroad-repairantennas/1-d             
+               iodeinsertion/diodeinsertion.log'…                               
+[05:44:35] [V] Running 'OpenROAD.CheckAntennas' at                  step.py:1122
+               'physical/runs/native/43-openroad-repairantennas/2-o             
+               penroad-checkantennas'…                                          
+[05:44:35] [V] Logging subprocess to                                step.py:1318
+               'physical/runs/native/43-openroad-repairantennas/2-o             
+               penroad-checkantennas/openroad-checkantennas.log'…               
+[05:44:50] [I] Gating variable for step                        sequential.py:317
+               'OpenROAD.ResizerTimingPostGRT' set to 'False'-                  
+               the step will be skipped.                                        
+[05:44:50] [I] Skipping step 'Resizer Timing Optimizations     sequential.py:325
+               (Post-Global Routing)'…                                          
+[05:44:50] [V] Running 'OpenROAD.STAMidPNR-3' at                    step.py:1122
+               'physical/runs/native/44-openroad-stamidpnr-3'…                  
+[05:44:50] [V] Logging subprocess to                                step.py:1318
+               'physical/runs/native/44-openroad-stamidpnr-3/openro             
+               ad-stamidpnr-3.log'…                                             
+[05:44:59] [V] Running 'OpenROAD.DetailedRouting' at                step.py:1122
+               'physical/runs/native/45-openroad-detailedrouting'…              
+[05:44:59] [I] Running TritonRoute with 9 threads…              openroad.py:1624
+[05:44:59] [V] Logging subprocess to                                step.py:1318
+               'physical/runs/native/45-openroad-detailedrouting/op             
+               enroad-detailedrouting.log'…                                     

@@ -1,0 +1,26 @@
+OpenSTA 2.6.0 GITDIR-NOT Copyright (c) 2024, Parallax Software, Inc.
+License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>
+
+This is free software, and you are free to change and redistribute it
+under certain conditions; type `show_copying' for details. 
+This program comes with ABSOLUTELY NO WARRANTY; for details type `show_warranty'.
+Warning: /workspace/scratch/a8bd4c2725ec/mx-tensor/physical/runs/native/53-openroad-fillinsertion/mx_pe_sky130.nl.v line 99380, module sky130_fd_sc_hd__tapvpwrvgnd_1 not found. Creating black box for TAP_TAPCELL_ROW_0_850.
+Warning: /workspace/scratch/a8bd4c2725ec/mx-tensor/physical/runs/native/53-openroad-fillinsertion/mx_pe_sky130.nl.v line 124881, module sky130_ef_sc_hd__decap_12 not found. Creating black box for FILLER_0_3.
+Warning: /workspace/scratch/a8bd4c2725ec/mx-tensor/physical/runs/native/53-openroad-fillinsertion/mx_pe_sky130.nl.v line 124883, module sky130_fd_sc_hd__fill_1 not found. Creating black box for FILLER_0_27.
+Warning: /workspace/scratch/a8bd4c2725ec/mx-tensor/physical/runs/native/53-openroad-fillinsertion/mx_pe_sky130.nl.v line 124946, module sky130_fd_sc_hd__fill_2 not found. Creating black box for FILLER_0_592.
+TOTAL_STA_PINS 84427
+Annotated 82517 pin activities.
+Group                       Internal       Switching         Leakage           Total
+                               Power           Power           Power           Power (Watts)
+------------------------------------------------------------------------------------
+Sequential           2.359348582e-04 4.713318776e-05 8.825904452e-09 2.830768644e-04  28.1%
+Combinational        1.696951367e-04 2.722770732e-04 8.237182669e-08 4.420545883e-04  43.8%
+Clock                1.529915316e-04 1.300823060e-04 8.762309989e-08 2.831614693e-04  28.1%
+Macro                0.000000000e+00 0.000000000e+00 0.000000000e+00 0.000000000e+00   0.0%
+Pad                  0.000000000e+00 0.000000000e+00 0.000000000e+00 0.000000000e+00   0.0%
+------------------------------------------------------------------------------------
+Total                5.586227635e-04 4.494930909e-04 1.788223045e-07 1.008294639e-03 100.0%
+                               55.4%           44.6%            0.0%
+worst slack 172.55
+worst slack 0.33
+clk period_min = 27.45 fmax = 36.43

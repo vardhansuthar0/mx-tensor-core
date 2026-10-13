@@ -1,0 +1,10 @@
+{
+  "DESIGN_NAME": "mx_pe_sky130",
+  "VERILOG_FILES": ["dir::generated.v"],
+  "CLOCK_PORT": "clk",
+  "CLOCK_PERIOD": 50,
+  "FP_SIZING": "absolute",
+  "DIE_AREA": [0, 0, 1200, 1200],
+  "CORE_AREA": [20, 20, 1180, 1180],
+  "PL_TARGET_DENSITY_PCT": 35
+}

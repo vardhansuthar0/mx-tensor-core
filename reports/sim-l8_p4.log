@@ -1,0 +1,24 @@
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 19.410 MB
+make[1]: Entering directory '/workspace/scratch/a8bd4c2725ec/mx-tensor/build/l8_p4'
+make[1]: Nothing to be done for 'default'.
+make[1]: Leaving directory '/workspace/scratch/a8bd4c2725ec/mx-tensor/build/l8_p4'
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/libpython3.12.so.1.0'
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/root/.local/lib/python3.12/site-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
+     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1791685957
+     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /root/.local/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.49
+     0.00ns INFO     cocotb.regression                  Running tests
+     0.00ns INFO     cocotb.regression                  running tb.test_pe.Regression (1/1)
+442890.00ns INFO     cocotb.regression                  tb.test_pe.Regression passed
+442890.00ns INFO     cocotb.regression                  **************************************************************************************
+                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        **************************************************************************************
+                                                        ** tb.test_pe.Regression          PASS      442890.00           4.02     110111.52  **
+                                                        **************************************************************************************
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0             442890.00           4.02     110098.96  **
+                                                        **************************************************************************************
+- :0: Verilog $finish

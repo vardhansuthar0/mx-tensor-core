@@ -1,0 +1,61 @@
+{
+  "baseline": "pass",
+  "mutants": [
+    {
+      "name": "broken_backpressure",
+      "status": "killed",
+      "reason": "scoreboard/protocol assertion",
+      "log": "reports/mutant-broken_backpressure.log"
+    },
+    {
+      "name": "scale_bias",
+      "status": "killed",
+      "reason": "scoreboard/protocol assertion",
+      "log": "reports/mutant-scale_bias.log"
+    },
+    {
+      "name": "subnormal_exponent",
+      "status": "killed",
+      "reason": "scoreboard/protocol assertion",
+      "log": "reports/mutant-subnormal_exponent.log"
+    },
+    {
+      "name": "e4m3_max_is_nan",
+      "status": "killed",
+      "reason": "scoreboard/protocol assertion",
+      "log": "reports/mutant-e4m3_max_is_nan.log"
+    },
+    {
+      "name": "product_sign",
+      "status": "killed",
+      "reason": "scoreboard/protocol assertion",
+      "log": "reports/mutant-product_sign.log"
+    },
+    {
+      "name": "round_ties_up",
+      "status": "killed",
+      "reason": "scoreboard/protocol assertion",
+      "log": "reports/mutant-round_ties_up.log"
+    },
+    {
+      "name": "ignore_nan_scale",
+      "status": "killed",
+      "reason": "scoreboard/protocol assertion",
+      "log": "reports/mutant-ignore_nan_scale.log"
+    },
+    {
+      "name": "drop_prior_beats",
+      "status": "killed",
+      "reason": "scoreboard/protocol assertion",
+      "log": "reports/mutant-drop_prior_beats.log"
+    },
+    {
+      "name": "disable_truncation",
+      "status": "killed",
+      "reason": "scoreboard/protocol assertion",
+      "log": "reports/mutant-disable_truncation.log"
+    }
+  ],
+  "killed": 9,
+  "total": 9
+}

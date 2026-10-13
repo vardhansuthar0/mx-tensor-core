@@ -1,0 +1,8 @@
+numpy==2.3.5
+ml_dtypes==0.6.0
+cocotb==2.1.0
+pyuvm==5.0.0
+cocotb-coverage==2.0
+pytest==9.1.1
+verilator==5.48.0
+yowasp-yosys==0.69.0.0.post1233

@@ -1,0 +1,5 @@
+openlane==2.3.10
+click==8.1.7
+volare==0.20.6
+socksio==1.0.0
+yowasp-yosys==0.69.0.0.post1233

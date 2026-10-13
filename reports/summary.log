@@ -1,0 +1,69 @@
+{
+  "generated_utc": "2026-10-11T02:36:20.394099+00:00",
+  "verification_status": "pass",
+  "model": {
+    "test_functions": 5,
+    "element_codes_crosschecked": 656,
+    "rounding_checks": 44000
+  },
+  "pe_configurations": 9,
+  "pe_blocks_checked": 48180,
+  "functional_coverage": {
+    "contract_bins_per_configuration": 160,
+    "rounding_bins_per_configuration": 7,
+    "scope": "Declared bins only; not exhaustive arithmetic or code coverage"
+  },
+  "array_tiles_checked": 90,
+  "array_results_checked": 630,
+  "formal": [
+    {
+      "name": "csa",
+      "status": "pass",
+      "method": "combinational SAT",
+      "scope": "70-bit 3:2 compressor equivalence modulo 2^70",
+      "log": "reports/formal-csa.log"
+    },
+    {
+      "name": "protocol",
+      "status": "pass",
+      "method": "unbounded temporal induction",
+      "scope": "8-lane four-stage PE reset and output stability under backpressure; not arithmetic equivalence",
+      "log": "reports/formal-protocol.log"
+    }
+  ],
+  "mutations": {
+    "killed": 9,
+    "total": 9
+  },
+  "physical": {
+    "status": "blocked",
+    "missing": [
+      "OpenLane 2 executable (with its OpenROAD/OpenSTA tool environment)",
+      "PDK_ROOT pointing to a versioned SKY130 installation"
+    ],
+    "area_um2": null,
+    "worst_slack_ns": null,
+    "power_mw": null,
+    "configuration": "8-lane, 4-stage PE; sky130A/sky130_fd_sc_hd; 50 ns requested clock",
+    "warning": "Configuration prepared but not validated by a physical run. No measured PPA is available."
+  },
+  "github": "connected; publishing tools not exposed in this session; not published",
+  "tools": {
+    "numpy": "2.3.5",
+    "ml_dtypes": "0.6.0",
+    "cocotb": "2.1.0",
+    "pyuvm": "5.0.0",
+    "cocotb-coverage": "2.0",
+    "verilator": "5.48.0",
+    "yowasp-yosys": "0.69.0.0.post1233"
+  },
+  "python": "3.12.14",
+  "limitations": [
+    "No SKY130 PPA or routed layout",
+    "No cross-block K accumulation; K=32 tiles only",
+    "Formal does not prove end-to-end floating-point correctness",
+    "No measured code coverage",
+    "Runtime truncation retains 70-bit hardware width",
+    "Full native SystemVerilog UVM not implemented"
+  ]
+}

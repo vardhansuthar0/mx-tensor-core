@@ -1,0 +1,17 @@
+{
+  "status": "pass",
+  "M": 4,
+  "N": 4,
+  "tiles": 30,
+  "pe_results": 480,
+  "checks": [
+    "broadcast indexing",
+    "all formats",
+    "both outputs",
+    "APB decode/errors",
+    "W1C event precedence",
+    "retirement counter",
+    "output stall",
+    "reset"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "physical/results/magic.gds": "5ae94a079fe7ce1100cbb89b755d1abe83934afae7257e5cbbc2b2ded256935c",
+  "physical/results/mx_pe_sky130.sdc": "a44e2e73bd029dd38739647b6ffea01a50b384274549ec50c6aeda76d2d6531f",
+  "physical/results/PDK-NOTICE.md": "c95d9a2b387de2b15a566d0d9a0191ce02b6aab7898975c6750c7f5b5917ff56",
+  "physical/results/SKYWATER-LICENSE-APACHE-2.0.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+  "physical/results/mx_pe_sky130.min.spef": "c7a3b5fbb0c9c7119e899749d78f3873c51759aa63570eff56cd2c8d6d37c49a",
+  "physical/results/analysis-state.json": "e2c104edefdd4c9bfd4657c4f3afd2818390f8da5ec7d794cf8cdb4e26af4b19",
+  "physical/results/mx_pe_sky130.def": "c9d6bb227f28606e340252c984b04650ecc8a17d1caf7a15b803b53d94af2dfe",
+  "physical/results/mx_pe_sky130.max.spef": "525b3e87342b05b78d2ff61949b540f5ea26cc21d6bb19dcf9f9f07b785e5e11",
+  "physical/results/mx_pe_sky130.nom.spef": "d8d23ab1b88d1791408b86d6357bfba067f45c3805326b43f765a81d245eacb5",
+  "physical/results/klayout.gds": "e798cdbbd230b92e6c514e30839fcf94ef7eb6f76d4cd0c861130aaefd62d3eb",
+  "physical/results/mx_pe_sky130.nl.v": "815bd1c3845094b78358953f17cb41396d24ad62df753914db39c811d2643e9f"
+}

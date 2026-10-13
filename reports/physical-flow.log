@@ -1,0 +1,1001 @@
+Libraries {'sky130_fd_sc_hvl', 'sky130_fd_io', 'sky130_sram_macros', 
+'sky130_fd_pr', 'sky130_ml_xx_hd'} not found, downloading them…
+Downloading sky130_fd_io.tar.zst… ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+Downloading sky130_fd_pr.tar.zst… ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+Downloading sky130_fd_sc_hvl.tar.zst… ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+Downloading sky130_ml_xx_hd.tar.zst… ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+Downloading sky130_sram_macros.tar.zst… ━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 0:00:00
+[15:31:29] INFO     Starting a new run of the 'Classic' flow with    flow.py:628
+                    the tag 'baseline'.                                         
+[15:31:29] INFO     Starting…                                  sequential.py:294
+──────────────────────────────── Verilator Lint ────────────────────────────────
+[15:31:30] VERBOSE  Running 'Verilator.Lint' at                     step.py:1122
+                    'physical/runs/baseline/01-verilator-lint'…                 
+[15:31:30] VERBOSE  Logging subprocess to                           step.py:1318
+                    'physical/runs/baseline/01-verilator-lint/veril             
+                    ator-lint.log'…                                             
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2138:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SEL generates 4 bits.       
+: ... note: In instance 'mx_pe_sky130'                                          
+2138 |   assign _0022_ = ! \core.da[4] [10:7];                                  
+|                   ^                                                           
+... For warning description see https://verilator.org/warn/WIDTHTRUNC?v=5.018   
+... Use "/* verilator lint_off WIDTHTRUNC */" and lint_on around source to      
+disable this message.                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2141:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SEL generates 4 bits.       
+: ... note: In instance 'mx_pe_sky130'                                          
+2141 |   assign _0025_ = ! \core.db[4] [10:7];                                  
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2163:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SEL generates 4 bits.       
+: ... note: In instance 'mx_pe_sky130'                                          
+2163 |   assign _0051_ = ! \core.da[5] [10:7];                                  
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2166:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SEL generates 4 bits.       
+: ... note: In instance 'mx_pe_sky130'                                          
+2166 |   assign _0054_ = ! \core.db[5] [10:7];                                  
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2185:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SIGNED generates 32 bits.   
+: ... note: In instance 'mx_pe_sky130'                                          
+2185 |   assign _0072_ = ! $signed(_0804_);                                     
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2190:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SEL generates 4 bits.       
+: ... note: In instance 'mx_pe_sky130'                                          
+2190 |   assign _0075_ = ! \core.da[6] [10:7];                                  
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2193:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SEL generates 4 bits.       
+: ... note: In instance 'mx_pe_sky130'                                          
+2193 |   assign _0079_ = ! \core.db[6] [10:7];                                  
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2211:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SEL generates 4 bits.       
+: ... note: In instance 'mx_pe_sky130'                                          
+2211 |   assign _0099_ = ! \core.da[7] [10:7];                                  
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2215:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SEL generates 4 bits.       
+: ... note: In instance 'mx_pe_sky130'                                          
+2215 |   assign _0104_ = ! \core.db[7] [10:7];                                  
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2310:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SIGNED generates 32 bits.   
+: ... note: In instance 'mx_pe_sky130'                                          
+2310 |   assign _0198_ = ! $signed(_0122_);                                     
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2320:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SIGNED generates 32 bits.   
+: ... note: In instance 'mx_pe_sky130'                                          
+2320 |   assign _0210_ = ! $signed(_0209_);                                     
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2498:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SIGNED generates 32 bits.   
+: ... note: In instance 'mx_pe_sky130'                                          
+2498 |   assign _0393_ = ! $signed(_0263_);                                     
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2598:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's VARREF 'core.beat' generates
+3 bits.                                                                         
+: ... note: In instance 'mx_pe_sky130'                                          
+2598 |   assign _0042_ = ! \core.beat ;                                         
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2599:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SIGNED generates 32 bits.   
+: ... note: In instance 'mx_pe_sky130'                                          
+2599 |   assign _0485_ = ! $signed(_0459_);                                     
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2622:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SIGNED generates 32 bits.   
+: ... note: In instance 'mx_pe_sky130'                                          
+2622 |   assign _0506_ = ! $signed(_0489_);                                     
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2644:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SIGNED generates 32 bits.   
+: ... note: In instance 'mx_pe_sky130'                                          
+2644 |   assign _0528_ = ! $signed(_0511_);                                     
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2665:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SIGNED generates 32 bits.   
+: ... note: In instance 'mx_pe_sky130'                                          
+2665 |   assign _0549_ = ! $signed(_0532_);                                     
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2687:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SIGNED generates 32 bits.   
+: ... note: In instance 'mx_pe_sky130'                                          
+2687 |   assign _0573_ = ! $signed(_0553_);                                     
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2708:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SIGNED generates 32 bits.   
+: ... note: In instance 'mx_pe_sky130'                                          
+2708 |   assign _0594_ = ! $signed(_0577_);                                     
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2729:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SIGNED generates 32 bits.   
+: ... note: In instance 'mx_pe_sky130'                                          
+2729 |   assign _0615_ = ! $signed(_0598_);                                     
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2750:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SIGNED generates 32 bits.   
+: ... note: In instance 'mx_pe_sky130'                                          
+2750 |   assign _0636_ = ! $signed(_0619_);                                     
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2771:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SIGNED generates 32 bits.   
+: ... note: In instance 'mx_pe_sky130'                                          
+2771 |   assign _0657_ = ! $signed(_0640_);                                     
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2792:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SIGNED generates 32 bits.   
+: ... note: In instance 'mx_pe_sky130'                                          
+2792 |   assign _0678_ = ! $signed(_0661_);                                     
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2813:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SIGNED generates 32 bits.   
+: ... note: In instance 'mx_pe_sky130'                                          
+2813 |   assign _0699_ = ! $signed(_0682_);                                     
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2834:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SIGNED generates 32 bits.   
+: ... note: In instance 'mx_pe_sky130'                                          
+2834 |   assign _0720_ = ! $signed(_0703_);                                     
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2851:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's VARREF 'core.active_fmt'    
+generates 3 bits.                                                               
+: ... note: In instance 'mx_pe_sky130'                                          
+2851 |   assign _0027_ = ! \core.active_fmt ;                                   
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2861:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SIGNED generates 32 bits.   
+: ... note: In instance 'mx_pe_sky130'                                          
+2861 |   assign _0741_ = ! $signed(_0724_);                                     
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2867:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SEL generates 4 bits.       
+: ... note: In instance 'mx_pe_sky130'                                          
+2867 |   assign _0746_ = ! \core.da[0] [10:7];                                  
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2870:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SEL generates 4 bits.       
+: ... note: In instance 'mx_pe_sky130'                                          
+2870 |   assign _0749_ = ! \core.db[0] [10:7];                                  
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2886:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SEL generates 4 bits.       
+: ... note: In instance 'mx_pe_sky130'                                          
+2886 |   assign _0765_ = ! \core.da[1] [10:7];                                  
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2889:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SEL generates 4 bits.       
+: ... note: In instance 'mx_pe_sky130'                                          
+2889 |   assign _0768_ = ! \core.db[1] [10:7];                                  
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2908:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SEL generates 4 bits.       
+: ... note: In instance 'mx_pe_sky130'                                          
+2908 |   assign _0786_ = ! \core.da[2] [10:7];                                  
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2912:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SEL generates 4 bits.       
+: ... note: In instance 'mx_pe_sky130'                                          
+2912 |   assign _0789_ = ! \core.db[2] [10:7];                                  
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2931:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SEL generates 4 bits.       
+: ... note: In instance 'mx_pe_sky130'                                          
+2931 |   assign _0809_ = ! \core.da[3] [10:7];                                  
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2934:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's SEL generates 4 bits.       
+: ... note: In instance 'mx_pe_sky130'                                          
+2934 |   assign _0812_ = ! \core.db[3] [10:7];                                  
+|                   ^                                                           
+%Warning-WIDTHTRUNC:                                                            
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:4688:19: Logical 
+operator LOGNOT expects 1 bit on the LHS, but LHS's VARREF 'in_fmt' generates 3 
+bits.                                                                           
+: ... note: In instance 'mx_pe_sky130'                                          
+4688 |   assign _1936_ = ! in_fmt;                                              
+|                   ^                                                           
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:46:15: Bits of   
+signal are not used: '_0012_'[31:4]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+46 |   wire [31:0] _0012_;                                                      
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:55:15: Bits of   
+signal are not used: '_0021_'[31:7]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+55 |   wire [31:0] _0021_;                                                      
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:158:15: Bits of  
+signal are not used: '_0124_'[31:1]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+158 |   wire [31:0] _0124_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:164:15: Signal is
+not used: '_0130_'                                                              
+: ... note: In instance 'mx_pe_sky130'                                          
+164 |   wire [69:0] _0130_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:167:15: Bits of  
+signal are not used: '_0133_'[31:10]                                            
+: ... note: In instance 'mx_pe_sky130'                                          
+167 |   wire [31:0] _0133_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:172:15: Signal is
+not used: '_0138_'                                                              
+: ... note: In instance 'mx_pe_sky130'                                          
+172 |   wire [69:0] _0138_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:179:15: Bits of  
+signal are not used: '_0145_'[31:4]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+179 |   wire [31:0] _0145_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:180:15: Signal is
+not used: '_0146_'                                                              
+: ... note: In instance 'mx_pe_sky130'                                          
+180 |   wire [69:0] _0146_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:186:15: Signal is
+not used: '_0152_'                                                              
+: ... note: In instance 'mx_pe_sky130'                                          
+186 |   wire [69:0] _0152_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:193:15: Signal is
+not used: '_0159_'                                                              
+: ... note: In instance 'mx_pe_sky130'                                          
+193 |   wire [69:0] _0159_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:200:15: Bits of  
+signal are not used: '_0166_'[31:7]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+200 |   wire [31:0] _0166_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:201:15: Signal is
+not used: '_0167_'                                                              
+: ... note: In instance 'mx_pe_sky130'                                          
+201 |   wire [69:0] _0167_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:307:15: Bits of  
+signal are not used: '_0273_'[31:1]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+307 |   wire [31:0] _0273_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:332:15: Bits of  
+signal are not used: '_0298_'[31:4]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+332 |   wire [31:0] _0298_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:352:15: Bits of  
+signal are not used: '_0318_'[31:7]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+352 |   wire [31:0] _0318_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:489:15: Bits of  
+signal are not used: '_0455_'[69]                                               
+: ... note: In instance 'mx_pe_sky130'                                          
+489 |   wire [69:0] _0455_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:502:15: Bits of  
+signal are not used: '_0468_'[31:1]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+502 |   wire [31:0] _0468_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:505:15: Bits of  
+signal are not used: '_0471_'[31:4]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+505 |   wire [31:0] _0471_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:508:15: Bits of  
+signal are not used: '_0474_'[31:7]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+508 |   wire [31:0] _0474_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:524:15: Bits of  
+signal are not used: '_0490_'[31:1]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+524 |   wire [31:0] _0490_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:527:15: Bits of  
+signal are not used: '_0493_'[31:4]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+527 |   wire [31:0] _0493_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:530:15: Bits of  
+signal are not used: '_0496_'[31:7]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+530 |   wire [31:0] _0496_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:546:15: Bits of  
+signal are not used: '_0512_'[31:1]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+546 |   wire [31:0] _0512_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:549:15: Bits of  
+signal are not used: '_0515_'[31:4]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+549 |   wire [31:0] _0515_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:552:15: Bits of  
+signal are not used: '_0518_'[31:7]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+552 |   wire [31:0] _0518_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:567:15: Bits of  
+signal are not used: '_0533_'[31:1]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+567 |   wire [31:0] _0533_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:570:15: Bits of  
+signal are not used: '_0536_'[31:4]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+570 |   wire [31:0] _0536_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:573:15: Bits of  
+signal are not used: '_0539_'[31:7]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+573 |   wire [31:0] _0539_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:588:15: Bits of  
+signal are not used: '_0554_'[31:1]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+588 |   wire [31:0] _0554_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:592:15: Bits of  
+signal are not used: '_0558_'[31:4]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+592 |   wire [31:0] _0558_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:595:15: Bits of  
+signal are not used: '_0561_'[31:7]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+595 |   wire [31:0] _0561_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:612:15: Bits of  
+signal are not used: '_0578_'[31:1]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+612 |   wire [31:0] _0578_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:615:15: Bits of  
+signal are not used: '_0581_'[31:4]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+615 |   wire [31:0] _0581_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:618:15: Bits of  
+signal are not used: '_0584_'[31:7]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+618 |   wire [31:0] _0584_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:633:15: Bits of  
+signal are not used: '_0599_'[31:1]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+633 |   wire [31:0] _0599_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:636:15: Bits of  
+signal are not used: '_0602_'[31:4]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+636 |   wire [31:0] _0602_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:639:15: Bits of  
+signal are not used: '_0605_'[31:7]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+639 |   wire [31:0] _0605_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:654:15: Bits of  
+signal are not used: '_0620_'[31:1]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+654 |   wire [31:0] _0620_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:657:15: Bits of  
+signal are not used: '_0623_'[31:4]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+657 |   wire [31:0] _0623_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:660:15: Bits of  
+signal are not used: '_0626_'[31:7]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+660 |   wire [31:0] _0626_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:675:15: Bits of  
+signal are not used: '_0641_'[31:1]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+675 |   wire [31:0] _0641_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:678:15: Bits of  
+signal are not used: '_0644_'[31:4]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+678 |   wire [31:0] _0644_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:681:15: Bits of  
+signal are not used: '_0647_'[31:7]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+681 |   wire [31:0] _0647_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:696:15: Bits of  
+signal are not used: '_0662_'[31:1]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+696 |   wire [31:0] _0662_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:699:15: Bits of  
+signal are not used: '_0665_'[31:4]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+699 |   wire [31:0] _0665_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:702:15: Bits of  
+signal are not used: '_0668_'[31:7]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+702 |   wire [31:0] _0668_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:717:15: Bits of  
+signal are not used: '_0683_'[31:1]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+717 |   wire [31:0] _0683_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:720:15: Bits of  
+signal are not used: '_0686_'[31:4]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+720 |   wire [31:0] _0686_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:723:15: Bits of  
+signal are not used: '_0689_'[31:7]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+723 |   wire [31:0] _0689_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:738:15: Bits of  
+signal are not used: '_0704_'[31:1]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+738 |   wire [31:0] _0704_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:741:15: Bits of  
+signal are not used: '_0707_'[31:4]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+741 |   wire [31:0] _0707_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:744:15: Bits of  
+signal are not used: '_0710_'[31:7]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+744 |   wire [31:0] _0710_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:759:15: Bits of  
+signal are not used: '_0725_'[31:1]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+759 |   wire [31:0] _0725_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:762:15: Bits of  
+signal are not used: '_0728_'[31:4]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+762 |   wire [31:0] _0728_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:765:15: Bits of  
+signal are not used: '_0731_'[31:7]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+765 |   wire [31:0] _0731_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:839:15: Bits of  
+signal are not used: '_0805_'[31:1]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+839 |   wire [31:0] _0805_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:971:15: Bits of  
+signal are not used: '_0937_'[69:1]                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+971 |   wire [69:0] _0937_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:973:15: Bits of  
+signal are not used: '_0939_'[69:32]                                            
+: ... note: In instance 'mx_pe_sky130'                                          
+973 |   wire [69:0] _0939_;                                                     
+|               ^~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2017:8: Signal is
+not used: 'core.approx4'                                                        
+: ... note: In instance 'mx_pe_sky130'                                          
+2017 |   wire \core.approx4 ;                                                   
+|        ^~~~~~~~~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2020:8: Signal is
+not used: 'core.clk'                                                            
+: ... note: In instance 'mx_pe_sky130'                                          
+2020 |   wire \core.clk ;                                                       
+|        ^~~~~~~~~                                                              
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2038:15: Bits of 
+signal are not driven, nor used: 'core.held_meta'[23]                           
+: ... note: In instance 'mx_pe_sky130'                                          
+2038 |   wire [23:0] \core.held_meta ;                                          
+|               ^~~~~~~~~~~~~~~                                                 
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2039:15: Signal  
+is not used: 'core.in_a'                                                        
+: ... note: In instance 'mx_pe_sky130'                                          
+2039 |   wire [63:0] \core.in_a ;                                               
+|               ^~~~~~~~~~                                                      
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2040:15: Signal  
+is not used: 'core.in_b'                                                        
+: ... note: In instance 'mx_pe_sky130'                                          
+2040 |   wire [63:0] \core.in_b ;                                               
+|               ^~~~~~~~~~                                                      
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2041:8: Signal is
+not used: 'core.in_bf16'                                                        
+: ... note: In instance 'mx_pe_sky130'                                          
+2041 |   wire \core.in_bf16 ;                                                   
+|        ^~~~~~~~~~~~~                                                          
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2042:14: Signal  
+is not used: 'core.in_fmt'                                                      
+: ... note: In instance 'mx_pe_sky130'                                          
+2042 |   wire [2:0] \core.in_fmt ;                                              
+|              ^~~~~~~~~~~~                                                     
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2044:14: Signal  
+is not used: 'core.in_scale_a'                                                  
+: ... note: In instance 'mx_pe_sky130'                                          
+2044 |   wire [7:0] \core.in_scale_a ;                                          
+|              ^~~~~~~~~~~~~~~~                                                 
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2045:14: Signal  
+is not used: 'core.in_scale_b'                                                  
+: ... note: In instance 'mx_pe_sky130'                                          
+2045 |   wire [7:0] \core.in_scale_b ;                                          
+|              ^~~~~~~~~~~~~~~~                                                 
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2046:14: Signal  
+is not used: 'core.in_trunc'                                                    
+: ... note: In instance 'mx_pe_sky130'                                          
+2046 |   wire [4:0] \core.in_trunc ;                                            
+|              ^~~~~~~~~~~~~~                                                   
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2047:8: Signal is
+not used: 'core.in_valid'                                                       
+: ... note: In instance 'mx_pe_sky130'                                          
+2047 |   wire \core.in_valid ;                                                  
+|        ^~~~~~~~~~~~~~                                                         
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2053:15: Signal  
+is not used: 'core.m4'                                                          
+: ... note: In instance 'mx_pe_sky130'                                          
+2053 |   wire [10:0] \core.m4 ;                                                 
+|               ^~~~~~~~                                                        
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2056:8: Signal is
+not used: 'core.nan4'                                                           
+: ... note: In instance 'mx_pe_sky130'                                          
+2056 |   wire \core.nan4 ;                                                      
+|        ^~~~~~~~~~                                                             
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2060:8: Signal is
+not used: 'core.neg4'                                                           
+: ... note: In instance 'mx_pe_sky130'                                          
+2060 |   wire \core.neg4 ;                                                      
+|        ^~~~~~~~~~                                                             
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2064:8: Signal is
+not used: 'core.out_ready'                                                      
+: ... note: In instance 'mx_pe_sky130'                                          
+2064 |   wire \core.out_ready ;                                                 
+|        ^~~~~~~~~~~~~~~                                                        
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2068:8: Signal is
+not used: 'core.pos4'                                                           
+: ... note: In instance 'mx_pe_sky130'                                          
+2068 |   wire \core.pos4 ;                                                      
+|        ^~~~~~~~~~                                                             
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2072:8: Signal is
+not used: 'core.rst'                                                            
+: ... note: In instance 'mx_pe_sky130'                                          
+2072 |   wire \core.rst ;                                                       
+|        ^~~~~~~~~                                                              
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2079:15: Signal  
+is not used: 'core.sum4'                                                        
+: ... note: In instance 'mx_pe_sky130'                                          
+2079 |   wire [69:0] \core.sum4 ;                                               
+|               ^~~~~~~~~~                                                      
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2080:15: Signal  
+is not used: 'core.tree.many.group3[0].a'                                       
+: ... note: In instance 'mx_pe_sky130'                                          
+2080 |   wire [69:0] \core.tree.many.group3[0].a ;                              
+|               ^~~~~~~~~~~~~~~~~~~~~~~~~~~                                     
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2081:15: Signal  
+is not used: 'core.tree.many.group3[0].b'                                       
+: ... note: In instance 'mx_pe_sky130'                                          
+2081 |   wire [69:0] \core.tree.many.group3[0].b ;                              
+|               ^~~~~~~~~~~~~~~~~~~~~~~~~~~                                     
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2082:15: Signal  
+is not used: 'core.tree.many.group3[0].c'                                       
+: ... note: In instance 'mx_pe_sky130'                                          
+2082 |   wire [69:0] \core.tree.many.group3[0].c ;                              
+|               ^~~~~~~~~~~~~~~~~~~~~~~~~~~                                     
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2083:15: Signal  
+is not used: 'core.tree.many.group3[1].a'                                       
+: ... note: In instance 'mx_pe_sky130'                                          
+2083 |   wire [69:0] \core.tree.many.group3[1].a ;                              
+|               ^~~~~~~~~~~~~~~~~~~~~~~~~~~                                     
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2084:15: Signal  
+is not used: 'core.tree.many.group3[1].b'                                       
+: ... note: In instance 'mx_pe_sky130'                                          
+2084 |   wire [69:0] \core.tree.many.group3[1].b ;                              
+|               ^~~~~~~~~~~~~~~~~~~~~~~~~~~                                     
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2085:15: Signal  
+is not used: 'core.tree.many.group3[1].c'                                       
+: ... note: In instance 'mx_pe_sky130'                                          
+2085 |   wire [69:0] \core.tree.many.group3[1].c ;                              
+|               ^~~~~~~~~~~~~~~~~~~~~~~~~~~                                     
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2087:15: Bits of 
+signal are not used: 'core.tree.many.next_level.many.group3[0].b'[0]            
+: ... note: In instance 'mx_pe_sky130'                                          
+2087 |   wire [69:0] \core.tree.many.next_level.many.group3[0].b ;              
+|               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                     
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2089:15: Bits of 
+signal are not used: 'core.tree.many.next_level.many.group3[1].a'[0]            
+: ... note: In instance 'mx_pe_sky130'                                          
+2089 |   wire [69:0] \core.tree.many.next_level.many.group3[1].a ;              
+|               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                     
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2090:15: Signal  
+is not used: 'core.tree.many.next_level.many.group3[1].b'                       
+: ... note: In instance 'mx_pe_sky130'                                          
+2090 |   wire [69:0] \core.tree.many.next_level.many.group3[1].b ;              
+|               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                     
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2091:15: Signal  
+is not used: 'core.tree.many.next_level.many.group3[1].c'                       
+: ... note: In instance 'mx_pe_sky130'                                          
+2091 |   wire [69:0] \core.tree.many.next_level.many.group3[1].c ;              
+|               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                     
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2093:15: Bits of 
+signal are not used:                                                            
+'core.tree.many.next_level.many.next_level.many.group3[0].b'[0]                 
+: ... note: In instance 'mx_pe_sky130'                                          
+2093 |   wire [69:0] \core.tree.many.next_level.many.next_level.many.group3[0].b
+;                                                                               
+|               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~     
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2096:15: Bits of 
+signal are not used:                                                            
+'core.tree.many.next_level.many.next_level.many.next_level.many.group3[0].b'[0] 
+: ... note: In instance 'mx_pe_sky130'                                          
+2096 |   wire [69:0]                                                            
+\core.tree.many.next_level.many.next_level.many.next_level.many.group3[0].b ;   
+|                                                                               
+^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~     
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2097:15: Bits of 
+signal are not used:                                                            
+'core.tree.many.next_level.many.next_level.many.next_level.many.group3[0].c'[0] 
+: ... note: In instance 'mx_pe_sky130'                                          
+2097 |   wire [69:0]                                                            
+\core.tree.many.next_level.many.next_level.many.next_level.many.group3[0].c ;   
+|                                                                               
+^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~     
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2098:15: Signal  
+is not used:                                                                    
+'core.tree.many.next_level.many.next_level.many.next_level.many.next_level.sum' 
+: ... note: In instance 'mx_pe_sky130'                                          
+2098 |   wire [69:0]                                                            
+\core.tree.many.next_level.many.next_level.many.next_level.many.next_level.sum ;
+|                                                                               
+^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2099:16: Bits of 
+signal are not used:                                                            
+'core.tree.many.next_level.many.next_level.many.next_level.many.next_level.terms
+'[70]                                                                           
+: ... note: In instance 'mx_pe_sky130'                                          
+2099 |   wire [139:0]                                                           
+\core.tree.many.next_level.many.next_level.many.next_level.many.next_level.terms
+;                                                                               
+|                                                                               
+^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2100:16: Signal  
+is not used:                                                                    
+'core.tree.many.next_level.many.next_level.many.next_level.many.reduced'        
+: ... note: In instance 'mx_pe_sky130'                                          
+2100 |   wire [139:0]                                                           
+\core.tree.many.next_level.many.next_level.many.next_level.many.reduced ;       
+|                                                                               
+^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~         
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2101:15: Signal  
+is not used: 'core.tree.many.next_level.many.next_level.many.next_level.sum'    
+: ... note: In instance 'mx_pe_sky130'                                          
+2101 |   wire [69:0]                                                            
+\core.tree.many.next_level.many.next_level.many.next_level.sum ;                
+|               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2102:16: Signal  
+is not used: 'core.tree.many.next_level.many.next_level.many.next_level.terms'  
+: ... note: In instance 'mx_pe_sky130'                                          
+2102 |   wire [209:0]                                                           
+\core.tree.many.next_level.many.next_level.many.next_level.terms ;              
+|                                                                               
+^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2103:16: Signal  
+is not used: 'core.tree.many.next_level.many.next_level.many.reduced'           
+: ... note: In instance 'mx_pe_sky130'                                          
+2103 |   wire [209:0] \core.tree.many.next_level.many.next_level.many.reduced ; 
+|                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~        
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2104:15: Signal  
+is not used: 'core.tree.many.next_level.many.next_level.sum'                    
+: ... note: In instance 'mx_pe_sky130'                                          
+2104 |   wire [69:0] \core.tree.many.next_level.many.next_level.sum ;           
+|               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                  
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2105:16: Signal  
+is not used: 'core.tree.many.next_level.many.next_level.terms'                  
+: ... note: In instance 'mx_pe_sky130'                                          
+2105 |   wire [279:0] \core.tree.many.next_level.many.next_level.terms ;        
+|                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~               
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2106:16: Signal  
+is not used: 'core.tree.many.next_level.many.reduced'                           
+: ... note: In instance 'mx_pe_sky130'                                          
+2106 |   wire [279:0] \core.tree.many.next_level.many.reduced ;                 
+|                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                        
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2107:15: Signal  
+is not used: 'core.tree.many.next_level.sum'                                    
+: ... note: In instance 'mx_pe_sky130'                                          
+2107 |   wire [69:0] \core.tree.many.next_level.sum ;                           
+|               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                                  
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2108:16: Signal  
+is not used: 'core.tree.many.next_level.terms'                                  
+: ... note: In instance 'mx_pe_sky130'                                          
+2108 |   wire [419:0] \core.tree.many.next_level.terms ;                        
+|                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                               
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2109:16: Signal  
+is not used: 'core.tree.many.reduced'                                           
+: ... note: In instance 'mx_pe_sky130'                                          
+2109 |   wire [419:0] \core.tree.many.reduced ;                                 
+|                ^~~~~~~~~~~~~~~~~~~~~~~                                        
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2110:15: Signal  
+is not used: 'core.tree.sum'                                                    
+: ... note: In instance 'mx_pe_sky130'                                          
+2110 |   wire [69:0] \core.tree.sum ;                                           
+|               ^~~~~~~~~~~~~~                                                  
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2111:16: Signal  
+is not used: 'core.tree.terms'                                                  
+: ... note: In instance 'mx_pe_sky130'                                          
+2111 |   wire [559:0] \core.tree.terms ;                                        
+|                ^~~~~~~~~~~~~~~~                                               
+%Warning-UNUSEDSIGNAL:                                                          
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:2115:8: Signal is
+not used: 'core.v4'                                                             
+: ... note: In instance 'mx_pe_sky130'                                          
+2115 |   wire \core.v4 ;                                                        
+|        ^~~~~~~~                                                               
+%Warning-CASEOVERLAP:                                                           
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:4607:7: Case     
+conditions overlap (example pattern 0x3)                                        
+4607 |       3'b?1?:                                                            
+|       ^~~~~~                                                                  
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:4605:7: ...      
+Location of overlapping condition                                               
+4605 |       3'b??1:                                                            
+|       ^~~~~~                                                                  
+%Warning-CASEOVERLAP:                                                           
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:4623:7: Case     
+conditions overlap (example pattern 0x3)                                        
+4623 |       3'b?1?:                                                            
+|       ^~~~~~                                                                  
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:4621:7: ...      
+Location of overlapping condition                                               
+4621 |       3'b??1:                                                            
+|       ^~~~~~                                                                  
+%Warning-CASEOVERLAP:                                                           
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:4639:7: Case     
+conditions overlap (example pattern 0x3)                                        
+4639 |       2'b1?:                                                             
+|       ^~~~~                                                                   
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:4637:7: ...      
+Location of overlapping condition                                               
+4637 |       2'b?1:                                                             
+|       ^~~~~                                                                   
+%Warning-CASEOVERLAP:                                                           
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:4674:7: Case     
+conditions overlap (example pattern 0x3)                                        
+4674 |       4'b??1?:                                                           
+|       ^~~~~~~                                                                 
+/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/generated.v:4672:7: ...      
+Location of overlapping condition                                               
+4672 |       4'b???1:                                                           
+|       ^~~~~~~                                                                 
+────────────────────────── Lint Timing Errors Checker ──────────────────────────
+[15:31:30] VERBOSE  Running 'Checker.LintTimingConstructs' at       step.py:1122
+                    'physical/runs/baseline/02-checker-linttimingco             
+                    nstructs'…                                                  
+[15:31:30] INFO     Check for Lint Timing Errors clear.           checker.py:404
+───────────────────────────── Lint Errors Checker ──────────────────────────────
+[15:31:30] VERBOSE  Running 'Checker.LintErrors' at                 step.py:1122
+                    'physical/runs/baseline/03-checker-linterrors'…             
+[15:31:30] INFO     Check for Lint errors clear.                  checker.py:132
+──────────────────────────── Lint Warnings Checker ─────────────────────────────
+[15:31:30] VERBOSE  Running 'Checker.LintWarnings' at               step.py:1122
+                    'physical/runs/baseline/04-checker-lintwarnings             
+                    '…                                                          
+[15:31:30] WARNING  144 Lint warnings found.                      checker.py:123
+───────────────────────────── Generate JSON Header ─────────────────────────────
+[15:31:30] VERBOSE  Running 'Yosys.JsonHeader' at                   step.py:1122
+                    'physical/runs/baseline/05-yosys-jsonheader'…               
+[15:31:30] VERBOSE  Logging subprocess to                           step.py:1318
+                    'physical/runs/baseline/05-yosys-jsonheader/yos             
+                    ys-jsonheader.log'…                                         
+                                                                                
+/----------------------------------------------------------------------------\  
+|  yosys -- Yosys Open SYnthesis Suite                                       |  
+|  Copyright (C) 2012 - 2024  Claire Xenia Wolf <claire@yosyshq.com>         |  
+|  Distributed under an ISC-like license, type "license" to see terms        |  
+\----------------------------------------------------------------------------/  
+Yosys 0.46 (git sha1 e97731b9dda91fa5fa53ed87df7c34163ba59a41, clang++ 17.0.6   
+-fPIC -O3)                                                                      
+Traceback (most recent call last):                                              
+File                                                                            
+"/root/.local/lib/python3.12/site-packages/openlane/scripts/pyosys/json_header.p
+y", line 16, in <module>                                                        
+import click                                                                    
+ModuleNotFoundError: No module named 'click'                                    
+ERROR: Python interpreter encountered an exception.                             
+[15:31:30] ERROR    Subprocess had a non-zero exit.                 step.py:1364
+[15:31:30] ERROR    Last 10 line(s):                                step.py:1369
+                     |  yosys -- Yosys Open SYnthesis Suite                     
+                    |                                                           
+                     |  Copyright (C) 2012 - 2024  Claire Xenia                 
+                    Wolf <claire@yosyshq.com>         |                         
+                     |  Distributed under an ISC-like license, type             
+                    "license" to see terms        |                             
+                     \---------------------------------------------             
+                    -------------------------------/                            
+                     Yosys 0.46 (git sha1                                       
+                    e97731b9dda91fa5fa53ed87df7c34163ba59a41,                   
+                    clang++ 17.0.6 -fPIC -O3)                                   
+                    Traceback (most recent call last):                          
+                      File                                                      
+                    "/root/.local/lib/python3.12/site-packages/open             
+                    lane/scripts/pyosys/json_header.py", line 16,               
+                    in <module>                                                 
+                        import click                                            
+                    ModuleNotFoundError: No module named 'click'                
+                    ERROR: Python interpreter encountered an                    
+                    exception.                                                  
+[15:31:30] ERROR    Full log file:                                  step.py:1372
+                    'physical/runs/baseline/05-yosys-jsonheader/yos             
+                    ys-jsonheader.log'                                          
+Classic - Stage 5 - Generate JSON Header ━                          4/78 0:00:00
+[15:31:30] WARNING  The following warnings were generated by the     flow.py:673
+                    flow:                                                       
+[15:31:30] WARNING  [Checker.LintWarnings] 144 Lint warnings found.  flow.py:675
+[15:31:30] ERROR    The following error was encountered while    __main__.py:187
+                    running the flow:                                           
+                    Generate JSON Header: subprocess (1,                        
+                    ['yosys', '-y',                                             
+                    '/root/.local/lib/python3.12/site-packages/o                
+                    penlane/scripts/pyosys/json_header.py',                     
+                    '--', '--config-in',                                        
+                    '/workspace/scratch/a8bd4c2725ec/mx-tensor/p                
+                    hysical/runs/baseline/05-yosys-jsonheader/co                
+                    nfig.json', '--extra-in',                                   
+                    '/workspace/scratch/a8bd4c2725ec/mx-tensor/p                
+                    hysical/runs/baseline/05-yosys-jsonheader/ex                
+                    tra.json', '--output',                                      
+                    '/workspace/scratch/a8bd4c2725ec/mx-tensor/p                
+                    hysical/runs/baseline/05-yosys-jsonheader/mx                
+                    _pe_sky130.h.json']) failed                                 
+[15:31:30] ERROR    OpenLane will now quit.                      __main__.py:188

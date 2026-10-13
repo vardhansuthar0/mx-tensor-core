@@ -1,0 +1,115 @@
+[05:58:05] [I] Starting a new run of the 'Classic' flow with the tag flow.py:628
+               'lvs'.                                                           
+[05:58:05] [I] Starting…                                       sequential.py:294
+[05:58:05] [I] Skipping step 'Verilator Lint'…                 sequential.py:325
+[05:58:05] [I] Skipping step 'Lint Timing Error Checker'…      sequential.py:325
+[05:58:05] [I] Skipping step 'Lint Errors Checker'…            sequential.py:325
+[05:58:05] [I] Skipping step 'Lint Warnings Checker'…          sequential.py:325
+[05:58:05] [I] Skipping step 'Generate JSON Header'…           sequential.py:325
+[05:58:05] [I] Skipping step 'Synthesis'…                      sequential.py:325
+[05:58:05] [I] Skipping step 'Unmapped Cells Checker'…         sequential.py:325
+[05:58:05] [I] Skipping step 'Yosys Synth Checks'…             sequential.py:325
+[05:58:05] [I] Skipping step 'Netlist Assign Statement         sequential.py:325
+               Checker'…                                                        
+[05:58:05] [I] Skipping step 'Check SDC Files'…                sequential.py:325
+[05:58:05] [I] Skipping step 'Check Macro Instances'…          sequential.py:325
+[05:58:05] [I] Skipping step 'STA (Pre-PnR)'…                  sequential.py:325
+[05:58:05] [I] Skipping step 'Floorplan Init'…                 sequential.py:325
+[05:58:05] [I] Skipping step 'Check Antenna Properties of      sequential.py:325
+               Macros Pins in Their LEF Views'…                                 
+[05:58:05] [I] Skipping step 'Set Power Connections'…          sequential.py:325
+[05:58:05] [I] Skipping step 'Manual Macro Placement'…         sequential.py:325
+[05:58:05] [I] Skipping step 'Cut Rows'…                       sequential.py:325
+[05:58:05] [I] Skipping step 'Tap/Decap Insertion'…            sequential.py:325
+[05:58:05] [I] Skipping step 'Add PDN obstructions'…           sequential.py:325
+[05:58:05] [I] Skipping step 'Generate PDN'…                   sequential.py:325
+[05:58:05] [I] Skipping step 'Remove PDN obstructions'…        sequential.py:325
+[05:58:05] [I] Skipping step 'Add Obstructions'…               sequential.py:325
+[05:58:05] [I] Skipping step 'Global Placement Skip IO'…       sequential.py:325
+[05:58:05] [I] Skipping step 'I/O Placement'…                  sequential.py:325
+[05:58:05] [I] Skipping step 'Custom I/O Placement'…           sequential.py:325
+[05:58:05] [I] Skipping step 'Apply DEF Template'…             sequential.py:325
+[05:58:05] [I] Skipping step 'Global Placement'…               sequential.py:325
+[05:58:05] [I] Skipping step 'Write Verilog Header'…           sequential.py:325
+[05:58:05] [I] Skipping step 'Power Grid Violation Checker'…   sequential.py:325
+[05:58:05] [I] Skipping step 'STA (Mid-PnR)'…                  sequential.py:325
+[05:58:05] [I] Skipping step 'Repair Design (Post-Global       sequential.py:325
+               Placement)'…                                                     
+[05:58:05] [I] Skipping step 'Manual Global Placement'…        sequential.py:325
+[05:58:05] [I] Skipping step 'Detailed Placement'…             sequential.py:325
+[05:58:05] [I] Skipping step 'Clock Tree Synthesis'…           sequential.py:325
+[05:58:05] [I] Skipping step 'STA (Mid-PnR)'…                  sequential.py:325
+[05:58:05] [I] Skipping step 'Resizer Timing Optimizations     sequential.py:325
+               (Post-Clock Tree Synthesis)'…                                    
+[05:58:05] [I] Skipping step 'STA (Mid-PnR)'…                  sequential.py:325
+[05:58:05] [I] Skipping step 'Global Routing'…                 sequential.py:325
+[05:58:05] [I] Skipping step 'Check Antennas'…                 sequential.py:325
+[05:58:05] [I] Gating variable for step                        sequential.py:317
+               'OpenROAD.RepairDesignPostGRT' set to 'False'-                   
+               the step will be skipped.                                        
+[05:58:05] [I] Skipping step 'Repair Design (Post-Global       sequential.py:325
+               Routing)'…                                                       
+[05:58:05] [I] Skipping step 'Diodes on Ports'…                sequential.py:325
+[05:58:05] [I] Gating variable for step                        sequential.py:317
+               'Odb.HeuristicDiodeInsertion' set to 'False'-                    
+               the step will be skipped.                                        
+[05:58:05] [I] Skipping step 'Heuristic Diode Insertion'…      sequential.py:325
+[05:58:05] [I] Skipping step 'Antenna Repair'…                 sequential.py:325
+[05:58:05] [I] Gating variable for step                        sequential.py:317
+               'OpenROAD.ResizerTimingPostGRT' set to 'False'-                  
+               the step will be skipped.                                        
+[05:58:05] [I] Skipping step 'Resizer Timing Optimizations     sequential.py:325
+               (Post-Global Routing)'…                                          
+[05:58:05] [I] Skipping step 'STA (Mid-PnR)'…                  sequential.py:325
+[05:58:05] [I] Skipping step 'Detailed Routing'…               sequential.py:325
+[05:58:05] [I] Skipping step 'Remove Obstructions'…            sequential.py:325
+[05:58:05] [I] Skipping step 'Check Antennas'…                 sequential.py:325
+[05:58:05] [I] Skipping step 'Routing DRC Checker'…            sequential.py:325
+[05:58:05] [I] Skipping step 'Report Disconnected Pins'…       sequential.py:325
+[05:58:05] [I] Skipping step 'Disconnected Pins Checker'…      sequential.py:325
+[05:58:05] [I] Skipping step 'Report Wire Length'…             sequential.py:325
+[05:58:05] [I] Skipping step 'Wire Length Threshold Checker'…  sequential.py:325
+[05:58:05] [I] Skipping step 'Fill Insertion'…                 sequential.py:325
+[05:58:05] [I] Skipping step 'Generate Cell Frequency Tables'… sequential.py:325
+[05:58:05] [I] Skipping step 'Parasitics (RC) Extraction'…     sequential.py:325
+[05:58:05] [I] Skipping step 'STA (Post-PnR)'…                 sequential.py:325
+[05:58:05] [I] Skipping step 'IR Drop Report'…                 sequential.py:325
+[05:58:05] [I] Skipping step 'GDSII Stream Out (Magic)'…       sequential.py:325
+[05:58:05] [I] Skipping step 'GDSII Stream Out (KLayout)'…     sequential.py:325
+[05:58:05] [I] Skipping step 'Write LEF (Magic)'…              sequential.py:325
+[05:58:05] [I] Skipping step 'Check Antenna Properties of Pins sequential.py:325
+               in The Generated Design LEF view'…                               
+[05:58:05] [I] Skipping step 'KLayout vs. Magic XOR'…          sequential.py:325
+[05:58:05] [I] Skipping step 'XOR Difference Checker'…         sequential.py:325
+[05:58:05] [I] Skipping step 'DRC'…                            sequential.py:325
+[05:58:05] [I] Skipping step 'Design Rule Check (KLayout)'…    sequential.py:325
+[05:58:05] [I] Skipping step 'Magic DRC Checker'…              sequential.py:325
+[05:58:05] [I] Skipping step 'KLayout DRC Checker'…            sequential.py:325
+[05:58:05] [V] Running 'Magic.SpiceExtraction' at                   step.py:1122
+               'physical/runs/lvs/01-magic-spiceextraction'…                    
+[05:58:05] [V] Logging subprocess to                                step.py:1318
+               'physical/runs/lvs/01-magic-spiceextraction/magic-sp             
+               iceextraction.log'…                                              
+[05:58:56] [V] Running 'Checker.IllegalOverlap' at                  step.py:1122
+               'physical/runs/lvs/02-checker-illegaloverlap'…                   
+[05:58:56] [I] Check for Magic Illegal Overlap errors clear.      checker.py:132
+[05:58:56] [V] Running 'Netgen.LVS' at                              step.py:1122
+               'physical/runs/lvs/03-netgen-lvs'…                               
+[05:58:56] [V] Logging subprocess to                                step.py:1318
+               'physical/runs/lvs/03-netgen-lvs/netgen-lvs.log'…                
+[05:59:16] [I] Skipping step 'LVS Error Checker'…              sequential.py:325
+[05:59:16] [I] Gating variable for step 'Yosys.EQY' set to     sequential.py:317
+               'False'- the step will be skipped.                               
+[05:59:16] [I] Skipping step 'Equivalence Check'…              sequential.py:325
+[05:59:16] [I] Skipping step 'Setup Timing Violations          sequential.py:325
+               Checker'…                                                        
+[05:59:16] [I] Skipping step 'Hold Timing Violations Checker'… sequential.py:325
+[05:59:16] [I] Skipping step 'Max Slew Violations Checker'…    sequential.py:325
+[05:59:16] [I] Skipping step 'Max Cap Violations Checker'…     sequential.py:325
+[05:59:16] [I] Skipping step 'Report Manufacturability'…       sequential.py:325
+[05:59:16] [I] Saving views to                                      state.py:212
+               '/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/             
+               runs/lvs/final'…                                                 
+[05:59:16] [I] Flow complete.                                  sequential.py:366
+
+

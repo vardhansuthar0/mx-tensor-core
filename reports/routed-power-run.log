@@ -1,0 +1,40 @@
+{'activity_window_ns': 180600.0, 'achieved_million_blocks_per_second': 1.1074197120708749, 'seed': 20261013, 'blocks_checked': 200, 'period_ns': 200, 'frequency_mhz': 5.0, 'formats': 5, 'finite_uniform_codes': True, 'scale_codes': [120, 134], 'trunc': [0, 2, 7, 15], 'simulation': 'zero-delay gate-level; no glitch/SDF power claim', 'vcd_scope': 'power_tb/dut', 'vcd': '/workspace/scratch/a8bd4c2725ec/mx-tensor/build/gate-power/activity.vcd', 'netlist': '/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/runs/native/53-openroad-fillinsertion/mx_pe_sky130.nl.v'}
+SPEF corners {'nom_*': '/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/runs/native/55-openroad-rcx/nom/mx_pe_sky130.nom.spef', 'min_*': '/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/runs/native/55-openroad-rcx/min/mx_pe_sky130.min.spef', 'max_*': '/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/runs/native/55-openroad-rcx/max/mx_pe_sky130.max.spef'}
+{
+  "activity_window_ns": 180600.0,
+  "achieved_million_blocks_per_second": 1.1074197120708749,
+  "seed": 20261013,
+  "blocks_checked": 200,
+  "period_ns": 200,
+  "frequency_mhz": 5.0,
+  "formats": 5,
+  "finite_uniform_codes": true,
+  "scale_codes": [
+    120,
+    134
+  ],
+  "trunc": [
+    0,
+    2,
+    7,
+    15
+  ],
+  "simulation": "zero-delay gate-level; no glitch/SDF power claim",
+  "vcd_scope": "power_tb/dut",
+  "vcd": "/workspace/scratch/a8bd4c2725ec/mx-tensor/build/gate-power/activity.vcd",
+  "netlist": "/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/runs/native/53-openroad-fillinsertion/mx_pe_sky130.nl.v",
+  "corner": "nom_tt_025C_1v80",
+  "power_mw": {
+    "internal": 0.5586227635000001,
+    "switching": 0.4494930909,
+    "leakage": 0.0001788223045,
+    "total": 1.0082946389999998
+  },
+  "estimated_energy_pj_per_block": 910.4900590169999,
+  "annotated_pin_activities": 82517,
+  "sta_pin_count": 84427,
+  "annotation_count_ratio_pct": 97.73769054923189,
+  "annotation_note": "Tool-reported annotation count divided by STA pin count; unannotated pins use tool defaults. Not a claim of full annotation.",
+  "spef": "/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/runs/native/55-openroad-rcx/nom/mx_pe_sky130.nom.spef",
+  "log": "reports/routed-power.log"
+}

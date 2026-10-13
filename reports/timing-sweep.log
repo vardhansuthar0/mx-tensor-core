@@ -1,0 +1,24 @@
+OpenSTA 2.6.0 GITDIR-NOT Copyright (c) 2024, Parallax Software, Inc.
+License GPLv3: GNU GPL version 3 <http://gnu.org/licenses/gpl.html>
+
+This is free software, and you are free to change and redistribute it
+under certain conditions; type `show_copying' for details. 
+This program comes with ABSOLUTELY NO WARRANTY; for details type `show_warranty'.
+Warning: /workspace/scratch/a8bd4c2725ec/eda-tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib line 1, library sky130_fd_sc_hd__tt_025C_1v80 already exists.
+Warning: /workspace/scratch/a8bd4c2725ec/eda-tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ss_100C_1v60.lib line 1, library sky130_fd_sc_hd__ss_100C_1v60 already exists.
+Warning: /workspace/scratch/a8bd4c2725ec/eda-tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_n40C_1v95.lib line 1, library sky130_fd_sc_hd__ff_n40C_1v95 already exists.
+Warning: /workspace/scratch/a8bd4c2725ec/eda-tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib line 1, library sky130_fd_sc_hd__tt_025C_1v80 already exists.
+Warning: /workspace/scratch/a8bd4c2725ec/eda-tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ss_100C_1v60.lib line 1, library sky130_fd_sc_hd__ss_100C_1v60 already exists.
+Warning: /workspace/scratch/a8bd4c2725ec/eda-tools/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_n40C_1v95.lib line 1, library sky130_fd_sc_hd__ff_n40C_1v95 already exists.
+Warning: /workspace/scratch/a8bd4c2725ec/mx-tensor/physical/runs/native/53-openroad-fillinsertion/mx_pe_sky130.nl.v line 99380, module sky130_fd_sc_hd__tapvpwrvgnd_1 not found. Creating black box for TAP_TAPCELL_ROW_0_850.
+Warning: /workspace/scratch/a8bd4c2725ec/mx-tensor/physical/runs/native/53-openroad-fillinsertion/mx_pe_sky130.nl.v line 124881, module sky130_ef_sc_hd__decap_12 not found. Creating black box for FILLER_0_3.
+Warning: /workspace/scratch/a8bd4c2725ec/mx-tensor/physical/runs/native/53-openroad-fillinsertion/mx_pe_sky130.nl.v line 124883, module sky130_fd_sc_hd__fill_1 not found. Creating black box for FILLER_0_27.
+Warning: /workspace/scratch/a8bd4c2725ec/mx-tensor/physical/runs/native/53-openroad-fillinsertion/mx_pe_sky130.nl.v line 124946, module sky130_fd_sc_hd__fill_2 not found. Creating black box for FILLER_0_592.
+TARGET50_WNS -4.371589436405258
+FAIL_PERIOD_NS 54.37141036987305
+PASS_PERIOD_NS 54.37164855003357
+PASS_SETUP_WNS 6.0396134247727846e-5
+PASS_HOLD_WNS 0.10815382229259063
+STA_LIMIT_MHZ 18.39193820065591
+POWER5MHZ_SETUP_WNS 145.6284094533717
+POWER5MHZ_HOLD_WNS 0.10815382229259063

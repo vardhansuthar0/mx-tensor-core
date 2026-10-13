@@ -1,0 +1,29 @@
+{
+  "status": "pass",
+  "lanes": 32,
+  "pipeline_stages": 5,
+  "checked_blocks": 5352,
+  "accepted_blocks": 5355,
+  "aborted_blocks": 3,
+  "stalled_cycles": 2609,
+  "reset_cycles": 4,
+  "functional_coverage": {
+    "name": "format x output x exact/trunc1 x 8 directed scenarios",
+    "hit": 160,
+    "total": 160,
+    "percent": 100.0
+  },
+  "rounding_bins": [
+    "above_half",
+    "below_half",
+    "exact",
+    "overflow",
+    "tie_even",
+    "tie_odd",
+    "underflow"
+  ],
+  "scope": "160 contract bins plus seven rounding classes; not complete arithmetic or code coverage.",
+  "sustained_cycles_per_block": 1,
+  "throughput_test_blocks": 64,
+  "seed": 20261011
+}

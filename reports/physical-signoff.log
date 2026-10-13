@@ -1,0 +1,125 @@
+[05:54:01] [I] Using existing run at 'native' with the 'Classic'     flow.py:578
+               flow.                                                            
+[05:54:01] [V] Using state at                                        flow.py:617
+               '/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/r            
+               uns/native/61-odb-checkdesignantennaproperties/state_            
+               out.json'.                                                       
+[05:54:01] [I] Starting…                                       sequential.py:294
+[05:54:01] [I] Skipping step 'Verilator Lint'…                 sequential.py:325
+[05:54:01] [I] Skipping step 'Lint Timing Error Checker'…      sequential.py:325
+[05:54:01] [I] Skipping step 'Lint Errors Checker'…            sequential.py:325
+[05:54:01] [I] Skipping step 'Lint Warnings Checker'…          sequential.py:325
+[05:54:01] [I] Skipping step 'Generate JSON Header'…           sequential.py:325
+[05:54:01] [I] Skipping step 'Synthesis'…                      sequential.py:325
+[05:54:01] [I] Skipping step 'Unmapped Cells Checker'…         sequential.py:325
+[05:54:01] [I] Skipping step 'Yosys Synth Checks'…             sequential.py:325
+[05:54:01] [I] Skipping step 'Netlist Assign Statement         sequential.py:325
+               Checker'…                                                        
+[05:54:01] [I] Skipping step 'Check SDC Files'…                sequential.py:325
+[05:54:01] [I] Skipping step 'Check Macro Instances'…          sequential.py:325
+[05:54:01] [I] Skipping step 'STA (Pre-PnR)'…                  sequential.py:325
+[05:54:01] [I] Skipping step 'Floorplan Init'…                 sequential.py:325
+[05:54:01] [I] Skipping step 'Check Antenna Properties of      sequential.py:325
+               Macros Pins in Their LEF Views'…                                 
+[05:54:01] [I] Skipping step 'Set Power Connections'…          sequential.py:325
+[05:54:01] [I] Skipping step 'Manual Macro Placement'…         sequential.py:325
+[05:54:01] [I] Skipping step 'Cut Rows'…                       sequential.py:325
+[05:54:01] [I] Skipping step 'Tap/Decap Insertion'…            sequential.py:325
+[05:54:01] [I] Skipping step 'Add PDN obstructions'…           sequential.py:325
+[05:54:01] [I] Skipping step 'Generate PDN'…                   sequential.py:325
+[05:54:01] [I] Skipping step 'Remove PDN obstructions'…        sequential.py:325
+[05:54:01] [I] Skipping step 'Add Obstructions'…               sequential.py:325
+[05:54:01] [I] Skipping step 'Global Placement Skip IO'…       sequential.py:325
+[05:54:01] [I] Skipping step 'I/O Placement'…                  sequential.py:325
+[05:54:01] [I] Skipping step 'Custom I/O Placement'…           sequential.py:325
+[05:54:01] [I] Skipping step 'Apply DEF Template'…             sequential.py:325
+[05:54:01] [I] Skipping step 'Global Placement'…               sequential.py:325
+[05:54:01] [I] Skipping step 'Write Verilog Header'…           sequential.py:325
+[05:54:01] [I] Skipping step 'Power Grid Violation Checker'…   sequential.py:325
+[05:54:01] [I] Skipping step 'STA (Mid-PnR)'…                  sequential.py:325
+[05:54:01] [I] Skipping step 'Repair Design (Post-Global       sequential.py:325
+               Placement)'…                                                     
+[05:54:01] [I] Skipping step 'Manual Global Placement'…        sequential.py:325
+[05:54:01] [I] Skipping step 'Detailed Placement'…             sequential.py:325
+[05:54:01] [I] Skipping step 'Clock Tree Synthesis'…           sequential.py:325
+[05:54:01] [I] Skipping step 'STA (Mid-PnR)'…                  sequential.py:325
+[05:54:01] [I] Skipping step 'Resizer Timing Optimizations     sequential.py:325
+               (Post-Clock Tree Synthesis)'…                                    
+[05:54:01] [I] Skipping step 'STA (Mid-PnR)'…                  sequential.py:325
+[05:54:01] [I] Skipping step 'Global Routing'…                 sequential.py:325
+[05:54:01] [I] Skipping step 'Check Antennas'…                 sequential.py:325
+[05:54:01] [I] Gating variable for step                        sequential.py:317
+               'OpenROAD.RepairDesignPostGRT' set to 'False'-                   
+               the step will be skipped.                                        
+[05:54:01] [I] Skipping step 'Repair Design (Post-Global       sequential.py:325
+               Routing)'…                                                       
+[05:54:01] [I] Skipping step 'Diodes on Ports'…                sequential.py:325
+[05:54:01] [I] Gating variable for step                        sequential.py:317
+               'Odb.HeuristicDiodeInsertion' set to 'False'-                    
+               the step will be skipped.                                        
+[05:54:01] [I] Skipping step 'Heuristic Diode Insertion'…      sequential.py:325
+[05:54:01] [I] Skipping step 'Antenna Repair'…                 sequential.py:325
+[05:54:01] [I] Gating variable for step                        sequential.py:317
+               'OpenROAD.ResizerTimingPostGRT' set to 'False'-                  
+               the step will be skipped.                                        
+[05:54:01] [I] Skipping step 'Resizer Timing Optimizations     sequential.py:325
+               (Post-Global Routing)'…                                          
+[05:54:01] [I] Skipping step 'STA (Mid-PnR)'…                  sequential.py:325
+[05:54:01] [I] Skipping step 'Detailed Routing'…               sequential.py:325
+[05:54:01] [I] Skipping step 'Remove Obstructions'…            sequential.py:325
+[05:54:01] [I] Skipping step 'Check Antennas'…                 sequential.py:325
+[05:54:01] [I] Skipping step 'Routing DRC Checker'…            sequential.py:325
+[05:54:01] [I] Skipping step 'Report Disconnected Pins'…       sequential.py:325
+[05:54:01] [I] Skipping step 'Disconnected Pins Checker'…      sequential.py:325
+[05:54:01] [I] Skipping step 'Report Wire Length'…             sequential.py:325
+[05:54:01] [I] Skipping step 'Wire Length Threshold Checker'…  sequential.py:325
+[05:54:01] [I] Skipping step 'Fill Insertion'…                 sequential.py:325
+[05:54:01] [I] Skipping step 'Generate Cell Frequency Tables'… sequential.py:325
+[05:54:01] [I] Skipping step 'Parasitics (RC) Extraction'…     sequential.py:325
+[05:54:01] [I] Skipping step 'STA (Post-PnR)'…                 sequential.py:325
+[05:54:01] [I] Skipping step 'IR Drop Report'…                 sequential.py:325
+[05:54:01] [I] Skipping step 'GDSII Stream Out (Magic)'…       sequential.py:325
+[05:54:01] [I] Skipping step 'GDSII Stream Out (KLayout)'…     sequential.py:325
+[05:54:01] [I] Skipping step 'Write LEF (Magic)'…              sequential.py:325
+[05:54:01] [I] Skipping step 'Check Antenna Properties of Pins sequential.py:325
+               in The Generated Design LEF view'…                               
+[05:54:01] [I] Skipping step 'KLayout vs. Magic XOR'…          sequential.py:325
+[05:54:01] [I] Skipping step 'XOR Difference Checker'…         sequential.py:325
+[05:54:01] [V] Running 'Magic.DRC' at                               step.py:1122
+               'physical/runs/native/63-magic-drc'…                             
+[05:54:01] [V] Logging subprocess to                                step.py:1318
+               'physical/runs/native/63-magic-drc/magic-drc.log'…               
+[05:59:57] [V] Running 'KLayout.DRC' at                             step.py:1122
+               'physical/runs/native/64-klayout-drc'…                           
+[05:59:57] [I] Running KLayout DRC with 9 threads…                klayout.py:375
+[05:59:57] [V] Logging subprocess to                                step.py:1318
+               'physical/runs/native/64-klayout-drc/klayout-drc.log             
+               '…                                                               
+[05:59:57] [E] Subprocess had a non-zero exit.                      step.py:1364
+[05:59:57] [E] Last 2 line(s):                                      step.py:1369
+               ERROR: ../../../src/tl/tl/tlFileUtils.cc,979,false               
+               ERROR: Internal error:                                           
+               ../../../src/tl/tl/tlFileUtils.cc:979 false was not              
+               true                                                             
+                                                                                
+[05:59:57] [E] Full log file:                                       step.py:1372
+               'physical/runs/native/64-klayout-drc/klayout-drc.log             
+               '                                                                
+
+[05:59:57] [E] The following error was encountered while running __main__.py:187
+               the flow:                                                        
+               Design Rule Check (KLayout): subprocess (1,                      
+               ['klayout', '-b', '-zz', '-r',                                   
+               '/workspace/scratch/a8bd4c2725ec/eda-tools/pdk/sk                
+               y130A/libs.tech/klayout/drc/sky130A_mr.drc',                     
+               '-rd',                                                           
+               'input=/workspace/scratch/a8bd4c2725ec/mx-tensor/                
+               physical/runs/native/58-magic-streamout/mx_pe_sky                
+               130.gds', '-rd', 'topcell=mx_pe_sky130', '-rd',                  
+               'report=/workspace/scratch/a8bd4c2725ec/mx-tensor                
+               /physical/runs/native/64-klayout-drc/reports/drc_                
+               violations.klayout.xml', '-rd', 'feol=true',                     
+               '-rd', 'beol=true', '-rd',                                       
+               'floating_metal=false', '-rd', 'offgrid=true',                   
+               '-rd', 'seal=true', '-rd', 'threads=9']) failed                  
+[05:59:57] [E] OpenLane will now quit.                           __main__.py:188

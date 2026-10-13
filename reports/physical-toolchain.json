@@ -1,0 +1,16 @@
+{
+  "openlane": "2.3.10",
+  "openroad": "edf00dff99f6c40d67a30c0e22a8191c5d2ed9d6",
+  "pdk_revision": "0fe599b2afb6708d281543108caf8310912f54af",
+  "pdk": "sky130A",
+  "standard_cell_library": "sky130_fd_sc_hd",
+  "install_method": "Native Nix cached binaries; no container execution",
+  "nix": "2.20.6",
+  "yosys": "0.46 e97731b9dda91fa5fa53ed87df7c34163ba59a41",
+  "opensta": "2.6.0",
+  "iverilog": "12.0",
+  "flake": "github:chipfoundry/openlane2/2.3.10",
+  "host_compatibility": "scripts/openlane_host.py with MX_DISABLE_PROCESS_STATS=1; CPU/RSS telemetry disabled, design checks unchanged",
+  "physical_source_top": "physical/mx_pe_sky130.sv",
+  "clock_requested_ns": 50
+}

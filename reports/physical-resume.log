@@ -1,0 +1,48 @@
+[05:39:22] [I] Using existing run at 'native' with the 'Classic'     flow.py:578
+               flow.                                                            
+[05:39:22] [V] Using state at                                        flow.py:617
+               '/workspace/scratch/a8bd4c2725ec/mx-tensor/physical/r            
+               uns/native/33-openroad-detailedplacement/state_out.js            
+               on'.                                                             
+[05:39:22] [I] Starting…                                       sequential.py:294
+[05:39:22] [I] Skipping step 'Verilator Lint'…                 sequential.py:325
+[05:39:22] [I] Skipping step 'Lint Timing Error Checker'…      sequential.py:325
+[05:39:22] [I] Skipping step 'Lint Errors Checker'…            sequential.py:325
+[05:39:22] [I] Skipping step 'Lint Warnings Checker'…          sequential.py:325
+[05:39:22] [I] Skipping step 'Generate JSON Header'…           sequential.py:325
+[05:39:22] [I] Skipping step 'Synthesis'…                      sequential.py:325
+[05:39:22] [I] Skipping step 'Unmapped Cells Checker'…         sequential.py:325
+[05:39:22] [I] Skipping step 'Yosys Synth Checks'…             sequential.py:325
+[05:39:22] [I] Skipping step 'Netlist Assign Statement         sequential.py:325
+               Checker'…                                                        
+[05:39:22] [I] Skipping step 'Check SDC Files'…                sequential.py:325
+[05:39:22] [I] Skipping step 'Check Macro Instances'…          sequential.py:325
+[05:39:22] [I] Skipping step 'STA (Pre-PnR)'…                  sequential.py:325
+[05:39:22] [I] Skipping step 'Floorplan Init'…                 sequential.py:325
+[05:39:22] [I] Skipping step 'Check Antenna Properties of      sequential.py:325
+               Macros Pins in Their LEF Views'…                                 
+[05:39:22] [I] Skipping step 'Set Power Connections'…          sequential.py:325
+[05:39:22] [I] Skipping step 'Manual Macro Placement'…         sequential.py:325
+[05:39:22] [I] Skipping step 'Cut Rows'…                       sequential.py:325
+[05:39:22] [I] Skipping step 'Tap/Decap Insertion'…            sequential.py:325
+[05:39:22] [I] Skipping step 'Add PDN obstructions'…           sequential.py:325
+[05:39:22] [I] Skipping step 'Generate PDN'…                   sequential.py:325
+[05:39:22] [I] Skipping step 'Remove PDN obstructions'…        sequential.py:325
+[05:39:22] [I] Skipping step 'Add Obstructions'…               sequential.py:325
+[05:39:22] [I] Skipping step 'Global Placement Skip IO'…       sequential.py:325
+[05:39:22] [I] Skipping step 'I/O Placement'…                  sequential.py:325
+[05:39:22] [I] Skipping step 'Custom I/O Placement'…           sequential.py:325
+[05:39:22] [I] Skipping step 'Apply DEF Template'…             sequential.py:325
+[05:39:22] [I] Skipping step 'Global Placement'…               sequential.py:325
+[05:39:22] [I] Skipping step 'Write Verilog Header'…           sequential.py:325
+[05:39:22] [I] Skipping step 'Power Grid Violation Checker'…   sequential.py:325
+[05:39:22] [I] Skipping step 'STA (Mid-PnR)'…                  sequential.py:325
+[05:39:22] [I] Skipping step 'Repair Design (Post-Global       sequential.py:325
+               Placement)'…                                                     
+[05:39:22] [I] Skipping step 'Manual Global Placement'…        sequential.py:325
+[05:39:22] [I] Skipping step 'Detailed Placement'…             sequential.py:325
+[05:39:22] [V] Running 'OpenROAD.CTS' at                            step.py:1122
+               'physical/runs/native/35-openroad-cts'…                          
+[05:39:22] [V] Logging subprocess to                                step.py:1318
+               'physical/runs/native/35-openroad-cts/openroad-cts.l             
+               og'…                                                             

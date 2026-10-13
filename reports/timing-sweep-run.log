@@ -1,0 +1,23 @@
+{
+  "target50_wns": -4.371589436405258,
+  "fail_period_ns": 54.37141036987305,
+  "pass_period_ns": 54.37164855003357,
+  "pass_setup_wns": 6.0396134247727846e-05,
+  "pass_hold_wns": 0.10815382229259063,
+  "sta_limit_mhz": 18.39193820065591,
+  "power5mhz_setup_wns": 145.6284094533717,
+  "power5mhz_hold_wns": 0.10815382229259063,
+  "corners": [
+    "nom_tt_025C_1v80",
+    "nom_ss_100C_1v60",
+    "nom_ff_n40C_1v95",
+    "min_tt_025C_1v80",
+    "min_ss_100C_1v60",
+    "min_ff_n40C_1v95",
+    "max_tt_025C_1v80",
+    "max_ss_100C_1v60",
+    "max_ff_n40C_1v95"
+  ],
+  "method": "22-step period bisection, fixed routed netlist and parasitics, fixed SDC interface delays; not a physical-flow clock sweep",
+  "log": "reports/timing-sweep.log"
+}

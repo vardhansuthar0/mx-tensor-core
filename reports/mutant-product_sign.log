@@ -1,0 +1,43 @@
+- V e r i l a t i o n   R e p o r t:  rev vUNKNOWN-built20260516-4e853d8
+- Verilator: Built from 0.000 MB sources in 0 modules, into 0.000 MB in 0 C++ files needing 0.000 MB
+- Verilator: Walltime 0.001 s (elab=0.000, cvt=0.000, bld=0.000); cpu 0.001 s on 1 threads; allocated 19.410 MB
+make[1]: Entering directory '/workspace/scratch/a8bd4c2725ec/mx-tensor/build/mutant_product_sign'
+make[1]: Nothing to be done for 'default'.
+make[1]: Leaving directory '/workspace/scratch/a8bd4c2725ec/mx-tensor/build/mutant_product_sign'
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:242  in gpi_load_users                  Loaded entry library: '/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/libpython3.12.so.1.0'
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:233  in gpi_load_users                  Running entry func 'initialize' from loaded library '/root/.local/lib/python3.12/site-packages/cocotb/simulator.cpython-312-x86_64-linux-gnu.so'
+     -.--ns INFO     pygpi                              ..ib/pygpi/embed.cpp:114  in initialize                      Using Python 3.12.12 interpreter at /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:74   in gpi_print_registered_impl       GPI: VPI support registered
+     0.00ns INFO     cocotb.initialize                  Seeding Python random module with 1791686021
+     0.00ns INFO     cocotb.initialize                  Initialized cocotb v2.1.0 from /root/.local/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb.initialize                  Running on Verilator version 5.49
+     0.00ns INFO     cocotb.regression                  Running tests
+     0.00ns INFO     cocotb.regression                  running tb.test_pe.Regression (1/1)
+235395.00ns WARNING  cocotb.regression                  tb.test_pe.Regression failed
+                                                        Traceback (most recent call last):
+                                                          File "/workspace/scratch/a8bd4c2725ec/mx-tensor/tb/test_pe.py", line 136, in run_phase
+                                                            await a.execute(cases(count=int(os.environ['MX_COUNT'])))
+                                                          File "/workspace/scratch/a8bd4c2725ec/mx-tensor/tb/test_pe.py", line 99, in execute
+                                                            if await self.tick(): break
+                                                               ^^^^^^^^^^^^^^^^^
+                                                          File "/workspace/scratch/a8bd4c2725ec/mx-tensor/tb/test_pe.py", line 71, in tick
+                                                            self.scoreboard.observe(d,rst,self.lanes,self.stages)
+                                                          File "/workspace/scratch/a8bd4c2725ec/mx-tensor/tb/test_pe.py", line 39, in observe
+                                                            assert got==(data,flags), f'SCOREBOARD: {block} expected {data:08x}/{flags:02x}, got {got[0]:08x}/{got[1]:02x}'
+                                                        AssertionError: SCOREBOARD: Block(a=[172, 255, 43, 99, 135, 133, 109, 253, 4, 193, 172, 91, 16, 252, 195, 0, 157, 94, 147, 216, 175, 58, 229, 66, 209, 160, 181, 44, 25, 230, 220, 237], b=[205, 148, 121, 8, 252, 171, 171, 46, 100, 168, 187, 156, 28, 70, 15, 221, 131, 31, 179, 150, 173, 38, 164, 225, 233, 91, 243, 174, 117, 225, 76, 137], fmt=3, sa=38, sb=246, bf16=True, trunc=1, tag='random') expected 000051d7/11, got 00005060/10
+                                                        assert (20576, 16) == (20951, 17)
+235395.00ns INFO     cocotb.regression                  **************************************************************************************
+                                                        ** TEST                          STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        **************************************************************************************
+                                                        ** tb.test_pe.Regression          FAIL      235395.00           2.06     114314.21  **
+                                                        **************************************************************************************
+                                                        ** TESTS=1 PASS=0 FAIL=1 SKIP=0             235395.00           2.06     114194.46  **
+                                                        **************************************************************************************
+- :0: Verilog $finish
+Traceback (most recent call last):
+  File "/workspace/scratch/a8bd4c2725ec/mx-tensor/scripts/run_sim.py", line 39, in <module>
+    a=p.parse_args();run(a.lanes,a.stages,a.rtl,a.label,a.count)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/a8bd4c2725ec/mx-tensor/scripts/run_sim.py", line 34, in run
+    raise RuntimeError(f'{label}: {failures}/{tests} tests failed')
+RuntimeError: mutant_product_sign: 1/1 tests failed
