@@ -8,7 +8,7 @@ def setup_tools():
         import verilator
         os.environ['PATH']=str(pathlib.Path(verilator.__file__).parent/'bin')+os.pathsep+os.environ['PATH']
     # Avoid broken precompiled-header include flags in the pinned wheel.
-    os.environ.setdefault('MAKEFLAGS','VK_PCH_I_FAST= VK_PCH_I_SLOW=')
+    os.environ['MAKEFLAGS']=os.environ.get('MAKEFLAGS','')+' VK_PCH_I_FAST= VK_PCH_I_SLOW='
     os.environ['PYTHONPATH']=str(ROOT)+os.pathsep+os.environ.get('PYTHONPATH','')
 
 def run(lanes=32, stages=4, rtl=None, label=None, count=2500):
