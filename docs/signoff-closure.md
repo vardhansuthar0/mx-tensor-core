@@ -58,8 +58,8 @@ and control trace; it never substitutes for arbitrary-stream arithmetic proof.
 See `reports/arithmetic-bounded.json` for the exact attempted case. The fully
 symbolic FP4 unroll exceeded the WebAssembly backend budget; the native SAT
 attempt expanded to 11,439,943 variables and 33,454,884 clauses and was killed.
-No numerical-equivalence pass is inferred from that attempt. An SMT attempt is
-being evaluated separately; unknown or interrupted results are not passes.
+No numerical-equivalence pass is inferred from that attempt. An SMT attempt reached the final assertion but its completion was not recovered
+after the execution environment disconnected. No SMT pass is claimed.
 
 Raw coverage is measured, but remaining counters require reachable stimulus or
 explicit, justified exclusions. Parameter-constant branches and structural
@@ -82,3 +82,12 @@ and acceptance check. On the hosted PID-namespace environment, also set
 `MX_DISABLE_PROCESS_STATS=1 MX_KLAYOUT_PROC_SELF_EXE=1`. The optional bounded
 arithmetic target requires a native Yosys backend via `YOSYS_NATIVE` and may
 need substantial memory; it is separate from the default CI campaign.
+
+## Latest recovered outcome
+
+The five-stage candidate meets the 50 ns timing target across all nine extracted
+corners (+3.229815 ns worst setup, +0.207146 ns worst hold), but has 2,339 slew,
+9 capacitance and 22 antenna-net/pin violations. Router DRC reported zero errors.
+The environment became offline during final independent checks and report
+collection. PR #1 is a draft; the task is not complete and signoff is not claimed.
+See `reports/physical.json` for explicitly labeled partial observations.
