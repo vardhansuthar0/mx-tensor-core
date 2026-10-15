@@ -1,0 +1,15 @@
+{
+  "status": "pass",
+  "input_assignments": 20971520,
+  "method": "exhaustive compiled combinational enumeration with independent integer reference",
+  "scope": "One lane: all 256 A/B byte encodings, five supported formats, 32 truncations, poison on/off. Checks signed 70-bit product and all four special/approximation flags. Not PE sequencing or full arithmetic equivalence.",
+  "negative_control": "Inverted production product bit must fail on a known zero input",
+  "source_sha256": {
+    "rtl/mx_pe.sv": "13df90e48a95bd468d224d9e9cd549b2647d3623cc4e3a74e8798c802c392320",
+    "formal/arithmetic_reference.svh": "71548e20deef7fc9e64b12825b90108c1fb214afddef3e22aefcd497082ae1ac",
+    "formal/product_check.svh": "df90a63d9d94d790b35a6df4ed0968168ffb9bbd6ecaf69695d00247a8ea597d",
+    "scripts/product_exhaustive.py": "dd80d239c44bb882b260983b525216c826a003e55230670c0a8251e417db56e4"
+  },
+  "harness_sha256": "62fb42986c98ef24d79ae9cb70b30bf0315a27bc0035282a86a73e2bd84eb5f5",
+  "log": "reports/product-exhaustive.log"
+}

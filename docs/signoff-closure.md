@@ -66,6 +66,22 @@ explicit, justified exclusions. Parameter-constant branches and structural
 constant bits are retained in the raw report. Array/APB code coverage and
 four-state X-propagation coverage have not been established.
 
+The resumed campaign adds sparse fixed-point powers, mixed carry populations
+and per-lane special events. Five-stage raw toggle coverage is now 99.676% at
+eight lanes, 99.596% at sixteen lanes and 98.731% at thirty-two lanes. Line
+coverage is 100% in all nine configurations. These are still incomplete raw
+coverage results. `make coverage-constants` attempts unbounded induction for
+individual simulator-derived constant-zero candidates and requires an inverted
+property counterexample; a failed campaign never grants exclusions.
+
+`make product-exhaustive` checks all 20,971,520 assignments to a one-lane
+product cone extracted verbatim from the production RTL: both full input bytes,
+five formats, every truncation, and poison on/off. The independent reference
+uses fixed-point element magnitudes and wide integer multiplication. Signed
+70-bit products and the four special/approximation flags match for every
+assignment; an inverted production product bit is detected. This is exhaustive
+combinational enumeration, not a full sequential PE arithmetic proof.
+
 ## Physical evidence
 
 The new candidate's results belong in `reports/physical.json` and

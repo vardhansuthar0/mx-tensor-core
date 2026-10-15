@@ -1,7 +1,7 @@
 .NOTPARALLEL: reproduce signoff
 PYTHON ?= python3
 .PHONY: reproduce model lint sim array formal mutation physical signoff clean
-reproduce: verification-start model lint sim array formal mutation converter-formal native-uvm code-coverage signoff-tests formal-negative
+reproduce: verification-start model lint sim array formal mutation converter-formal product-exhaustive native-uvm code-coverage signoff-tests formal-negative
 	$(PYTHON) scripts/summarize.py
 model:
 	$(PYTHON) -m pytest -q tb/test_model.py --junitxml=reports/model.xml
@@ -52,3 +52,9 @@ arithmetic-bounded:
 .PHONY: formal-negative
 formal-negative:
 	$(PYTHON) scripts/formal_negative.py
+
+.PHONY: product-exhaustive coverage-constants
+product-exhaustive:
+	$(PYTHON) scripts/product_exhaustive.py
+coverage-constants:
+	$(PYTHON) scripts/coverage_constants.py
