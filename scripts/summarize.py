@@ -2,13 +2,19 @@ import hashlib,importlib.metadata,json,pathlib,platform,subprocess,xml.etree.Ele
 from datetime import datetime,timezone
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 reports=ROOT/'reports'
+from provenance import source_manifest
+run=json.loads((reports/'verification-inputs.json').read_text())
+assert run['source_sha256']==source_manifest(), 'Regression inputs changed during execution; rerun make reproduce'
+required=[f'l{l}_p{p}.json' for l in [8,16,32] for p in [3,4,5]]+[f'array{x}.json' for x in [1,2,4]]+['formal.json','mutations.json','model.xml','native-uvm.json','code-coverage.json','converter-equivalence.json','converter-specification.json','formal-negative-controls.json']
+assert all((reports/p).stat().st_mtime>=run['started_epoch'] for p in required), 'Stale regression evidence; rerun make reproduce'
+
 pe=[json.loads((reports/f'l{l}_p{p}.json').read_text()) for l in [8,16,32] for p in [3,4,5]]
 arrays=[json.loads((reports/f'array{x}.json').read_text()) for x in [1,2,4]]
 formal=json.loads((reports/'formal.json').read_text());mut=json.loads((reports/'mutations.json').read_text())
 assert all(x['status']=='pass' for x in pe+arrays+formal)
 assert mut['baseline']=='pass' and mut['killed']==mut['total']
 assert not ET.parse(reports/'model.xml').getroot().findall('.//failure')
-summary={'generated_utc':datetime.now(timezone.utc).isoformat(),'verification_status':'pass',
+summary={'generated_utc':datetime.now(timezone.utc).isoformat(),'verification_status':'pass','verification_run_id':run['run_id'],
  'model':{'test_functions':5,'element_codes_crosschecked':656,'rounding_checks':44000},
  'pe_configurations':len(pe),'pe_blocks_checked':sum(x['checked_blocks'] for x in pe),
  'functional_coverage':{'contract_bins_per_configuration':160,'rounding_bins_per_configuration':7,
@@ -19,9 +25,17 @@ summary={'generated_utc':datetime.now(timezone.utc).isoformat(),'verification_st
  'tools':{name:importlib.metadata.version(name) for name in ['numpy','ml_dtypes','cocotb','pyuvm','cocotb-coverage','verilator','yowasp-yosys']},
  'python':platform.python_version(),
  'limitations':['SKY130 physical results cover one PE only; signoff violations remain','No cross-block K accumulation; K=32 tiles only',
-                'Formal does not prove end-to-end floating-point correctness','No measured code coverage',
-                'Runtime truncation retains 70-bit hardware width','Full native SystemVerilog UVM not implemented']}
+                'Formal does not prove end-to-end floating-point correctness','RTL code/toggle counters measured; uncovered points remain',
+                'Runtime truncation retains 70-bit hardware width','Native SV UVM regression covers one 8-lane PE configuration only']}
+for key,name in [('native_uvm','native-uvm.json'),('converter_equivalence','converter-equivalence.json'),('converter_specification','converter-specification.json'),('formal_negative_controls','formal-negative-controls.json')]:
+ path=reports/name
+ if path.exists():summary[key]=json.loads(path.read_text())
+path=reports/'code-coverage.json'
+if path.exists():
+ coverage=json.loads(path.read_text())
+ summary['code_coverage']={k:v for k,v in coverage.items() if k!='configurations'}
+ summary['code_coverage']['configurations']=[{k:v for k,v in c.items() if k!='uncovered'} for c in coverage['configurations']]
 (reports/'status.json').write_text(json.dumps(summary,indent=2)+'\n')
-manifest={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for folder in ['rtl','model','tb','formal','scripts','physical'] for p in sorted((ROOT/folder).rglob('*')) if p.is_file() and '__pycache__' not in str(p) and 'runs' not in p.parts and 'results' not in p.parts and p.suffix in ['.sv','.py','.json','.sby']}
+manifest=run['source_sha256']
 (reports/'source-sha256.json').write_text(json.dumps(manifest,indent=2)+'\n')
 print(json.dumps(summary,indent=2))

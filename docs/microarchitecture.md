@@ -98,7 +98,7 @@ registered output after edge t+(32/LANES-1)+3 in the absence of stalls.
 
 PIPE_STAGES=3 bypasses the decode register, combining decode and multiply.
 PIPE_STAGES=5 adds a register between completed sum and conversion. This
-fifth stage does not split the converter; timing gains are not guaranteed.
+fifth stage registers magnitude and leading index before conversion rounding; routed timing still determines closure.
 Its utility must be judged by measurement. Pipeline depth is elaboration-time.
 
 ## 3. Integration and sign-off
@@ -124,3 +124,20 @@ failures for kills, separately bounded/unbounded formal results, and physical
 reports with tool versions, PDK revision, corner, clock, parasitics, stimulus
 and activity source. Unknown or unrun is never a passing result. Completion
 status and deferred features are recorded in README and reports/status.json.
+
+## Converter closure revision
+
+The five-stage configuration now registers the 70-bit magnitude and seven-bit
+leading index after the completed block sum, rather than copying the entire
+sum into an otherwise redundant register stage. Sign, scale, output mode and
+exception metadata remain aligned on the same global advance enable. Its
+five-cycle accepted-beat latency and four-cycle initiation interval at eight
+lanes are unchanged. Three- and four-stage configurations use the same
+normalization network without the additional normalization registers.
+
+Magnitude uses a preserved parallel-prefix OR network for two's-complement
+negation; leading-index search has logarithmic depth; sticky bits use a parallel
+mask reduction. `make converter-formal` proves the combinational conversion
+against both the frozen baseline and an independent quotient/remainder RNE
+specification. The separate four-/five-stage induction jobs cover reset and
+stalled-output preservation, not full numerical pipeline correctness.

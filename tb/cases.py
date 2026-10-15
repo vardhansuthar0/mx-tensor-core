@@ -48,7 +48,7 @@ def cases(seed=20261011, count=2500):
             out.append(Block([one]+[0]*31,[one]*32,fmt,127,sc,bool(sc%2),tag='scale_sweep'))
     # NaNs, both infinities, zero*infinity, opposite infinities, reserved format.
     for bf in [False,True]:
-        for ac,bc in [(0x7c,0),(0x7c,0x3c),(0xfc,0x3c),(0x7d,0x3c)]:
+        for ac,bc in [(0x7c,0),(0x7c,0x7c),(0x7c,0x3c),(0xfc,0x3c),(0x7d,0x3c)]:
             out.append(Block([ac]+[0]*31,[bc]*32,1,bf16=bf,tag='special'))
         out.append(Block([0x7c,0xfc]+[0]*30,[0x3c]*32,1,bf16=bf,tag='opposite_inf'))
         out.append(Block([0x7f]+[0]*31,[0x38]*32,0,bf16=bf,tag='special'))
@@ -66,6 +66,11 @@ def cases(seed=20261011, count=2500):
                 if x.sig*y.sig and (x.sig*y.sig)&(x.sig*y.sig-1)==0:
                     power=(x.sig*y.sig).bit_length()-1+x.exp+y.exp
                     choices.setdefault(power,(ac,bc))
+        # Carry into a new normal exponent, and subnormal RNE promotion to
+        # minimum normal. These were uncovered converter branches.
+        ac,bc=choices[-p]
+        out.append(Block([0x3c,0x3c,ac|0x80]+[0]*29,[0x3c,0x3c,bc]+[0]*29,1,bf16=bf,tag='round_carry'))
+        out.append(Block([0x3c,ac|0x80]+[0]*30,[0x3c,bc]+[0]*30,1,1,127,bf,tag='round_to_min_normal'))
         for direction in [-1,0,1]:
             for odd in [False,True]:
                 a=[0x3c]; b=[0x3c]

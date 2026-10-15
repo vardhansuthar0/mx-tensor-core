@@ -1,6 +1,7 @@
+.NOTPARALLEL: reproduce signoff
 PYTHON ?= python3
 .PHONY: reproduce model lint sim array formal mutation physical signoff clean
-reproduce: model lint sim array formal mutation
+reproduce: verification-start model lint sim array formal mutation converter-formal native-uvm code-coverage signoff-tests formal-negative
 	$(PYTHON) scripts/summarize.py
 model:
 	$(PYTHON) -m pytest -q tb/test_model.py --junitxml=reports/model.xml
@@ -17,6 +18,7 @@ mutation:
 physical:
 	$(PYTHON) scripts/physical.py
 signoff: reproduce physical
+	$(PYTHON) scripts/signoff_check.py
 clean:
 	$(PYTHON) -c "import shutil; shutil.rmtree('build', ignore_errors=True)"
 
@@ -24,3 +26,29 @@ clean:
 analyze-physical:
 	$(PYTHON) scripts/routed_power.py physical/results/analysis-state.json
 	$(PYTHON) scripts/timing_sweep.py physical/results/analysis-state.json
+
+.PHONY: converter-formal native-uvm code-coverage check-signoff
+converter-formal:
+	$(PYTHON) scripts/converter_formal.py
+native-uvm:
+	$(PYTHON) scripts/native_uvm.py
+code-coverage:
+	$(PYTHON) scripts/code_coverage.py
+check-signoff:
+	$(PYTHON) scripts/signoff_check.py
+
+.PHONY: signoff-tests
+signoff-tests:
+	$(PYTHON) -m pytest -q tb/test_signoff.py
+
+.PHONY: verification-start
+verification-start:
+	$(PYTHON) scripts/provenance.py
+
+.PHONY: arithmetic-bounded
+arithmetic-bounded:
+	$(PYTHON) scripts/arithmetic_formal.py
+
+.PHONY: formal-negative
+formal-negative:
+	$(PYTHON) scripts/formal_negative.py
