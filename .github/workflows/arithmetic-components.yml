@@ -10,6 +10,8 @@ on:
       - 'scripts/normalization_formal.py'
       - 'scripts/product_bindings.py'
       - 'scripts/product_exhaustive.py'
+      - 'formal/product_check.svh'
+      - 'formal/arithmetic_reference.svh'
       - 'rtl/mx_csa.sv'
       - '.github/workflows/arithmetic-components.yml'
       - 'rtl/mx_pe.sv'

@@ -48,6 +48,7 @@ if(!past_valid)assume(rst);
 if(past_valid)begin
 assert(ov==(vp[STAGES-1]^1'(NEGATIVE_CONTROL)));
 assert(ir==(ga&&!rst));
+assert(dut.active_fmt==((beat==0)?fmt:heldfmt));
 assert(dut.beat==beat);assert(dut.held_fmt==heldfmt);assert(dut.held_meta==held);assert(dut.input_meta==active);
 assert(dut.v1==gv1);assert(dut.m1==gm1);assert(dut.v2==gv2);assert(dut.m2==gm2);
 assert(dut.v3==vp[DELAY]);

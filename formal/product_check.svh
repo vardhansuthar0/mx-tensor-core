@@ -2,9 +2,11 @@ logic [63:0] p;
 logic [69:0] q,expected;
 logic rn,rp,rm,ra,negative;
 logic [1:0] ak,bk;
+integer reference_grid;
 always_comb begin
 p=64'(element_magnitude(in_a,fmt))*64'(element_magnitude(in_b,fmt));
-q=(70'(p)>>(int'(grid_for(fmt))+int'(trunc)))<<(int'(grid_for(fmt))+int'(trunc));
+case(fmt)0:reference_grid=14;1:reference_grid=0;2:reference_grid=24;3:reference_grid=26;4:reference_grid=30;default:reference_grid=0;endcase
+q=(70'(p)>>(reference_grid+int'(trunc)))<<(reference_grid+int'(trunc));
 negative=element_negative(in_a,fmt)^element_negative(in_b,fmt);
 ak=element_kind(in_a,fmt);bk=element_kind(in_b,fmt);
 rn=poison;rp=0;rm=0;ra=0;expected=0;
