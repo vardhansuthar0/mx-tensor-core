@@ -64,3 +64,7 @@ coverage-paths:
 	$(PYTHON) scripts/coverage_paths.py
 coverage-closure: coverage-constants coverage-paths
 	$(PYTHON) scripts/coverage_closure.py
+
+.PHONY: streaming-formal
+streaming-formal:
+	$(PYTHON) scripts/streaming_formal.py
