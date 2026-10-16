@@ -36,31 +36,46 @@ module mx_pe #(parameter integer LANES=32, PIPE_STAGES=4)(
             3: grid_for=26; 4: grid_for=30; default: grid_for=0;
         endcase
     endfunction
+    function automatic integer leading70(input logic [69:0] value);
+        logic [127:0] search;
+        integer index;
+        begin
+            search={58'b0,value}; index=0;
+            for(integer step=64;step>0;step=step/2) begin
+                if(|(search>>step)) begin search=search>>step; index=index+step; end
+            end
+            leading70=index;
+        end
+    endfunction
+    // Keep the signed-total interface for equivalence; magnitude is precomputed.
+    /* verilator lint_off UNUSEDSIGNAL */
     function automatic [36:0] convert(input logic signed [69:0] total, input logic bf16, input logic signed [9:0] scale,
-        input logic nanbit, posinf, neginf, approx);
-        logic [69:0] mag, kept;
+        input logic nanbit, posinf, neginf, approx, input logic [69:0] magnitude, input logic [6:0] leading);
+    /* verilator lint_on UNUSEDSIGNAL */
+        logic [69:0] mag, kept, sticky_terms;
         logic signbit, guardbit, sticky, lost;
         logic [31:0] bits;
         logic [4:0] flags;
         integer lead, p, expo, shift, exfield;
         begin
-            signbit=total[69]; mag=signbit ? $unsigned(-total) : $unsigned(total);
+            signbit=total[69]; mag=magnitude;
             p=bf16?8:24; bits=0; flags={approx,4'b0000};
-            lead=0; expo=0; shift=0; exfield=0; guardbit=0; sticky=0; lost=0; kept=0;
+            lead=0; expo=0; shift=0; exfield=0; guardbit=0; sticky=0; lost=0; kept=0; sticky_terms=0;
             if (nanbit || (posinf && neginf)) begin
                 bits=bf16?32'h00007fc0:32'h7fc00000; flags[3]=1;
             end else if(posinf || neginf) begin
                 bits=(32'(neginf)<<(p+7)) | (32'd255<<(p-1));
             end else if(mag!=0) begin
-                for(integer i=0;i<70;i=i+1) if(mag[i]) lead=i;
+                lead=int'(leading);
                 expo=lead+int'($signed(scale))-32; shift=lead-(p-1);
                 if(expo < -126) shift=-126-(p-1)-(int'($signed(scale))-32);
                 if(shift>0) begin
                     kept=mag>>shift;
                     for(integer i=0;i<70;i=i+1) begin
                         if(i==shift-1) guardbit=mag[i];
-                        if(i<shift-1) sticky=sticky|mag[i];
+                        sticky_terms[i]=(i<shift-1) && mag[i];
                     end
+                    sticky=|sticky_terms;
                     lost=guardbit|sticky;
                     if(guardbit && (sticky || kept[0])) kept=kept+70'd1;
                 end else kept=mag<<(-shift);
@@ -188,21 +203,36 @@ module mx_pe #(parameter integer LANES=32, PIPE_STAGES=4)(
     logic signed [69:0] sum4;
     logic nan4,pos4,neg4,approx4,v4;
     out_meta_t m4;
+    logic [69:0] converter_mag;
+    logic [6:0] converter_lead;
+    // Preserve parallel-prefix levels through synthesis. The baseline mapped
+    // two's-complement magnitude to a long chain of shared OR prefixes.
+    for(genvar level=0;level<8;level=level+1) begin: magnitude_tree
+        (* keep = 1 *) wire [69:0] prefix;
+        if(level==0) begin: first_level
+            assign prefix=sum3;
+        end else begin: next_level
+            assign prefix=magnitude_tree[level-1].prefix | (magnitude_tree[level-1].prefix << (1<<(level-1)));
+        end
+    end
+    wire [69:0] completed_mag=$unsigned(sum3) ^ ((magnitude_tree[7].prefix<<1) & {70{sum3[69]}});
+    wire [6:0] completed_lead=7'(leading70(completed_mag));
+    // End normalization network.
     generate
         if(PIPE_STAGES==5) begin: extra_stage
             always_ff @(posedge clk) begin
-                if(rst) begin sum4<=0; m4<='0; nan4<=0; pos4<=0; neg4<=0; approx4<=0; v4<=0; end
+                if(rst) begin converter_mag<=0; converter_lead<=0; sum4<=0; m4<='0; nan4<=0; pos4<=0; neg4<=0; approx4<=0; v4<=0; end
                 else if(advance) begin
-                    sum4<=sum3; m4<=m3; nan4<=nan3; pos4<=pos3; neg4<=neg3; approx4<=approx3; v4<=v3;
+                    converter_mag<=completed_mag; converter_lead<=completed_lead; sum4<=sum3; m4<=m3; nan4<=nan3; pos4<=pos3; neg4<=neg3; approx4<=approx3; v4<=v3;
                 end
             end
         end else begin: no_extra_stage
-            always_comb begin sum4=sum3; m4=m3; nan4=nan3; pos4=pos3; neg4=neg3; approx4=approx3; v4=v3; end
+            always_comb begin converter_mag=completed_mag; converter_lead=completed_lead; sum4=sum3; m4=m3; nan4=nan3; pos4=pos3; neg4=neg3; approx4=approx3; v4=v3; end
         end
     endgenerate
     always_ff @(posedge clk) begin
         if(rst) begin out_valid<=0; out_data<=0; out_flags<=0; end
-        else if(advance) begin out_valid<=v4; if(v4) {out_flags,out_data}<=convert(sum4,m4.bf16,m4.scale,nan4,pos4,neg4,approx4); end
+        else if(advance) begin out_valid<=v4; if(v4) {out_flags,out_data}<=convert(sum4,m4.bf16,m4.scale,nan4,pos4,neg4,approx4,converter_mag,converter_lead); end
     end
 `ifndef SYNTHESIS
     initial begin

@@ -1,0 +1,187 @@
+name: Arithmetic composition components
+on:
+  workflow_dispatch:
+  push:
+    branches: [signoff-closure]
+    paths:
+      - 'formal/streaming_pipeline.sv'
+      - 'scripts/streaming_formal.py'
+      - 'scripts/csa_composition.py'
+      - 'scripts/normalization_formal.py'
+      - 'scripts/product_bindings.py'
+      - 'scripts/product_exhaustive.py'
+      - 'formal/product_check.svh'
+      - 'formal/arithmetic_reference.svh'
+      - 'scripts/arithmetic_composition.py'
+      - 'scripts/converter_formal.py'
+      - 'formal/converter_spec.svh'
+      - 'formal/converter_reference.svh'
+      - 'rtl/mx_csa.sv'
+      - '.github/workflows/arithmetic-components.yml'
+      - 'rtl/mx_pe.sv'
+permissions:
+  contents: read
+concurrency:
+  group: mx-arithmetic-components
+  cancel-in-progress: true
+jobs:
+  streaming:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install yowasp-yosys==0.69.0.0.post1233
+      - run: sudo apt-get update && sudo apt-get install -y yosys
+      - run: python -m py_compile scripts/streaming_formal.py
+      - run: make streaming-formal
+      - name: Print scoped result
+        if: always()
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path('reports/streaming-refinement.json')
+          print(p.read_text() if p.exists() else '{"status":"unavailable","scope":"partial arithmetic component"}')
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: arithmetic-component-streaming
+          path: reports/streaming-refinement.json
+          if-no-files-found: error
+  csa:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get update && sudo apt-get install -y yosys
+      - run: python -m py_compile scripts/csa_composition.py
+      - run: python scripts/csa_composition.py
+      - name: Print scoped result
+        if: always()
+        run: |
+          python - <<'PY'
+          import pathlib
+          p=pathlib.Path('reports/csa-composition.json')
+          print(p.read_text() if p.exists() else '{"status":"unavailable","scope":"CSA component"}')
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: arithmetic-component-csa
+          path: reports/csa-composition.json
+          if-no-files-found: error
+  normalization:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install yowasp-yosys==0.69.0.0.post1233
+      - run: sudo apt-get update && sudo apt-get install -y yosys
+      - run: python -m py_compile scripts/normalization_formal.py
+      - run: python scripts/normalization_formal.py
+      - name: Print scoped result
+        if: always()
+        run: |
+          python - <<'PY'
+          import pathlib
+          p=pathlib.Path('reports/normalization-refinement.json')
+          print(p.read_text() if p.exists() else '{"status":"unavailable","scope":"normalization component"}')
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: arithmetic-component-normalization
+          path: reports/normalization-refinement.json
+          if-no-files-found: error
+  product-bindings:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install yowasp-yosys==0.69.0.0.post1233
+      - run: sudo apt-get update && sudo apt-get install -y yosys
+      - run: python -m py_compile scripts/product_bindings.py
+      - run: python scripts/product_bindings.py
+      - name: Print scoped result
+        if: always()
+        run: |
+          python - <<'PY'
+          import pathlib
+          p=pathlib.Path('reports/product-bindings.json')
+          print(p.read_text() if p.exists() else '{"status":"unavailable","scope":"product bindings"}')
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: arithmetic-component-bindings
+          path: reports/product-bindings.json
+          if-no-files-found: error
+
+  compose:
+    needs: [streaming, csa, normalization, product-bindings]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Remove any historical certificate
+        run: python -c "import pathlib; pathlib.Path('reports/arithmetic-equivalence.json').unlink(missing_ok=True)"
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: arithmetic-component-*
+          merge-multiple: true
+          path: reports
+      - run: python -m py_compile scripts/arithmetic_composition.py scripts/product_exhaustive.py scripts/converter_formal.py
+      - run: make product-exhaustive converter-formal
+      - run: python scripts/arithmetic_composition.py
+      - name: Print arithmetic certificate
+        if: always()
+        run: |
+          python - <<'PY'
+          import pathlib
+          p=pathlib.Path('reports/arithmetic-equivalence.json')
+          print(p.read_text() if p.exists() else '{"status":"unavailable","scope":"full_pe_independent_spec"}')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: arithmetic-certificate
+          if-no-files-found: error
+          path: |
+            reports/arithmetic-equivalence.json
+            reports/streaming-refinement.json
+            reports/csa-composition.json
+            reports/normalization-refinement.json
+            reports/product-bindings.json
+            reports/product-exhaustive.json
+            reports/converter-equivalence.json
+            reports/converter-specification.json

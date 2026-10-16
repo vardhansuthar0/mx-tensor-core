@@ -1,10 +1,37 @@
 {
   "DESIGN_NAME": "mx_pe_sky130",
-  "VERILOG_FILES": ["dir::generated.v"],
+  "VERILOG_FILES": [
+    "dir::generated.v"
+  ],
   "CLOCK_PORT": "clk",
   "CLOCK_PERIOD": 50,
   "FP_SIZING": "absolute",
-  "DIE_AREA": [0, 0, 1200, 1200],
-  "CORE_AREA": [20, 20, 1180, 1180],
-  "PL_TARGET_DENSITY_PCT": 35
+  "DIE_AREA": [
+    0,
+    0,
+    1200,
+    1200
+  ],
+  "CORE_AREA": [
+    20,
+    20,
+    1180,
+    1180
+  ],
+  "PL_TARGET_DENSITY_PCT": 35,
+  "RUN_POST_GRT_DESIGN_REPAIR": true,
+  "GRT_DESIGN_REPAIR_MAX_WIRE_LENGTH": 250,
+  "GRT_DESIGN_REPAIR_MAX_SLEW_PCT": 50,
+  "GRT_DESIGN_REPAIR_MAX_CAP_PCT": 40,
+  "GRT_ANTENNA_ITERS": 30,
+  "GRT_ANTENNA_MARGIN": 80,
+  "DIODE_ON_PORTS": "in",
+  "CTS_ROOT_BUFFER": "sky130_fd_sc_hd__clkbuf_8",
+  "CTS_MAX_CAP": 0.12,
+  "CTS_MAX_SLEW": 0.5,
+  "PL_RESIZER_HOLD_SLACK_MARGIN": 0.2,
+  "KLAYOUT_DRC_THREADS": 2,
+  "KLAYOUT_XOR_THREADS": 2,
+  "RUN_HEURISTIC_DIODE_INSERTION": true,
+  "HEURISTIC_ANTENNA_THRESHOLD": 90
 }

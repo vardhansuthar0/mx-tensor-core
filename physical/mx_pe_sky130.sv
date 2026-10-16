@@ -6,5 +6,5 @@ module mx_pe_sky130(
  output wire out_valid,input wire out_ready,
  output wire [31:0] out_data,output wire [4:0] out_flags
 );
- mx_pe #(.LANES(8),.PIPE_STAGES(4)) core(.*);
+ mx_pe #(.LANES(8),.PIPE_STAGES(5)) core(.*);
 endmodule

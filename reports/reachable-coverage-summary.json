@@ -1,0 +1,290 @@
+{
+  "status": "pass",
+  "scope": "Reachable PE/CSA line, branch, expression and toggle counters, nine configurations; raw counts retained. Array/APB coverage not included.",
+  "failures": [],
+  "source_commit": "ceb4500f15b44838b735478237bd1d1fc922e6d4",
+  "proofs": {
+    "coverage-constants": {
+      "status": "pass",
+      "sha256": "f2dbcdfe0f1f2a11705798935d4dcfe3fe5616d7c2937db05620f57c864bf826"
+    },
+    "coverage-paths": {
+      "status": "pass",
+      "sha256": "b3a32db2f36328428d59fb6d38dc169a212a690a41b12a35b361cea35fcb4032"
+    }
+  },
+  "raw_coverage_sha256": "55302374a0e2fc995fe8847f2b9d4806033f7b1d707e8dfe8ffc28fa6e2df97f",
+  "configurations": [
+    {
+      "lanes": 8,
+      "stages": 3,
+      "metrics": {
+        "line": {
+          "raw_hit": 41,
+          "raw_total": 41,
+          "proved_unreachable": 0,
+          "reachable_total": 41
+        },
+        "branch": {
+          "raw_hit": 50,
+          "raw_total": 50,
+          "proved_unreachable": 0,
+          "reachable_total": 50
+        },
+        "expr": {
+          "raw_hit": 106,
+          "raw_total": 109,
+          "proved_unreachable": 3,
+          "reachable_total": 106
+        },
+        "toggle": {
+          "raw_hit": 7998,
+          "raw_total": 8024,
+          "proved_unreachable": 26,
+          "reachable_total": 7998
+        }
+      }
+    },
+    {
+      "lanes": 8,
+      "stages": 4,
+      "metrics": {
+        "line": {
+          "raw_hit": 43,
+          "raw_total": 43,
+          "proved_unreachable": 0,
+          "reachable_total": 43
+        },
+        "branch": {
+          "raw_hit": 52,
+          "raw_total": 52,
+          "proved_unreachable": 0,
+          "reachable_total": 52
+        },
+        "expr": {
+          "raw_hit": 106,
+          "raw_total": 109,
+          "proved_unreachable": 3,
+          "reachable_total": 106
+        },
+        "toggle": {
+          "raw_hit": 7998,
+          "raw_total": 8024,
+          "proved_unreachable": 26,
+          "reachable_total": 7998
+        }
+      }
+    },
+    {
+      "lanes": 8,
+      "stages": 5,
+      "metrics": {
+        "line": {
+          "raw_hit": 44,
+          "raw_total": 44,
+          "proved_unreachable": 0,
+          "reachable_total": 44
+        },
+        "branch": {
+          "raw_hit": 54,
+          "raw_total": 54,
+          "proved_unreachable": 0,
+          "reachable_total": 54
+        },
+        "expr": {
+          "raw_hit": 106,
+          "raw_total": 109,
+          "proved_unreachable": 3,
+          "reachable_total": 106
+        },
+        "toggle": {
+          "raw_hit": 7998,
+          "raw_total": 8024,
+          "proved_unreachable": 26,
+          "reachable_total": 7998
+        }
+      }
+    },
+    {
+      "lanes": 16,
+      "stages": 3,
+      "metrics": {
+        "line": {
+          "raw_hit": 41,
+          "raw_total": 41,
+          "proved_unreachable": 0,
+          "reachable_total": 41
+        },
+        "branch": {
+          "raw_hit": 50,
+          "raw_total": 50,
+          "proved_unreachable": 0,
+          "reachable_total": 50
+        },
+        "expr": {
+          "raw_hit": 102,
+          "raw_total": 109,
+          "proved_unreachable": 7,
+          "reachable_total": 102
+        },
+        "toggle": {
+          "raw_hit": 12318,
+          "raw_total": 12368,
+          "proved_unreachable": 50,
+          "reachable_total": 12318
+        }
+      }
+    },
+    {
+      "lanes": 16,
+      "stages": 4,
+      "metrics": {
+        "line": {
+          "raw_hit": 43,
+          "raw_total": 43,
+          "proved_unreachable": 0,
+          "reachable_total": 43
+        },
+        "branch": {
+          "raw_hit": 52,
+          "raw_total": 52,
+          "proved_unreachable": 0,
+          "reachable_total": 52
+        },
+        "expr": {
+          "raw_hit": 102,
+          "raw_total": 109,
+          "proved_unreachable": 7,
+          "reachable_total": 102
+        },
+        "toggle": {
+          "raw_hit": 12318,
+          "raw_total": 12368,
+          "proved_unreachable": 50,
+          "reachable_total": 12318
+        }
+      }
+    },
+    {
+      "lanes": 16,
+      "stages": 5,
+      "metrics": {
+        "line": {
+          "raw_hit": 44,
+          "raw_total": 44,
+          "proved_unreachable": 0,
+          "reachable_total": 44
+        },
+        "branch": {
+          "raw_hit": 54,
+          "raw_total": 54,
+          "proved_unreachable": 0,
+          "reachable_total": 54
+        },
+        "expr": {
+          "raw_hit": 102,
+          "raw_total": 109,
+          "proved_unreachable": 7,
+          "reachable_total": 102
+        },
+        "toggle": {
+          "raw_hit": 12318,
+          "raw_total": 12368,
+          "proved_unreachable": 50,
+          "reachable_total": 12318
+        }
+      }
+    },
+    {
+      "lanes": 32,
+      "stages": 3,
+      "metrics": {
+        "line": {
+          "raw_hit": 41,
+          "raw_total": 41,
+          "proved_unreachable": 0,
+          "reachable_total": 41
+        },
+        "branch": {
+          "raw_hit": 45,
+          "raw_total": 50,
+          "proved_unreachable": 5,
+          "reachable_total": 45
+        },
+        "expr": {
+          "raw_hit": 89,
+          "raw_total": 109,
+          "proved_unreachable": 20,
+          "reachable_total": 89
+        },
+        "toggle": {
+          "raw_hit": 18742,
+          "raw_total": 18984,
+          "proved_unreachable": 242,
+          "reachable_total": 18742
+        }
+      }
+    },
+    {
+      "lanes": 32,
+      "stages": 4,
+      "metrics": {
+        "line": {
+          "raw_hit": 43,
+          "raw_total": 43,
+          "proved_unreachable": 0,
+          "reachable_total": 43
+        },
+        "branch": {
+          "raw_hit": 47,
+          "raw_total": 52,
+          "proved_unreachable": 5,
+          "reachable_total": 47
+        },
+        "expr": {
+          "raw_hit": 89,
+          "raw_total": 109,
+          "proved_unreachable": 20,
+          "reachable_total": 89
+        },
+        "toggle": {
+          "raw_hit": 18743,
+          "raw_total": 18984,
+          "proved_unreachable": 241,
+          "reachable_total": 18743
+        }
+      }
+    },
+    {
+      "lanes": 32,
+      "stages": 5,
+      "metrics": {
+        "line": {
+          "raw_hit": 44,
+          "raw_total": 44,
+          "proved_unreachable": 0,
+          "reachable_total": 44
+        },
+        "branch": {
+          "raw_hit": 49,
+          "raw_total": 54,
+          "proved_unreachable": 5,
+          "reachable_total": 49
+        },
+        "expr": {
+          "raw_hit": 89,
+          "raw_total": 109,
+          "proved_unreachable": 20,
+          "reachable_total": 89
+        },
+        "toggle": {
+          "raw_hit": 18743,
+          "raw_total": 18984,
+          "proved_unreachable": 241,
+          "reachable_total": 18743
+        }
+      }
+    }
+  ],
+  "evidence": "Full reports, harnesses and logs are generated by make reproduce and uploaded by the repository verification workflow."
+}

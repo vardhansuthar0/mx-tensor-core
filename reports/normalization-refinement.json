@@ -1,0 +1,42 @@
+{
+  "status": "pass",
+  "scope": "Production magnitude/leading network, extra packet registers and output capture for arbitrary signed 70-bit sums and arbitrary converter results; scalar converter arithmetic is a separate obligation",
+  "method": "Source-extracted production network, independent absolute value/linear leading reference, unbounded induction and inverted-magnitude counterexamples",
+  "source_sha256": {
+    "rtl/mx_pe.sv": "13df90e48a95bd468d224d9e9cd549b2647d3623cc4e3a74e8798c802c392320",
+    "scripts/normalization_formal.py": "1fd9097b318716f629309934830693a7c7614b336cec851df35fe6eb3c363513"
+  },
+  "harness_sha256": "cc74b0d2a47d4a64b4b5b39a6ec3abed0ee2d49b26874a0f297e586a8fe8f5de",
+  "results": [
+    {
+      "stages": 3,
+      "negative_control": false,
+      "status": "pass"
+    },
+    {
+      "stages": 3,
+      "negative_control": true,
+      "status": "pass"
+    },
+    {
+      "stages": 4,
+      "negative_control": false,
+      "status": "pass"
+    },
+    {
+      "stages": 4,
+      "negative_control": true,
+      "status": "pass"
+    },
+    {
+      "stages": 5,
+      "negative_control": false,
+      "status": "pass"
+    },
+    {
+      "stages": 5,
+      "negative_control": true,
+      "status": "pass"
+    }
+  ]
+}

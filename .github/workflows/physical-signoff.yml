@@ -1,0 +1,99 @@
+name: SKY130 PE physical closure
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: mx-pe-physical-closure
+  cancel-in-progress: true
+jobs:
+  physical:
+    name: One-PE physical checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install Python dependencies and check gate behavior
+        run: |
+          python -m pip install -r requirements.txt -r requirements-physical.txt
+          python -m compileall -q scripts
+          python -m pytest -q tb/test_model.py tb/test_signoff.py
+          echo "MX_PYTHON=$pythonLocation/bin/python3" >> "$GITHUB_ENV"
+      - name: Install pinned native EDA tools
+        run: |
+          curl --fail --location --retry 3 https://releases.nixos.org/nix/nix-2.20.6/nix-2.20.6-x86_64-linux.tar.xz -o "$RUNNER_TEMP/mx-nix.tar.xz"
+          tar --no-same-owner -xf "$RUNNER_TEMP/mx-nix.tar.xz" -C "$RUNNER_TEMP"
+          sudo mkdir -p /nix/store /nix/var/nix
+          sudo cp -a "$RUNNER_TEMP/nix-2.20.6-x86_64-linux/store/." /nix/store/
+          sudo chown -R "$(id -u):$(id -g)" /nix
+          mkdir -p "$HOME/.config/nix"
+          printf 'experimental-features = nix-command flakes\nsandbox = false\nbuild-users-group =\n' > "$HOME/.config/nix/nix.conf"
+          export NIX_SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+          MX_NIX_EXE=$(printf '%s\n' /nix/store/*-nix-2.20.6/bin/nix)
+          "$MX_NIX_EXE" print-dev-env --accept-flake-config github:chipfoundry/openlane2/2.3.10 > "$RUNNER_TEMP/mx-eda-env.sh"
+          source "$RUNNER_TEMP/mx-eda-env.sh"
+          dirname "$(command -v openroad)" >> "$GITHUB_PATH"
+      - name: Install pinned SKY130 HD and IO libraries
+        run: |
+          MX_PDK_ROOT="$RUNNER_TEMP/mx-pdk"
+          mkdir -p "$MX_PDK_ROOT"
+          for MX_ASSET in common sky130_fd_sc_hd sky130_fd_io; do
+            curl --fail --location --retry 3 "https://github.com/chipfoundry/volare/releases/download/sky130-0fe599b2afb6708d281543108caf8310912f54af/$MX_ASSET.tar.zst" -o "$RUNNER_TEMP/$MX_ASSET.tar.zst"
+            sha256sum "$RUNNER_TEMP/$MX_ASSET.tar.zst"
+            tar --no-same-owner --zstd -xf "$RUNNER_TEMP/$MX_ASSET.tar.zst" -C "$MX_PDK_ROOT"
+          done
+          echo "PDK_ROOT=$MX_PDK_ROOT" >> "$GITHUB_ENV"
+          df -h .
+      - name: Run full routed physical flow
+        continue-on-error: true
+        run: |
+          set +e
+          "$MX_PYTHON" scripts/physical.py --tag "github-$GITHUB_RUN_ID" --jobs 2 &
+          MX_PID=$!
+          while kill -0 "$MX_PID" 2>/dev/null; do
+            tail -n 4 "reports/physical-flow-github-$GITHUB_RUN_ID.log" 2>/dev/null
+            sleep 30
+          done
+          wait "$MX_PID"
+          MX_STATUS=$?
+          echo "Physical driver exit: $MX_STATUS"
+          exit "$MX_STATUS"
+      - name: Evaluate physical-only acceptance
+        if: always()
+        run: '"$MX_PYTHON" scripts/signoff_check.py --physical-only'
+      - name: Export numeric physical evidence
+        if: always()
+        run: |
+          "$MX_PYTHON" - <<'PY'
+          import json,os,pathlib,math
+          root=pathlib.Path('reports')
+          def load(name):
+              try:return json.loads((root/name).read_text())
+              except (OSError,ValueError):return {}
+          p=load('physical.json');gate=load('physical-signoff.json')
+          names=['antenna__violating__nets','antenna__violating__pins','route__drc_errors','magic__drc_error__count','klayout__drc_error__count','design__lvs_error__count','design__xor_difference__count']
+          def numeric(d):return {k:v for k,v in d.items() if type(v) in (int,float) and math.isfinite(v)}
+          result={'source_commit':os.environ['GITHUB_SHA'],'run_id':os.environ['GITHUB_RUN_ID'],
+                  'scope':'one 8-lane, 5-stage PE; physical checks only, not full arithmetic signoff',
+                  'target_clock_ns':p.get('requested_clock_ns'),'flow_exit_code':p.get('flow_exit_code'),
+                  'area_um2':p.get('area_um2'),'utilization':p.get('utilization'),
+                  'timing':numeric(p.get('timing',{})),'electrical':numeric(p.get('electrical',{})),
+                  'checks':{k:p.get('drc_lvs',{}).get(k) for k in names},
+                  'netlist_sha256':p.get('netlist_sha256'),'gate_blocks_checked':(p.get('power') or {}).get('blocks_checked'),
+                  'estimated_energy_pj_per_block':(p.get('power') or {}).get('estimated_energy_pj_per_block'),
+                  'acceptance':gate}
+          (root/'physical-summary.json').write_text(json.dumps(result,indent=2,allow_nan=False)+'\n')
+          print(json.dumps(result,indent=2,allow_nan=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: physical-numeric-evidence
+          path: reports/physical-summary.json
+          if-no-files-found: warn

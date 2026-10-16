@@ -43,8 +43,7 @@ possible for every format.
 
 100% means these 167 declared bins, independently in each PE configuration.
 It does not mean all possible inputs, all rounding/format/control crosses,
-branch/toggle coverage, or complete verification. There is no code-coverage
-percentage in this release. Functional coverage cannot prove correctness.
+branch/toggle coverage, or complete verification. `reports/code-coverage.json` now retains raw instrumented line/branch/expression/toggle counts and every uncovered counter across nine PE configurations. These counters have no exclusions or waivers; measurement does not imply closure. Functional coverage cannot prove correctness.
 
 ## Assertions and formal
 
@@ -81,3 +80,38 @@ format, formal conservation/latency and bounded end-to-end FP4 equivalence,
 four-state simulation, code/toggle coverage, longer/multiple random seeds,
 cross-block matrix accumulation, and workload-driven physical power analysis.
 None is implied complete by the first milestone's coverage or mutation score.
+
+## Closure additions
+
+`make converter-formal` proves the current converter (including the preserved
+parallel-prefix magnitude network) equivalent to the converter frozen at
+commit 835e63e for all 70-bit sums, 10-bit scales, output formats and special
+flags. This is a rewrite-equivalence proof, not an independent numerical spec.
+
+`make native-uvm` fetches Accellera UVM 2020.3.1 at commit
+78c06547a2a0a29b3dc9dcafae62b75b2ff61544. A native SV sequence, sequencer,
+driver, monitor and scoreboard check generated integer-model vectors through
+the actual ready/valid interface of an 8-lane PE (five stages by default; `--stages` selects 3/4/5). LFSR backpressure
+and a watchdog check stalls and draining. DPI/backdoor facilities are disabled;
+UVM emits two associated capability warnings. This test uses initial reset;
+the pyuvm campaign retains occupied-pipeline and partial-block reset testing.
+
+The directed suite now includes infinity times infinity, RNE exponent carry,
+and rounding a subnormal up to minimum normal. `make signoff-tests` tests that
+the acceptance validator rejects known false-positive situations. Acceptance
+requires original 50 ns timing across all nine extracted corners, zero
+slew/capacitance/antenna/DRC/LVS/XOR violations, checked gate simulation on the
+same netlist, current source hashes and completed verification gates. Missing,
+non-finite, stale or failed results block acceptance. Full arithmetic formal
+proof and coverage closure remain work items; no report field substitutes for
+those proofs or measurements.
+
+The converter additionally passes a combinational SAT comparison against the independently written `formal/converter_spec.svh`, which chooses an output quantum, divides exactly, and compares integer remainders to half a quantum. See `reports/converter-specification.json`. Full sequential numerical refinement remains separate.
+
+The direct slang-based protocol harness now exposes symbolic values as actual
+module input ports. Internal `anyseq` attributes were not sufficient with this
+frontend: the netlist contained X constants instead of free inputs. Fresh
+induction proofs and inverted-property counterexample controls replace those
+old direct-Yosys results. Converter proofs already used explicit input ports.
+The optional bounded numerical harness also uses explicit ports and verifies
+that the frontend retains them before invoking the native backend.

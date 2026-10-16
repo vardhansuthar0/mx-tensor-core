@@ -1,0 +1,182 @@
+{
+  "status": "pass",
+  "scope": "Production per-lane product replication/flag OR for arbitrary decoded words; real decode/product registers under explicit oracle cuts, arbitrary bubbles/stalls/resets after initial reset. Decode calls and cut arguments checked by exact production source anchors. One-lane arithmetic and control/metadata are separate obligations.",
+  "source_sha256": {
+    "rtl/mx_pe.sv": "13df90e48a95bd468d224d9e9cd549b2647d3623cc4e3a74e8798c802c392320",
+    "scripts/product_bindings.py": "7a0cf060cb9edfb8076b40320d35246e76baabc6e0e363ae38939c51fa3ef453"
+  },
+  "harness_sha256": {
+    "replication": "ec7f77e8c6cf3ec2cbe800b70a0a74e1b46f00edf29bf482c612866ec248edfe",
+    "register": "a9a73e3f89b23ab63fe784c28b378259ad485d3eda38f13a7af3b5dd2f3654c9"
+  },
+  "results": [
+    {
+      "kind": "replication",
+      "lanes": 8,
+      "stages": null,
+      "negative_control": false,
+      "status": "pass"
+    },
+    {
+      "kind": "replication",
+      "lanes": 8,
+      "stages": null,
+      "negative_control": true,
+      "status": "pass"
+    },
+    {
+      "kind": "replication",
+      "lanes": 16,
+      "stages": null,
+      "negative_control": false,
+      "status": "pass"
+    },
+    {
+      "kind": "replication",
+      "lanes": 16,
+      "stages": null,
+      "negative_control": true,
+      "status": "pass"
+    },
+    {
+      "kind": "replication",
+      "lanes": 32,
+      "stages": null,
+      "negative_control": false,
+      "status": "pass"
+    },
+    {
+      "kind": "replication",
+      "lanes": 32,
+      "stages": null,
+      "negative_control": true,
+      "status": "pass"
+    },
+    {
+      "kind": "register",
+      "lanes": 8,
+      "stages": 3,
+      "negative_control": false,
+      "status": "pass"
+    },
+    {
+      "kind": "register",
+      "lanes": 8,
+      "stages": 3,
+      "negative_control": true,
+      "status": "pass"
+    },
+    {
+      "kind": "register",
+      "lanes": 8,
+      "stages": 4,
+      "negative_control": false,
+      "status": "pass"
+    },
+    {
+      "kind": "register",
+      "lanes": 8,
+      "stages": 4,
+      "negative_control": true,
+      "status": "pass"
+    },
+    {
+      "kind": "register",
+      "lanes": 8,
+      "stages": 5,
+      "negative_control": false,
+      "status": "pass"
+    },
+    {
+      "kind": "register",
+      "lanes": 8,
+      "stages": 5,
+      "negative_control": true,
+      "status": "pass"
+    },
+    {
+      "kind": "register",
+      "lanes": 16,
+      "stages": 3,
+      "negative_control": false,
+      "status": "pass"
+    },
+    {
+      "kind": "register",
+      "lanes": 16,
+      "stages": 3,
+      "negative_control": true,
+      "status": "pass"
+    },
+    {
+      "kind": "register",
+      "lanes": 16,
+      "stages": 4,
+      "negative_control": false,
+      "status": "pass"
+    },
+    {
+      "kind": "register",
+      "lanes": 16,
+      "stages": 4,
+      "negative_control": true,
+      "status": "pass"
+    },
+    {
+      "kind": "register",
+      "lanes": 16,
+      "stages": 5,
+      "negative_control": false,
+      "status": "pass"
+    },
+    {
+      "kind": "register",
+      "lanes": 16,
+      "stages": 5,
+      "negative_control": true,
+      "status": "pass"
+    },
+    {
+      "kind": "register",
+      "lanes": 32,
+      "stages": 3,
+      "negative_control": false,
+      "status": "pass"
+    },
+    {
+      "kind": "register",
+      "lanes": 32,
+      "stages": 3,
+      "negative_control": true,
+      "status": "pass"
+    },
+    {
+      "kind": "register",
+      "lanes": 32,
+      "stages": 4,
+      "negative_control": false,
+      "status": "pass"
+    },
+    {
+      "kind": "register",
+      "lanes": 32,
+      "stages": 4,
+      "negative_control": true,
+      "status": "pass"
+    },
+    {
+      "kind": "register",
+      "lanes": 32,
+      "stages": 5,
+      "negative_control": false,
+      "status": "pass"
+    },
+    {
+      "kind": "register",
+      "lanes": 32,
+      "stages": 5,
+      "negative_control": true,
+      "status": "pass"
+    }
+  ]
+}

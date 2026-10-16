@@ -1,10 +1,11 @@
-module protocol_proof(input clk);
-    (* anyseq *) reg rst,in_valid,out_ready;
-    (* anyseq *) reg [63:0] in_a,in_b;
-    (* anyseq *) reg [7:0] sa,sb;
-    (* anyseq *) reg [2:0] fmt;
-    (* anyseq *) reg bf;
-    (* anyseq *) reg [4:0] trunc;
+module protocol_proof(
+    input clk,rst,in_valid,out_ready,
+    input [63:0] in_a,in_b,
+    input [7:0] sa,sb,
+    input [2:0] fmt,
+    input bf,
+    input [4:0] trunc
+);
     wire in_ready,out_valid;
     wire [31:0] data;
     wire [4:0] flags;

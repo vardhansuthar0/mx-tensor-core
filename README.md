@@ -13,27 +13,31 @@ tensor-core designs are proprietary.
 
 ## Reproduce
 
-On Linux x86-64 with Python 3.12, a C++ compiler and Make:
+On Linux x86-64 with Python 3.12, a C++ compiler, Make and native Yosys:
 
 ```sh
 python3 -m venv .venv
 . .venv/bin/activate
 python -m pip install -r requirements.txt
+# Ubuntu/Debian: sudo apt-get install yosys
 make reproduce
 ```
 
 After setup, **`make reproduce`** runs model checks, warning-fatal lint,
-all nine PE configurations, three array sizes, two formal jobs and the nine-
-mutant campaign. It stops on failures and writes evidence under `reports/`.
+all nine PE configurations, three array sizes, structural/protocol/converter formal jobs and the nine-
+mutant campaign, exhaustive product-pair enumeration, native SV UVM and instrumented RTL coverage with proven-unreachable-point auditing. It stops on failures and writes evidence under `reports/`.
 The pinned Verilator wheel reports a development engine version; both wheel
 version and raw simulator banners are retained. A local Make override avoids
 its precompiled-header include issue. Yosys uses the pinned WebAssembly build
-with its slang SystemVerilog frontend; a native Yosys needs that frontend too.
+with its slang SystemVerilog frontend. Coverage induction uses a native SAT
+backend (`yosys` on PATH or `YOSYS_NATIVE`); that backend reads lowered JSON
+and does not need the slang plugin.
 
-Individual targets: `make model lint sim array formal mutation`.
+Individual targets: `make model lint sim array formal mutation converter-formal native-uvm code-coverage`.
 `make physical` requires an OpenLane 2 tool environment and SKY130 PDK.
-`make signoff` includes physical execution and fails when it is unavailable;
-it is not a substitute for reviewing timing, DRC/LVS and activity annotation.
+`make arithmetic-composed` runs the complete compositional PE arithmetic campaign.
+`make signoff` includes that campaign and physical execution, and fails when either is unavailable;
+its final validator rejects missing, stale or failing timing, electrical, antenna, DRC/LVS/XOR and verification evidence. `make check-signoff` evaluates retained reports without rerunning EDA tools.
 
 ## Implemented contract
 
@@ -51,7 +55,7 @@ it is not a substitute for reviewing timing, DRC/LVS and activity annotation.
 Read `docs/microarchitecture.md` before the RTL. The specification was written
 before implementation; it derives the required signed accumulator widths as
 42/70/24/18/14 bits. Runtime format selection provisions the worst-case width.
-The optional fifth stage registers the completed sum, not a split converter.
+The fifth stage registers the completed magnitude and leading-bit index, splitting normalization from rounding. Three- and four-stage configurations retain combinational normalization.
 
 ## Interfaces and software-visible registers
 
@@ -85,13 +89,10 @@ against simultaneous W1C. Sticky flags count retired results, not aborted work.
 classes, sampling rules, seeds, formal scope, mutation validity rules and
 remaining verification work. Coverage is sampled from observed, checked
 transactions. The campaign must kill all named planted defects, but does not
-claim to detect all possible bugs. Native SystemVerilog UVM, end-to-end
-arithmetic formal equivalence and code/toggle coverage are not completed.
+claim to detect all possible bugs. Native SystemVerilog UVM now checks the 8-lane/five-stage PE using pinned Accellera UVM 2020.3.1. Instrumented line/branch/expression/toggle counters are measured across all nine PE configurations, with uncovered points retained. The converter rewrite is formally equivalent to baseline and to an independent integer-RNE specification for all converter inputs. **The full compositional PE arithmetic certificate passes all nine configurations**, including arbitrary bubbles, stalls and later resets after initial reset, all metadata, and all five formats plus reserved-format poison. It combines 27,262,976 exhaustive lane cases, full CSA structural induction, unbounded stream/register proofs and independent scalar-converter SAT proofs. See `reports/arithmetic-equivalence.json` and `docs/arithmetic-composition.md`. **Reachable PE/CSA code and toggle coverage is closed with individually proved unreachable points; raw counters are preserved.** Array/APB code/toggle coverage and four-state X analysis remain unmeasured. See `docs/coverage-closure.md` and `docs/signoff-closure.md`.
 
 `physical/README.md` gives the physical handoff and reporting requirements.
-One 8-lane, four-stage PE has measured routed area and timing plus activity-based
-power estimates. See `docs/physical-results.md`. The 20 MHz target fails slow-corner
-timing, and electrical/antenna violations remain; do not claim signoff closure.
+The published baseline has routed area, timing and activity-based power estimates for one 8-lane/four-stage PE. Its measurements are preserved in `docs/physical-baseline.md`; the optimized candidate requires fresh physical evidence. See `docs/physical-results.md`. The baseline fails the 20 MHz slow-corner target and has electrical/antenna violations. The candidate keeps the 50 ns target, selects the existing five-stage PE with split conversion, alternates post-global-route electrical and antenna repairs, and uses tighter clock-tree load limits. **No signoff closure is claimed until all acceptance gates pass.**
 The two-page PDF documents retain the earlier RTL milestone; the physical report
 and machine-readable results supersede their physical-status statements.
 
@@ -112,7 +113,7 @@ and machine-readable results supersede their physical-status statements.
 
 Public source: https://github.com/vardhansuthar0/mx-tensor-core
 
-The full routed views and raw reports are supplied in the release package.
+The `v0.1.1-measured` release contains the published four-stage routed views and raw reports. Candidate results are identified separately by configuration and source hashes.
 The repository contains the RTL, model, verification, scripts, summaries and
 key logs. GitHub Actions runs the verification suite on pushes; its result
 must be checked separately from the local measurements.

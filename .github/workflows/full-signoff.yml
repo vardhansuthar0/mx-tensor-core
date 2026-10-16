@@ -1,0 +1,188 @@
+name: Complete PE signoff
+on:
+  workflow_dispatch:
+  push:
+    branches: [signoff-closure]
+    paths:
+      - '.github/workflows/full-signoff.yml'
+      - 'rtl/**'
+      - 'physical/config.json'
+      - 'physical/mx_pe_sky130.sv'
+      - 'scripts/physical.py'
+      - 'scripts/closure_flow.py'
+      - 'scripts/protect_antenna_pins.py'
+      - 'scripts/repair_clocks.tcl'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: mx-full-pe-signoff
+  cancel-in-progress: true
+jobs:
+  physical:
+    name: Verification, arithmetic and routed physical acceptance
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install Python dependencies and check gate behavior
+        run: |
+          python -m pip install -r requirements.txt -r requirements-physical.txt
+          python -m compileall -q scripts
+          python -m pytest -q tb/test_model.py tb/test_signoff.py tb/test_antenna_geometry.py
+          echo "MX_PYTHON=$pythonLocation/bin/python3" >> "$GITHUB_ENV"
+      - name: Install pinned native EDA tools
+        run: |
+          curl --fail --location --retry 3 https://releases.nixos.org/nix/nix-2.20.6/nix-2.20.6-x86_64-linux.tar.xz -o "$RUNNER_TEMP/mx-nix.tar.xz"
+          tar --no-same-owner -xf "$RUNNER_TEMP/mx-nix.tar.xz" -C "$RUNNER_TEMP"
+          sudo mkdir -p /nix/store /nix/var/nix
+          sudo cp -a "$RUNNER_TEMP/nix-2.20.6-x86_64-linux/store/." /nix/store/
+          sudo chown -R "$(id -u):$(id -g)" /nix
+          mkdir -p "$HOME/.config/nix"
+          printf 'experimental-features = nix-command flakes\nsandbox = false\nbuild-users-group =\n' > "$HOME/.config/nix/nix.conf"
+          export NIX_SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+          MX_NIX_EXE=$(printf '%s\n' /nix/store/*-nix-2.20.6/bin/nix)
+          "$MX_NIX_EXE" print-dev-env --accept-flake-config github:chipfoundry/openlane2/2.3.10 > "$RUNNER_TEMP/mx-eda-env.sh"
+          source "$RUNNER_TEMP/mx-eda-env.sh"
+          echo "MX_EDA_BIN=$(dirname "$(command -v openroad)")" >> "$GITHUB_ENV"
+      - name: Restore passing source-bound verification evidence
+        id: evidence_cache
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: verification-evidence
+          run-id: 38837494092
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: reports
+      - name: Validate verification evidence source identity
+        id: verification_cache
+        env:
+          MX_EVIDENCE_DOWNLOAD: ${{ steps.evidence_cache.outcome }}
+        run: |
+          python - <<'PY'
+          import json,os,pathlib
+          from scripts.provenance import source_manifest
+          root=pathlib.Path('reports')
+          def load(name):
+              try:return json.loads((root/name).read_text())
+              except (OSError,ValueError):return {}
+          captured=load('verification-inputs.json').get('source_sha256',{})
+          current=source_manifest()
+          reused=(os.environ['MX_EVIDENCE_DOWNLOAD']=='success'
+                  and captured==current and load('source-sha256.json')==current
+                  and load('status.json').get('verification_status')=='pass')
+          origin={'reused':reused,'reference_run':38837494092,'reference_artifact':12020620210,
+                  'reference_commit':'6305c04fd54132dedbade089bc2994986073a764',
+                  'method':'Reuse only after exact equality of every recorded implementation input hash; otherwise replay',
+                  'consumer_commit':os.environ['GITHUB_SHA'],'consumer_run':os.environ['GITHUB_RUN_ID']}
+          (root/'verification-reuse.json').write_text(json.dumps(origin,indent=2)+'\n')
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write('reused='+str(reused).lower()+'\n')
+          print(json.dumps(origin,indent=2))
+          PY
+      - name: Remove historical physical acceptance reports
+        run: |
+          python - <<'PY'
+          import pathlib
+          for name in ('physical.json','physical-signoff.json','signoff.json'):
+              pathlib.Path('reports',name).unlink(missing_ok=True)
+          PY
+      - name: Install verification SAT backend after EDA package tests
+        run: sudo apt-get update && sudo apt-get install -y yosys
+      - name: Validate reused regression or replay changed inputs
+        env:
+          MX_REUSE_VERIFICATION: ${{ steps.verification_cache.outputs.reused }}
+        run: |
+          if [ "$MX_REUSE_VERIFICATION" = true ]; then
+            python scripts/coverage_closure.py
+            python scripts/summarize.py
+          else
+            make reproduce
+          fi
+      - name: Replay full PE arithmetic campaign
+        run: make arithmetic-composed
+      - name: Activate pinned native EDA executables
+        run: echo "$MX_EDA_BIN" >> "$GITHUB_PATH"
+      - name: Install pinned SKY130 HD and IO libraries
+        run: |
+          MX_PDK_ROOT="$RUNNER_TEMP/mx-pdk"
+          mkdir -p "$MX_PDK_ROOT"
+          for MX_ASSET in common sky130_fd_sc_hd sky130_fd_io; do
+            curl --fail --location --retry 3 "https://github.com/chipfoundry/volare/releases/download/sky130-0fe599b2afb6708d281543108caf8310912f54af/$MX_ASSET.tar.zst" -o "$RUNNER_TEMP/$MX_ASSET.tar.zst"
+            sha256sum "$RUNNER_TEMP/$MX_ASSET.tar.zst"
+            tar --no-same-owner --zstd -xf "$RUNNER_TEMP/$MX_ASSET.tar.zst" -C "$MX_PDK_ROOT"
+          done
+          echo "PDK_ROOT=$MX_PDK_ROOT" >> "$GITHUB_ENV"
+          df -h .
+      - name: Run full routed physical flow
+        continue-on-error: true
+        run: |
+          set +e
+          "$MX_PYTHON" scripts/physical.py --tag "github-$GITHUB_RUN_ID" --jobs 2 &
+          MX_PID=$!
+          while kill -0 "$MX_PID" 2>/dev/null; do
+            tail -n 4 "reports/physical-flow-github-$GITHUB_RUN_ID.log" 2>/dev/null
+            sleep 30
+          done
+          wait "$MX_PID"
+          MX_STATUS=$?
+          echo "Physical driver exit: $MX_STATUS"
+          exit "$MX_STATUS"
+      - name: Refresh summary with current physical evidence
+        if: always()
+        run: '"${MX_PYTHON:-python3}" scripts/summarize.py'
+      - name: Evaluate complete signoff acceptance
+        if: always()
+        run: '"${MX_PYTHON:-python3}" scripts/signoff_check.py'
+      - name: Export numeric physical evidence
+        if: always()
+        run: |
+          "${MX_PYTHON:-python3}" - <<'PY'
+          import hashlib,json,math,os,pathlib
+          root=pathlib.Path('reports')
+          def load(name):
+              try:return json.loads((root/name).read_text())
+              except (OSError,ValueError):return {}
+          p=load('physical.json');gate=load('signoff.json')
+          def numeric(d):return {k:v for k,v in d.items() if type(v) in (int,float) and math.isfinite(v)}
+          names=['antenna__violating__nets','antenna__violating__pins','route__drc_errors','magic__drc_error__count','klayout__drc_error__count','design__lvs_error__count','design__xor_difference__count']
+          power=p.get('power') or {}
+          evidence={'requested_clock_ns':p.get('requested_clock_ns'),'flow_exit_code':p.get('flow_exit_code'),
+                    'source_sha256':p.get('source_sha256',{}),'netlist_sha256':p.get('netlist_sha256'),
+                    'area_um2':p.get('area_um2'),'utilization':p.get('utilization'),
+                    'timing':numeric(p.get('timing',{})),'electrical':numeric(p.get('electrical',{})),
+                    'drc_lvs':{k:p.get('drc_lvs',{}).get(k) for k in names},
+                    'power':{k:power.get(k) for k in ('blocks_checked','netlist_sha256','estimated_energy_pj_per_block')},
+                    'evidence_origin':{'source_commit':os.environ['GITHUB_SHA'],'run_id':os.environ['GITHUB_RUN_ID'],
+                                       'scope':'One 8-lane, 5-stage PE physical implementation',
+                                       'original_report_sha256':hashlib.sha256((root/'physical.json').read_bytes()).hexdigest() if (root/'physical.json').exists() else None}}
+          (root/'physical-gate-evidence.json').write_text(json.dumps(evidence,indent=2,allow_nan=False)+'\n')
+          print(json.dumps({'physical_evidence':evidence,'full_signoff':gate},indent=2,allow_nan=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: full-signoff-numeric-evidence
+          if-no-files-found: error
+          path: |
+            reports/signoff.json
+            reports/verification-reuse.json
+            reports/physical-gate-evidence.json
+            reports/arithmetic-equivalence.json
+            reports/streaming-refinement.json
+            reports/csa-composition.json
+            reports/normalization-refinement.json
+            reports/product-bindings.json
+            reports/product-exhaustive.json
+            reports/converter-equivalence.json
+            reports/converter-specification.json
+            reports/status.json
+            reports/source-sha256.json
+            reports/native-uvm.json
+            reports/code-coverage.json
+            reports/coverage-closure.json
