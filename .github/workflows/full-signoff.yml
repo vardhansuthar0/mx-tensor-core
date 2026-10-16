@@ -34,7 +34,7 @@ jobs:
         run: |
           python -m pip install -r requirements.txt -r requirements-physical.txt
           python -m compileall -q scripts
-          python -m pytest -q tb/test_model.py tb/test_signoff.py
+          python -m pytest -q tb/test_model.py tb/test_signoff.py tb/test_antenna_geometry.py
           echo "MX_PYTHON=$pythonLocation/bin/python3" >> "$GITHUB_ENV"
           sudo apt-get update && sudo apt-get install -y yosys
       - name: Remove historical physical acceptance reports

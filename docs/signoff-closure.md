@@ -126,8 +126,24 @@ reported zero errors; routed gate simulation checked 200 blocks. It still had
 98 slew, 4 capacitance and 16 antenna-net/pin violations.
 
 Those observations precede the final clock-net and adjacent-diode ECO fixes.
-They are not measurements of the fully repaired candidate. The local
-execution environment disconnected during its reroute. A fresh pinned
-[hosted physical run](https://github.com/vardhansuthar0/mx-tensor-core/actions/runs/38832427461)
-is executing the complete flow with every final checker retained. PR #1 stays
-draft until actual complete evidence satisfies the full signoff gate.
+
+The first hosted fresh run at 43394b2 stopped after
+`065-mx-ecocheckantennas`, with 23 antenna nets/pins and zero router DRC errors.
+Final extracted timing, electrical, Magic/KLayout DRC, XOR, LVS and routed
+gate simulation were not reached. Its actual partial report is retained in
+`reports/physical-attempt-38832427461.json` and `reports/physical.json`.
+It is not a completed physical measurement.
+
+The local-diode repair previously read the Rich summary table, whose ratios
+are rounded and whose names can wrap. It now reads complete raw OpenROAD
+VIOLATED records, including true violations whose displayed ratios round to
+equality. Tests cover that case, long names, inline/cumulative markers,
+missing context, repeated pins and local fixed-cell geometry. The adjacent
+site search also checks both sides by increasing distance and accommodates
+earlier ECO diodes. All final antenna/electrical checks remain mandatory.
+Failures now print a bounded final exception and latest-step diagnostic
+to CI stdout so a short failing ECO cannot disappear between progress samples.
+
+The [combined hosted signoff workflow](https://github.com/vardhansuthar0/mx-tensor-core/actions/workflows/full-signoff.yml)
+replays all verification/arithmetic campaigns and the complete physical flow.
+PR #1 remains draft until that full gate has actual passing evidence.

@@ -1,21 +1,38 @@
-# SKY130 closure candidate — timing met, signoff blocked
+# SKY130 candidate: physical signoff remains incomplete
 
-The candidate is one **8-lane, 5-stage PE**, targeting **50 ns / 20 MHz**. The published baseline used four stages. This is not an array PPA result.
+The latest hosted physical attempt used one eight-lane, five-stage PE, a
+70-bit accumulator and the unchanged 50 ns / 20 MHz target. It stopped after
+the first detailed antenna ECO round, before final extraction and independent
+checks. No physical signoff is claimed.
 
-| Latest observed routed result | Value |
-|---|---:|
-| Worst setup slack, nine extracted corners | +3.229815 ns |
-| Worst hold slack, nine extracted corners | +0.207146 ns |
-| Slew violations | 2,339 |
-| Capacitance violations | 9 |
-| Antenna-violating nets / pins | 22 / 22 |
-| Router DRC errors | 0 |
-| Candidate Magic/KLayout DRC, XOR, LVS | Final evidence not recovered |
+| Observation | Actual value |
+| --- | --- |
+| Source commit | 43394b2a94f57d1ec5f1c083dc0663125aab88e6 |
+| Workflow run | [38832427461](https://github.com/vardhansuthar0/mx-tensor-core/actions/runs/38832427461) |
+| Flow exit code | 2 |
+| Last completed stage | 065-mx-ecocheckantennas |
+| Checkpoint standard-cell area | 305,070 µm² |
+| Checkpoint utilization | 22.7568% |
+| Router DRC errors at the completed reroute | 0 |
+| Antenna nets / pins | 23 / 23 |
+| Final nine-corner timing and electrical checks | Not reached |
+| Magic / KLayout DRC, LVS and XOR | Not reached |
+| Routed gate simulation and power | Not reached |
 
-All nine reported setup slacks are positive at the unchanged target. **Electrical and antenna signoff remain failed.** The five-stage normalization split closes the observed timing failure; the repair settings do not close electrical/antenna violations.
+The raw numeric partial report is `reports/physical.json`; the immutable
+attempt copy is `reports/physical-attempt-38832427461.json`. The checkpoint
+area and router result are not final signoff measurements.
 
-These metrics were read from `physical/runs/p5-final/61-openroad-stapostpnr/state_out.json` before the execution environment disconnected. `reports/physical.json` preserves the observed values and labels them as a partial recovery. It is not a raw report archive or completed signoff evaluation. No candidate power, area, final LVS or independent DRC/XOR pass is inferred.
+The next closure attempt uses raw OpenROAD antenna records rather than the
+rounded/wrapped presentation table, a wider legal adjacent-diode search and
+retained final-error diagnostics. The complete signoff workflow replays
+verification and arithmetic before the routed flow and then evaluates the
+full source-bound acceptance gate. Every extracted timing/electrical corner,
+antenna check, independent DRC, LVS, XOR and routed gate simulation must pass.
 
-The published four-stage metrics and raw views remain historical evidence: [physical-baseline.md](physical-baseline.md), `reports/physical-baseline.json`, and release `v0.1.1-measured`.
-
-Full sequential arithmetic refinement and raw coverage closure also remain open. `make check-signoff` must reject the partial evidence. See [signoff-closure.md](signoff-closure.md) and [PR #1](https://github.com/vardhansuthar0/mx-tensor-core/pull/1).
+The earlier four-stage measurements remain historical in
+[physical-baseline.md](physical-baseline.md). Earlier milestone statements
+do not supersede this physical-status report. See
+[signoff-closure.md](signoff-closure.md) for the completed arithmetic and
+reachable PE/CSA coverage evidence and the separately labeled local physical
+observations preceding this hosted attempt.

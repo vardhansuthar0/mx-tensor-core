@@ -2,7 +2,8 @@
 
 This changes the layout; it does not waive any antenna or electrical check.
 The following legalization, routing, extraction and independent checks remain
-necessary. OpenLane's pin-side diode placement utility supplies the geometry.
+necessary. OpenLane's pin-side diode placement utility supplies the geometry. Raw
+OpenROAD violation records avoid rounded ratios and wrapped table names.
 """
 import hashlib,json,pathlib
 import odb
@@ -11,16 +12,34 @@ from reader import click_odb,click
 from diodes import DiodeInserter
 
 def violations(text):
-    if not all(label in text for label in ('P / R','Required','Net','Pin','Layer')):
-        raise ValueError('Not an OpenLane antenna summary')
-    pins=[]
+    """Read raw OpenROAD records, never Rich's rounded/wrapped summary.
+
+    VIOLATED is authoritative: displayed ratios may round to equality.
+    Every marked record must have complete, finite numeric context.
+    """
+    import re
+    number=r'([+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)'
+    patterns={key:re.compile(r'^\s*'+label+r':\s*'+value)
+              for key,label,value in [('net','Net',r'(\S+)'),('pin','Pin',r'(\S+)'),
+                                      ('layer','Layer',r'(\S+)'),
+                                      ('required','Required ratio',number),
+                                      ('partial','Partial area ratio',number)]}
+    record={};pins=[]
     for line in text.splitlines():
-        if not line.startswith('│'):continue
-        fields=[x.strip() for x in line.split('│')[1:-1]]
-        if len(fields)!=6:raise ValueError('Malformed antenna report row')
-        ratio,partial,required,net,pin,layer=fields
-        if float(ratio)<=1 or float(partial)<=float(required):raise ValueError('Non-violating row in antenna report')
-        pins.append((net,pin))
+        for key,pattern in patterns.items():
+            match=pattern.match(line)
+            if match:
+                if key=='net':record={}
+                elif key=='pin':record={k:v for k,v in record.items() if k=='net'}
+                elif key=='layer':record={k:v for k,v in record.items() if k in ('net','pin')}
+                record[key]=match.group(1)
+        if 'VIOLATED' not in line:continue
+        if set(record)!=set(patterns):raise ValueError('Incomplete raw antenna violation: '+line)
+        required=Decimal(record['required']);partial=Decimal(record['partial'])
+        if not required.is_finite() or not partial.is_finite() or required<=0 or partial<0:
+            raise ValueError('Invalid raw antenna ratio: '+line)
+        if '/' not in record['pin']:raise ValueError('Raw antenna violation has no instance/pin: '+record['pin'])
+        pins.append((record['net'],record['pin']))
     return sorted(set(pins))
 
 def rectangle(inst):
@@ -51,8 +70,8 @@ def fix_adjacent_pair(block,gate,diode):
     for shift in shifts:
         gate_box=(gr[0]+shift,gr[1],gr[2]+shift,gr[3])
         if gate_box[0]<xmin or gate_box[2]>xmax or any(overlaps(gate_box,b) for b in fixed):continue
-        for side in sides:
-            for offset in range(4):
+        for offset in range(32):
+            for side in sides:
                 x=gate_box[0]-dw*(offset+1) if side=='left' else gate_box[2]+dw*offset
                 box=(x,dr[1],x+dw,dr[3])
                 if x<xmin or x+dw>xmax or any(overlaps(box,b) for b in fixed):continue
@@ -71,6 +90,7 @@ def fix_adjacent_pair(block,gate,diode):
 @click_odb
 def protect(reader,report,evidence,diode_cell,diode_pin,fix_pairs,clear_routing):
     path=pathlib.Path(report);pins=violations(path.read_text())
+    if not pins:raise ValueError('Active antenna ECO has no complete raw VIOLATED records')
     inserter=DiodeInserter(reader,diode_cell,diode_pin,Decimal(0),side_strategy='pin');placement=[]
     for net_name,pin in pins:
         inst_name,pin_name=pin.rsplit('/',1)

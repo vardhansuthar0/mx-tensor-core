@@ -32,14 +32,14 @@ class ProtectAntennaPins(OdbpyStep):
     def get_script_path(self):return str(pathlib.Path(__file__).with_name('protect_antenna_pins.py'))
     def get_command(self):
         root=pathlib.Path(self.step_dir).parent
-        reports=list(root.rglob('antenna_summary.rpt'))
+        reports=list(root.rglob('antenna.rpt'))
         if not reports:
             odb=pathlib.Path(str(self.state_in.result()[DesignFormat.ODB]))
             for parent in odb.parents:
                 if parent.name=='runs':break
-                reports=list(parent.rglob('antenna_summary.rpt'))
+                reports=list(parent.rglob('antenna.rpt'))
                 if reports:break
-        if not reports:raise RuntimeError('No measured antenna report for local pin protection')
+        if not reports:raise RuntimeError('No measured raw antenna report for local pin protection')
         report=max(reports,key=lambda p:p.stat().st_mtime_ns)
         return super().get_command()+['--report',str(report),'--evidence',str(pathlib.Path(self.step_dir)/'local-diodes.json'),'--fix-pairs','--clear-routing']
     def run(self,state_in,**kwargs):

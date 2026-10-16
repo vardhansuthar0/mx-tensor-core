@@ -65,7 +65,7 @@ else:
   if state.get('odb'):
    for parent in pathlib.Path(state['odb']).resolve().parents:
     if parent.name=='runs':break
-    antenna_reports=list(parent.rglob('antenna_summary.rpt'))
+    antenna_reports=list(parent.rglob('antenna.rpt'))
     if antenna_reports:
      report=max(antenna_reports,key=lambda p:p.stat().st_mtime_ns)
      inputs.append(str(report.relative_to(ROOT)));break
@@ -81,6 +81,17 @@ if a.seed_state:cmd+=['--with-initial-state',str(a.seed_state.resolve())]
 cmd+=['physical/config.json']
 with (ROOT/'reports'/f'physical-flow-{a.tag}.log').open('w') as f:result=subprocess.run(cmd,cwd=ROOT,stdout=f,stderr=subprocess.STDOUT)
 run=ROOT/'physical/runs'/a.tag
+if result.returncode:
+ # Keep a bounded final exception in CI stdout; periodic progress tails can
+ # otherwise miss a short failing ECO step between samples.
+ flow_log=ROOT/'reports'/f'physical-flow-{a.tag}.log'
+ print('Physical flow failed; final diagnostic lines:',flush=True)
+ print('\n'.join(flow_log.read_text(errors='replace').splitlines()[-180:]),flush=True)
+ step_logs=list(run.glob('[0-9]*/*.log'))
+ if step_logs:
+  latest=max(step_logs,key=lambda path:path.stat().st_mtime_ns)
+  print('Latest step diagnostic:',latest.relative_to(ROOT),flush=True)
+  print('\n'.join(latest.read_text(errors='replace').splitlines()[-80:]),flush=True)
 sta=sorted(run.glob('*-openroad-stapostpnr/state_out.json'),key=lambda p:int(p.parent.name.split('-')[0]))
 if sta:
  subprocess.run([sys.executable,str(ROOT/'scripts/routed_power.py'),str(sta[-1])],cwd=ROOT,check=True)

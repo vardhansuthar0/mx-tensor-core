@@ -39,7 +39,7 @@ check-signoff:
 
 .PHONY: signoff-tests
 signoff-tests:
-	$(PYTHON) -m pytest -q tb/test_signoff.py
+	$(PYTHON) -m pytest -q tb/test_signoff.py tb/test_antenna_geometry.py
 
 .PHONY: verification-start
 verification-start:

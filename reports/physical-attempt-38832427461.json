@@ -1,0 +1,65 @@
+{
+  "generated_utc": "2026-10-16T01:40:59.662427+00:00",
+  "status": "partial",
+  "configuration": "8-lane, 5-stage PE, runtime five formats, 70-bit accumulator; not the 4x4 array",
+  "signoff_status": "pending_evaluation",
+  "requested_clock_ns": 50,
+  "synthesis_area_um2": 219718.2272,
+  "area_um2": 305070,
+  "core_area_um2": 1340570,
+  "die_area_um2": 1440000,
+  "utilization": 0.227568,
+  "timing": {},
+  "sta_clock_reports": {},
+  "drc_lvs": {
+    "antenna__violating__nets": 23,
+    "antenna__violating__pins": 23,
+    "route__antenna_violation__count": 23,
+    "design__instance__count__class:antenna_cell": 13718,
+    "antenna_diodes_count": 794,
+    "route__drc_errors__iter:1": 21934,
+    "route__drc_errors__iter:2": 13066,
+    "route__drc_errors__iter:3": 11961,
+    "route__drc_errors__iter:4": 1728,
+    "route__drc_errors__iter:5": 152,
+    "route__drc_errors__iter:6": 0,
+    "route__drc_errors__iter:7": 6,
+    "route__drc_errors__iter:8": 0,
+    "route__drc_errors": 0,
+    "mx__antenna_eco_active": 1
+  },
+  "timing_sweep": null,
+  "last_completed_stage": "065-mx-ecocheckantennas",
+  "power": null,
+  "limitations": [
+    "Physical result covers one PE configuration only.",
+    "STA frequency estimates are not silicon measurements or a PnR clock sweep.",
+    "Gate activity is zero-delay; delay-induced glitches are not included.",
+    "CPU/RSS tool telemetry was disabled for host PID namespace compatibility."
+  ],
+  "implementation_configuration": {
+    "lanes": 8,
+    "stages": 5,
+    "flow": "MXClosure"
+  },
+  "flow_exit_code": 2,
+  "source_sha256": {
+    "scripts/physical.py": "9f30544bc3abeceb3951d842918ec742bd0b58fbd6eba9101e5aac77b4865d3d",
+    "scripts/openlane_host.py": "6b8eeb698a25fd97a64ea408b2a4413a28add4417accdb03c08fa18805f62bc2",
+    "scripts/closure_flow.py": "54d19dc287cda59022b0b08a7d19b4793fa4c63cd93b48379eb7ae3b854de712",
+    "scripts/repair_clocks.tcl": "2b91407adb30dd7c5c5778b5291b14993165340af03fbfd3b48a2a8cf8d096e9",
+    "scripts/protect_antenna_pins.py": "36f6f0959a7f9317ea779ac4a81356abd9608babffe300546486cc052950ba0e",
+    "scripts/host/proc_self_exe.c": "a7fc56b621d090d30c53a4d986e360eeef09b9c2690f1c0cf9fb7f76a9e369e9",
+    "rtl/mx_csa.sv": "0ba16fb9081ae0d72904d20dcda95eb275358f8150e00dddd02e63a80367e4be",
+    "rtl/mx_pe.sv": "13df90e48a95bd468d224d9e9cd549b2647d3623cc4e3a74e8798c802c392320",
+    "physical/mx_pe_sky130.sv": "7623d2c780517e47b86e56c58636a66d86ff25f1c5ed23925c4a674bc31b0e24",
+    "physical/config.json": "d2756d4df7a662836dc7cc4264a6d01b19dc7561a5b1040be254a66ab5098798",
+    "physical/generated.v": "3eab2ae8fe93be8a6f9cfd7c21a4ce8c690a974a47c6837beec5a6dc2d7d1ae0"
+  },
+  "netlist_sha256": null,
+  "electrical": {},
+  "klayout_checks": {
+    "drc": "not_passed",
+    "xor": "not_passed"
+  }
+}
