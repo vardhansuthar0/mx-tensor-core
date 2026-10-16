@@ -6,6 +6,8 @@ on:
     paths:
       - 'formal/streaming_pipeline.sv'
       - 'scripts/streaming_formal.py'
+      - 'scripts/csa_composition.py'
+      - 'rtl/mx_csa.sv'
       - '.github/workflows/arithmetic-components.yml'
       - 'rtl/mx_pe.sv'
 permissions:
@@ -35,4 +37,26 @@ jobs:
           import json,pathlib
           p=pathlib.Path('reports/streaming-refinement.json')
           print(p.read_text() if p.exists() else '{"status":"unavailable","scope":"partial arithmetic component"}')
+          PY
+
+  csa:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: sudo apt-get update && sudo apt-get install -y yosys
+      - run: python -m py_compile scripts/csa_composition.py
+      - run: python scripts/csa_composition.py
+      - name: Print scoped result
+        if: always()
+        run: |
+          python - <<'PY'
+          import pathlib
+          p=pathlib.Path('reports/csa-composition.json')
+          print(p.read_text() if p.exists() else '{"status":"unavailable","scope":"CSA component"}')
           PY
