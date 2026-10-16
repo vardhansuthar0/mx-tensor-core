@@ -1,0 +1,64 @@
+{
+  "status": "pass",
+  "scope": "CSA trees for 8, 16 and 32 arbitrary 70-bit terms, exact modulo 2^70; not full PE equivalence",
+  "method": "Induction over elaborated hierarchy; exact Boolean polynomial check of every reduced bit; independent 70-bit 3:2 SAT identity and counterexample control",
+  "source_sha256": {
+    "rtl/mx_csa.sv": "0ba16fb9081ae0d72904d20dcda95eb275358f8150e00dddd02e63a80367e4be",
+    "scripts/csa_composition.py": "aa0f8a0652174c9aaf1d93ca758bb1aad24e6c1e130750a872bf05a56fdc3977"
+  },
+  "results": [
+    {
+      "lanes": 8,
+      "status": "pass",
+      "certified_recursive_sizes": [
+        2,
+        3,
+        4,
+        6,
+        8
+      ],
+      "negative_controls": [
+        "zero_bit rejected",
+        "duplicate_word rejected"
+      ]
+    },
+    {
+      "lanes": 16,
+      "status": "pass",
+      "certified_recursive_sizes": [
+        2,
+        3,
+        4,
+        6,
+        8,
+        11,
+        16
+      ],
+      "negative_controls": [
+        "zero_bit rejected",
+        "duplicate_word rejected"
+      ]
+    },
+    {
+      "lanes": 32,
+      "status": "pass",
+      "certified_recursive_sizes": [
+        2,
+        3,
+        4,
+        5,
+        7,
+        10,
+        15,
+        22,
+        32
+      ],
+      "negative_controls": [
+        "zero_bit rejected",
+        "duplicate_word rejected"
+      ]
+    }
+  ],
+  "primitive_sat": "pass",
+  "primitive_negative_control": "counterexample"
+}

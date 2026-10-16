@@ -3,6 +3,9 @@ import argparse, hashlib, json, math, pathlib, sys
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 CORNERS=[f'{rc}_{cell}' for rc in ('nom','min','max') for cell in ('tt_025C_1v80','ss_100C_1v60','ff_n40C_1v95')]
 
+ARITHMETIC_COMPONENTS=['streaming-refinement.json','product-bindings.json','normalization-refinement.json','csa-composition.json','product-exhaustive.json','converter-equivalence.json','converter-specification.json']
+ARITHMETIC_PRODUCERS=['scripts/arithmetic_composition.py','scripts/streaming_formal.py','scripts/product_bindings.py','scripts/normalization_formal.py','scripts/csa_composition.py','scripts/product_exhaustive.py','scripts/converter_formal.py','formal/streaming_pipeline.sv','formal/product_check.svh','formal/arithmetic_reference.svh','formal/converter_spec.svh']
+
 def evaluate(root, physical_only=False):
     failures=[]
     def read(name):
@@ -50,7 +53,15 @@ def evaluate(root, physical_only=False):
     fresh(uvm.get('rtl_sha256',{}),'Native UVM')
     arithmetic=read('arithmetic-equivalence.json')
     require(arithmetic.get('status')=='pass' and arithmetic.get('scope')=='full_pe_independent_spec','Full PE arithmetic equivalence against independent specification remains open')
-    fresh(arithmetic.get('rtl_sha256',{}),'Arithmetic proof')
+    proof_manifest=arithmetic.get('rtl_sha256',{})
+    fresh(proof_manifest,'Arithmetic proof')
+    proof_configs=arithmetic.get('configurations',[])
+    require(len(proof_configs)==9 and {(r.get('lanes'),r.get('stages')) for r in proof_configs}=={(l,p) for l in (8,16,32) for p in (3,4,5)},'Arithmetic proof missing PE configurations')
+    require(arithmetic.get('certificate_negative_controls_passed')==6,'Arithmetic certificate rejection controls incomplete')
+    components=arithmetic.get('component_evidence_sha256',{})
+    require(set(components)=={'reports/'+name for name in ARITHMETIC_COMPONENTS},'Arithmetic component evidence incomplete')
+    require(all(proof_manifest.get(path)==sha for path,sha in components.items()),'Arithmetic component digests not bound to fresh proof manifest')
+    require(set(ARITHMETIC_PRODUCERS)<=proof_manifest.keys(),'Arithmetic proof generators/specification unbound')
     coverage=read('code-coverage.json');fresh(coverage.get('rtl_sha256',{}),'Code coverage')
     raw_complete=coverage.get('closure_status')=='complete'
     configs=coverage.get('configurations',[])

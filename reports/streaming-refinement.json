@@ -1,0 +1,139 @@
+{
+  "status": "pass",
+  "scope": "Abstract beat sums/flags; arbitrary streams, bubbles, stalls and resets after initial reset. Proves accumulation, first-beat metadata, pending-token conservation, result packets and valid latency. Product/CSA bindings and rounded output equivalence remain separate obligations.",
+  "method": "unbounded induction with explicit symbolic input ports and inverted-valid counterexamples",
+  "source_sha256": {
+    "rtl/mx_pe.sv": "13df90e48a95bd468d224d9e9cd549b2647d3623cc4e3a74e8798c802c392320",
+    "formal/streaming_pipeline.sv": "ade1c5296070582c51bb56c8316da0288aa73a21bfae112cc8c0dde7c064f6ce",
+    "scripts/streaming_formal.py": "a71b5f6345329f7e42c2de7003eec8d84189a4bba6ef70b1c3a00adf57a57b6e"
+  },
+  "abstraction_sha256": "28b93117a0cd3bbd0911cecbf04acfebf5d0ac9d33714f40839c0528fd6b1a7d",
+  "results": [
+    {
+      "lanes": 8,
+      "stages": 3,
+      "negative_control": false,
+      "status": "pass",
+      "log": "reports/streaming-l8_p3.log"
+    },
+    {
+      "lanes": 8,
+      "stages": 3,
+      "negative_control": true,
+      "status": "pass",
+      "log": "reports/streaming-l8_p3-negative.log"
+    },
+    {
+      "lanes": 8,
+      "stages": 4,
+      "negative_control": false,
+      "status": "pass",
+      "log": "reports/streaming-l8_p4.log"
+    },
+    {
+      "lanes": 8,
+      "stages": 4,
+      "negative_control": true,
+      "status": "pass",
+      "log": "reports/streaming-l8_p4-negative.log"
+    },
+    {
+      "lanes": 8,
+      "stages": 5,
+      "negative_control": false,
+      "status": "pass",
+      "log": "reports/streaming-l8_p5.log"
+    },
+    {
+      "lanes": 8,
+      "stages": 5,
+      "negative_control": true,
+      "status": "pass",
+      "log": "reports/streaming-l8_p5-negative.log"
+    },
+    {
+      "lanes": 16,
+      "stages": 3,
+      "negative_control": false,
+      "status": "pass",
+      "log": "reports/streaming-l16_p3.log"
+    },
+    {
+      "lanes": 16,
+      "stages": 3,
+      "negative_control": true,
+      "status": "pass",
+      "log": "reports/streaming-l16_p3-negative.log"
+    },
+    {
+      "lanes": 16,
+      "stages": 4,
+      "negative_control": false,
+      "status": "pass",
+      "log": "reports/streaming-l16_p4.log"
+    },
+    {
+      "lanes": 16,
+      "stages": 4,
+      "negative_control": true,
+      "status": "pass",
+      "log": "reports/streaming-l16_p4-negative.log"
+    },
+    {
+      "lanes": 16,
+      "stages": 5,
+      "negative_control": false,
+      "status": "pass",
+      "log": "reports/streaming-l16_p5.log"
+    },
+    {
+      "lanes": 16,
+      "stages": 5,
+      "negative_control": true,
+      "status": "pass",
+      "log": "reports/streaming-l16_p5-negative.log"
+    },
+    {
+      "lanes": 32,
+      "stages": 3,
+      "negative_control": false,
+      "status": "pass",
+      "log": "reports/streaming-l32_p3.log"
+    },
+    {
+      "lanes": 32,
+      "stages": 3,
+      "negative_control": true,
+      "status": "pass",
+      "log": "reports/streaming-l32_p3-negative.log"
+    },
+    {
+      "lanes": 32,
+      "stages": 4,
+      "negative_control": false,
+      "status": "pass",
+      "log": "reports/streaming-l32_p4.log"
+    },
+    {
+      "lanes": 32,
+      "stages": 4,
+      "negative_control": true,
+      "status": "pass",
+      "log": "reports/streaming-l32_p4-negative.log"
+    },
+    {
+      "lanes": 32,
+      "stages": 5,
+      "negative_control": false,
+      "status": "pass",
+      "log": "reports/streaming-l32_p5.log"
+    },
+    {
+      "lanes": 32,
+      "stages": 5,
+      "negative_control": true,
+      "status": "pass",
+      "log": "reports/streaming-l32_p5-negative.log"
+    }
+  ]
+}

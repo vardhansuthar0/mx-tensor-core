@@ -1,0 +1,92 @@
+{
+  "status": "pass",
+  "scope": "full_pe_independent_spec",
+  "method": "Compositional arithmetic refinement: exhaustive finite lane contract + structural CSA induction + unbounded streaming/register refinement + independent scalar RNE SAT proof",
+  "configurations": [
+    {
+      "lanes": 8,
+      "stages": 3
+    },
+    {
+      "lanes": 8,
+      "stages": 4
+    },
+    {
+      "lanes": 8,
+      "stages": 5
+    },
+    {
+      "lanes": 16,
+      "stages": 3
+    },
+    {
+      "lanes": 16,
+      "stages": 4
+    },
+    {
+      "lanes": 16,
+      "stages": 5
+    },
+    {
+      "lanes": 32,
+      "stages": 3
+    },
+    {
+      "lanes": 32,
+      "stages": 4
+    },
+    {
+      "lanes": 32,
+      "stages": 5
+    }
+  ],
+  "assumptions": [
+    "Initial synchronous reset; later resets arbitrary",
+    "Two-state RTL semantics",
+    "Supported LANES 8/16/32 and PIPE_STAGES 3/4/5"
+  ],
+  "input_space": "All raw A/B byte encodings; five supported formats and three reserved formats producing poison; all scales, truncations, output formats, valid bubbles, stalls and later resets; first accepted beat supplies block metadata",
+  "scope_limits": [
+    "PE arithmetic only; not array/APB equivalence or four-state X analysis",
+    "Physical checks and measured coverage are separate signoff obligations"
+  ],
+  "maximum_finite_product": 14123288431433875456,
+  "maximum_32_term_magnitude": 451945229805884014592,
+  "signed_70_bit_limit": 590295810358705651712,
+  "rtl_sha256": {
+    "rtl/mx_pe.sv": "13df90e48a95bd468d224d9e9cd549b2647d3623cc4e3a74e8798c802c392320",
+    "formal/streaming_pipeline.sv": "ade1c5296070582c51bb56c8316da0288aa73a21bfae112cc8c0dde7c064f6ce",
+    "scripts/streaming_formal.py": "a71b5f6345329f7e42c2de7003eec8d84189a4bba6ef70b1c3a00adf57a57b6e",
+    "scripts/product_bindings.py": "7a0cf060cb9edfb8076b40320d35246e76baabc6e0e363ae38939c51fa3ef453",
+    "scripts/normalization_formal.py": "1fd9097b318716f629309934830693a7c7614b336cec851df35fe6eb3c363513",
+    "rtl/mx_csa.sv": "0ba16fb9081ae0d72904d20dcda95eb275358f8150e00dddd02e63a80367e4be",
+    "scripts/csa_composition.py": "aa0f8a0652174c9aaf1d93ca758bb1aad24e6c1e130750a872bf05a56fdc3977",
+    "formal/arithmetic_reference.svh": "71548e20deef7fc9e64b12825b90108c1fb214afddef3e22aefcd497082ae1ac",
+    "formal/product_check.svh": "c4ac03fd9cf7d7b94937986699b8a6b42884fcc7df80e6b763ba9968ae8f4d06",
+    "scripts/product_exhaustive.py": "310fb69e3cfef9259dfbb5f17c1a605f3ebf2a7315857089b2b8c84b2c6af480",
+    "formal/converter_reference.svh": "c8bc3619f5ccb663f2c24735cea3eccc90489a125063ef8a8eab402e5524e33e",
+    "scripts/converter_formal.py": "c9067a029bfb5415e0e946d3be6c44aa9e6f027d0011a866a16fa0b50f639c77",
+    "formal/converter_spec.svh": "ebe85068a845b8521b241fb96a0aaf60b5b519d3209ebae1cea043a09552c68c",
+    "scripts/arithmetic_composition.py": "c965b85db831fafa4fc1222f3437f038dc37913704840611a6fdbd1952800204",
+    "reports/streaming-refinement.json": "ee3928d44c8bfd4aa2fcfe877ffe9a271d4bcec17b218a33c2db7251e5f3983a",
+    "reports/product-bindings.json": "9701afa14c556f49f19c8b2ebf505ae2bf161dbc3f99eee9af5a06a8aea2ed9c",
+    "reports/normalization-refinement.json": "f6399f9c680cbd73a40e652cc5d79d77ca5302c2a04efa9cab2a5dd137d5d0a3",
+    "reports/csa-composition.json": "a809f8650312845de36b12303b9129472ecb420e2af314431e73991931084e81",
+    "reports/product-exhaustive.json": "f990b6bcf04e37e5c9f8454fc1c7d951f027bcaf6ca2abf2664d73eb4a3fb950",
+    "reports/converter-equivalence.json": "b533c870ef19ae16b3bbef8aa29b2260ff5f04d47ac94cc840b887fde264a814",
+    "reports/converter-specification.json": "cafea94a60fa458bbc040b1b2d54f0c6c57738aea304fc70df82ff85adf7d043"
+  },
+  "component_evidence_sha256": {
+    "reports/streaming-refinement.json": "ee3928d44c8bfd4aa2fcfe877ffe9a271d4bcec17b218a33c2db7251e5f3983a",
+    "reports/product-bindings.json": "9701afa14c556f49f19c8b2ebf505ae2bf161dbc3f99eee9af5a06a8aea2ed9c",
+    "reports/normalization-refinement.json": "f6399f9c680cbd73a40e652cc5d79d77ca5302c2a04efa9cab2a5dd137d5d0a3",
+    "reports/csa-composition.json": "a809f8650312845de36b12303b9129472ecb420e2af314431e73991931084e81",
+    "reports/product-exhaustive.json": "f990b6bcf04e37e5c9f8454fc1c7d951f027bcaf6ca2abf2664d73eb4a3fb950",
+    "reports/converter-equivalence.json": "b533c870ef19ae16b3bbef8aa29b2260ff5f04d47ac94cc840b887fde264a814",
+    "reports/converter-specification.json": "cafea94a60fa458bbc040b1b2d54f0c6c57738aea304fc70df82ff85adf7d043"
+  },
+  "component_campaigns": 7,
+  "configuration_and_control_rows": 51,
+  "documentation": "docs/arithmetic-composition.md",
+  "certificate_negative_controls_passed": 6
+}

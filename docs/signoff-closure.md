@@ -43,23 +43,36 @@ not a completed physical signoff. `make check-signoff` is the acceptance gate;
   corners, electrical violations and KLayout/XOR checks. The report generator
   renders observed metrics instead of historical hardcoded pass counts.
 - A regression snapshots its sources before running and requires unchanged
-  sources plus fresh result files before writing a passing summary. Sixteen
+  sources plus fresh result files before writing a passing summary. The
   validator tests exercise stale data, missing checks/corners, non-finite
   metrics, relaxed clock targets and false completion claims.
 
-## Remaining proof and coverage work
+## Arithmetic and coverage closure
 
-Full sequential PE arithmetic refinement against an independent specification
-is not complete. The optional `make arithmetic-bounded` harness uses explicit
-symbolic input ports and captures a complete block at reset, with contiguous
-valid beats and an always-ready output. Its deliberately inverted known-zero
-control must fail. A passing named case covers only that format/configuration
-and control trace; it never substitutes for arbitrary-stream arithmetic proof.
-See `reports/arithmetic-bounded.json` for the exact attempted case. The fully
-symbolic FP4 unroll exceeded the WebAssembly backend budget; the native SAT
-attempt expanded to 11,439,943 variables and 33,454,884 clauses and was killed.
-No numerical-equivalence pass is inferred from that attempt. An SMT attempt reached the final assertion but its completion was not recovered
-after the execution environment disconnected. No SMT pass is claimed.
+The full compositional PE arithmetic certificate passes all nine supported
+lane/pipeline configurations. It covers every raw byte encoding, supported
+format and reserved-format poison, all scale/truncation/output metadata, and
+arbitrary bubbles, stalls and later resets after initial synchronous reset.
+The claim uses two-state RTL semantics and is scoped to the PE.
+
+The certificate connects the exhaustive independent lane contract, full CSA
+structural induction, actual lane replication/register bindings, unbounded
+stream/metadata/accumulation refinement, normalization/output capture, and
+all-input independent integer-RNE scalar conversion. Source and report hashes
+bind every component. All positive and deliberately wrong control obligations
+must pass their respective proof/counterexample requirements. Six corrupted
+evidence controls verify that the assembler rejects incomplete or stale claims.
+
+Run `make arithmetic-composed`. See [arithmetic-composition.md](arithmetic-composition.md)
+for the cut-point contracts and exact integer range argument, and
+`reports/arithmetic-equivalence.json` for the actual certificate. The passing
+[hosted campaign](https://github.com/vardhansuthar0/mx-tensor-core/actions/runs/38835214797)
+retains an eight-JSON certificate artifact. This does not certify physical
+checks, array/APB equivalence or four-state X behavior.
+
+The optional bounded monolithic harness remains a separate experiment.
+Its resource-limited attempts are not counted as passing evidence; the
+certificate above uses compositional obligations instead.
 
 Raw coverage retains parameter-constant branches and structural constant bits.
 The reachable PE/CSA coverage audit passes all nine configurations using
@@ -77,13 +90,15 @@ lanes and 98.731% at thirty-two lanes. Line coverage is 100% in all nine
 configurations. `make coverage-closure` proves and audits every remaining
 PE/CSA counter; a failed or stale campaign never grants exclusions.
 
-`make product-exhaustive` checks all 20,971,520 assignments to a one-lane
+`make product-exhaustive` checks all 27,262,976 assignments to a one-lane
 product cone extracted verbatim from the production RTL: both full input bytes,
-five formats, every truncation, and poison on/off. The independent reference
+five supported formats with poison on/off, three reserved formats with
+required poison, and every truncation. The independent reference
 uses fixed-point element magnitudes and wide integer multiplication. Signed
 70-bit products and the four special/approximation flags match for every
-assignment; an inverted production product bit is detected. This is exhaustive
-combinational enumeration, not a full sequential PE arithmetic proof.
+assignment; an inverted production product bit is detected. This is one component of the full certificate, rather than a standalone
+sequential PE proof. It also measures the maximum finite product and checks
+that 32 such magnitudes fit in signed 70 bits.
 
 ## Physical evidence
 
@@ -102,11 +117,17 @@ and acceptance check. On the hosted PID-namespace environment, also set
 arithmetic target requires a native Yosys backend via `YOSYS_NATIVE` and may
 need substantial memory; it is separate from the default CI campaign.
 
-## Latest recovered outcome
+## Latest observed physical outcome
 
-The five-stage candidate meets the 50 ns timing target across all nine extracted
-corners (+3.229815 ns worst setup, +0.207146 ns worst hold), but has 2,339 slew,
-9 capacitance and 22 antenna-net/pin violations. Router DRC reported zero errors.
-The environment became offline during final independent checks and report
-collection. PR #1 is a draft; the task is not complete and signoff is not claimed.
-See `reports/physical.json` for explicitly labeled partial observations.
+The latest completed local slow-corner repair experiment met the unchanged
+50 ns target across all nine extracted corners: worst setup +3.340073201 ns
+and worst hold +0.212931678 ns. Router, Magic and KLayout DRC, XOR and LVS
+reported zero errors; routed gate simulation checked 200 blocks. It still had
+98 slew, 4 capacitance and 16 antenna-net/pin violations.
+
+Those observations precede the final clock-net and adjacent-diode ECO fixes.
+They are not measurements of the fully repaired candidate. The local
+execution environment disconnected during its reroute. A fresh pinned
+[hosted physical run](https://github.com/vardhansuthar0/mx-tensor-core/actions/runs/38832427461)
+is executing the complete flow with every final checker retained. PR #1 stays
+draft until actual complete evidence satisfies the full signoff gate.

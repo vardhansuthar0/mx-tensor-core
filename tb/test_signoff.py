@@ -31,7 +31,14 @@ def passing(tmp_path):
     write(tmp_path,'status.json',{'verification_status':'pass'})
     write(tmp_path,'source-sha256.json',manifest)
     write(tmp_path,'native-uvm.json',{'status':'pass','blocks_checked':200,'rtl_sha256':manifest})
-    write(tmp_path,'arithmetic-equivalence.json',{'status':'pass','scope':'full_pe_independent_spec','rtl_sha256':manifest})
+    arithmetic_manifest=dict(manifest);components={}
+    for path in gate.ARITHMETIC_PRODUCERS+['reports/'+name for name in gate.ARITHMETIC_COMPONENTS]:
+        p=tmp_path/path;p.parent.mkdir(parents=True,exist_ok=True);p.write_text(path)
+        arithmetic_manifest[path]=hashlib.sha256(p.read_bytes()).hexdigest()
+        if path.startswith('reports/'):components[path]=arithmetic_manifest[path]
+    write(tmp_path,'arithmetic-equivalence.json',{'status':'pass','scope':'full_pe_independent_spec','rtl_sha256':arithmetic_manifest,
+          'configurations':[{'lanes':l,'stages':p} for l in (8,16,32) for p in (3,4,5)],
+          'certificate_negative_controls_passed':6,'component_evidence_sha256':components})
     write(tmp_path,'code-coverage.json',{'closure_status':'complete','rtl_sha256':manifest,'configurations':[{'lanes':l,'stages':p,'metrics':{k:{'hit':3,'total':3} for k in ('line','branch','expr','toggle')}} for l in (8,16,32) for p in (3,4,5)]})
     return tmp_path
 
@@ -87,3 +94,16 @@ def test_physical_scope_rejects_violations(passing):
     d['drc_lvs']['antenna__violating__pins']=1
     write(passing,'physical.json',d)
     assert gate.evaluate(passing,physical_only=True)
+
+@pytest.mark.parametrize('failure',['configuration','negative_controls','component_missing','producer_missing','digest_unbound','stale_component'])
+def test_arithmetic_certificate_fail_closed(passing,failure):
+    p=passing/'reports/arithmetic-equivalence.json';d=json.loads(p.read_text())
+    component='reports/'+gate.ARITHMETIC_COMPONENTS[0]
+    if failure=='configuration':d['configurations'].pop()
+    if failure=='negative_controls':d['certificate_negative_controls_passed']=5
+    if failure=='component_missing':del d['component_evidence_sha256'][component]
+    if failure=='producer_missing':del d['rtl_sha256'][gate.ARITHMETIC_PRODUCERS[0]]
+    if failure=='digest_unbound':d['component_evidence_sha256'][component]='0'*64
+    if failure=='stale_component':(passing/component).write_text('changed proof result')
+    write(passing,'arithmetic-equivalence.json',d)
+    assert gate.evaluate(passing)

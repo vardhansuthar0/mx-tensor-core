@@ -35,7 +35,8 @@ and does not need the slang plugin.
 
 Individual targets: `make model lint sim array formal mutation converter-formal native-uvm code-coverage`.
 `make physical` requires an OpenLane 2 tool environment and SKY130 PDK.
-`make signoff` includes physical execution and fails when it is unavailable;
+`make arithmetic-composed` runs the complete compositional PE arithmetic campaign.
+`make signoff` includes that campaign and physical execution, and fails when either is unavailable;
 its final validator rejects missing, stale or failing timing, electrical, antenna, DRC/LVS/XOR and verification evidence. `make check-signoff` evaluates retained reports without rerunning EDA tools.
 
 ## Implemented contract
@@ -88,7 +89,7 @@ against simultaneous W1C. Sticky flags count retired results, not aborted work.
 classes, sampling rules, seeds, formal scope, mutation validity rules and
 remaining verification work. Coverage is sampled from observed, checked
 transactions. The campaign must kill all named planted defects, but does not
-claim to detect all possible bugs. Native SystemVerilog UVM now checks the 8-lane/five-stage PE using pinned Accellera UVM 2020.3.1. Instrumented line/branch/expression/toggle counters are measured across all nine PE configurations, with uncovered points retained. The converter rewrite is formally equivalent to baseline for all converter inputs. **Full PE arithmetic equivalence against an independent specification and code/toggle coverage closure remain open.** See `docs/signoff-closure.md`.
+claim to detect all possible bugs. Native SystemVerilog UVM now checks the 8-lane/five-stage PE using pinned Accellera UVM 2020.3.1. Instrumented line/branch/expression/toggle counters are measured across all nine PE configurations, with uncovered points retained. The converter rewrite is formally equivalent to baseline and to an independent integer-RNE specification for all converter inputs. **The full compositional PE arithmetic certificate passes all nine configurations**, including arbitrary bubbles, stalls and later resets after initial reset, all metadata, and all five formats plus reserved-format poison. It combines 27,262,976 exhaustive lane cases, full CSA structural induction, unbounded stream/register proofs and independent scalar-converter SAT proofs. See `reports/arithmetic-equivalence.json` and `docs/arithmetic-composition.md`. **Reachable PE/CSA code and toggle coverage is closed with individually proved unreachable points; raw counters are preserved.** Array/APB code/toggle coverage and four-state X analysis remain unmeasured. See `docs/coverage-closure.md` and `docs/signoff-closure.md`.
 
 `physical/README.md` gives the physical handoff and reporting requirements.
 The published baseline has routed area, timing and activity-based power estimates for one 8-lane/four-stage PE. Its measurements are preserved in `docs/physical-baseline.md`; the optimized candidate requires fresh physical evidence. See `docs/physical-results.md`. The baseline fails the 20 MHz slow-corner target and has electrical/antenna violations. The candidate keeps the 50 ns target, selects the existing five-stage PE with split conversion, alternates post-global-route electrical and antenna repairs, and uses tighter clock-tree load limits. **No signoff closure is claimed until all acceptance gates pass.**
