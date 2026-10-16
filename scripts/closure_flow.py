@@ -19,7 +19,7 @@ class RepairSlowCorner(OpenROAD.RepairDesignPostGRT):
     config_vars=OpenROAD.RepairDesignPostGRT.config_vars+[
         Variable("CLOSURE_REPAIR_CORNERS",List[str],
                  "Corners used by the extra electrical repair only; final STA unchanged.",
-                 default=["max_ss_100C_1v60"])]
+                 default=["nom_tt_025C_1v80","nom_ss_100C_1v60","nom_ff_n40C_1v95","min_tt_025C_1v80","min_ss_100C_1v60","min_ff_n40C_1v95","max_tt_025C_1v80","max_ss_100C_1v60","max_ff_n40C_1v95"])]
     def run(self,state_in,**kwargs):
         return super().run(state_in,corners_key="CLOSURE_REPAIR_CORNERS",**kwargs)
 
