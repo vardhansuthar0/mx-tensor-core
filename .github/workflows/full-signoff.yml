@@ -85,6 +85,9 @@ jobs:
           MX_STATUS=$?
           echo "Physical driver exit: $MX_STATUS"
           exit "$MX_STATUS"
+      - name: Refresh summary with current physical evidence
+        if: always()
+        run: '"${MX_PYTHON:-python3}" scripts/summarize.py'
       - name: Evaluate complete signoff acceptance
         if: always()
         run: '"${MX_PYTHON:-python3}" scripts/signoff_check.py'
