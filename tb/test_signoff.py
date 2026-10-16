@@ -75,3 +75,15 @@ def test_reject_exclusion_without_proof(passing):
     write(passing,'code-coverage.json',d)
     write(passing,'coverage-constants.json',{'status':'pass','configurations':[]})
     assert any('coverage closure remains open' in x for x in gate.evaluate(passing))
+
+
+def test_physical_scope_keeps_full_signoff_blocked(passing):
+    (passing/'reports/arithmetic-equivalence.json').unlink()
+    assert gate.evaluate(passing,physical_only=True)==[]
+    assert gate.evaluate(passing)
+
+def test_physical_scope_rejects_violations(passing):
+    p=passing/'reports/physical.json';d=json.loads(p.read_text())
+    d['drc_lvs']['antenna__violating__pins']=1
+    write(passing,'physical.json',d)
+    assert gate.evaluate(passing,physical_only=True)

@@ -62,6 +62,13 @@ else:
     if not view.is_file():raise SystemExit('Missing seed view: '+value)
     inputs.append(str(view.relative_to(ROOT)))
   retain_views(state)
+  if state.get('odb'):
+   for parent in pathlib.Path(state['odb']).resolve().parents:
+    if parent.name=='runs':break
+    antenna_reports=list(parent.rglob('antenna_summary.rpt'))
+    if antenna_reports:
+     report=max(antenna_reports,key=lambda p:p.stat().st_mtime_ns)
+     inputs.append(str(report.relative_to(ROOT)));break
  manifest.write_text(json.dumps({p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in inputs},indent=2)+'\n')
 info=ROOT/'reports'/f'physical-run-{a.tag}.json'
 if not resuming:

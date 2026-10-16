@@ -5,6 +5,7 @@ from openlane.flows import Flow
 from openlane.flows.classic import Classic
 from openlane.steps import OpenROAD,OdbpyStep
 from openlane.config import Variable
+from openlane.state import DesignFormat
 from typing import List
 import pathlib
 
@@ -32,6 +33,12 @@ class ProtectAntennaPins(OdbpyStep):
     def get_command(self):
         root=pathlib.Path(self.step_dir).parent
         reports=list(root.rglob('antenna_summary.rpt'))
+        if not reports:
+            odb=pathlib.Path(str(self.state_in.result()[DesignFormat.ODB]))
+            for parent in odb.parents:
+                if parent.name=='runs':break
+                reports=list(parent.rglob('antenna_summary.rpt'))
+                if reports:break
         if not reports:raise RuntimeError('No measured antenna report for local pin protection')
         report=max(reports,key=lambda p:p.stat().st_mtime_ns)
         return super().get_command()+['--report',str(report),'--evidence',str(pathlib.Path(self.step_dir)/'local-diodes.json'),'--fix-pairs','--clear-routing']

@@ -3,7 +3,7 @@ import argparse, hashlib, json, math, pathlib, sys
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 CORNERS=[f'{rc}_{cell}' for rc in ('nom','min','max') for cell in ('tt_025C_1v80','ss_100C_1v60','ff_n40C_1v95')]
 
-def evaluate(root):
+def evaluate(root, physical_only=False):
     failures=[]
     def read(name):
         try:return json.loads((root/'reports'/name).read_text())
@@ -41,6 +41,7 @@ def evaluate(root):
     power=physical.get('power') or {}
     numeric(power,'blocks_checked',lambda v:v>0,'No checked routed gate simulation')
     require(bool(power.get('netlist_sha256')) and power.get('netlist_sha256')==physical.get('netlist_sha256'),'Gate simulation/power netlist does not match physical netlist')
+    if physical_only:return failures
     verification=read('status.json')
     require(verification.get('verification_status')=='pass','Verification regression did not pass')
     source_manifest=read('source-sha256.json');fresh(source_manifest,'Verification')
@@ -66,10 +67,10 @@ def evaluate(root):
     return failures
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--root',type=pathlib.Path,default=ROOT);a=p.parse_args()
-    failures=evaluate(a.root)
-    result={'status':'blocked' if failures else 'pass','target_clock_ns':50,'failures':failures}
-    (a.root/'reports/signoff.json').write_text(json.dumps(result,indent=2)+'\n')
+    p=argparse.ArgumentParser();p.add_argument('--root',type=pathlib.Path,default=ROOT);p.add_argument('--physical-only',action='store_true');a=p.parse_args()
+    failures=evaluate(a.root,a.physical_only)
+    result={'status':'blocked' if failures else 'pass','scope':'one_pe_physical' if a.physical_only else 'full_signoff','target_clock_ns':50,'failures':failures}
+    (a.root/'reports'/('physical-signoff.json' if a.physical_only else 'signoff.json')).write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result,indent=2))
     return bool(failures)
 if __name__=='__main__':sys.exit(main())
