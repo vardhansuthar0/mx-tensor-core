@@ -12,6 +12,10 @@ on:
       - 'scripts/product_exhaustive.py'
       - 'formal/product_check.svh'
       - 'formal/arithmetic_reference.svh'
+      - 'scripts/arithmetic_composition.py'
+      - 'scripts/converter_formal.py'
+      - 'formal/converter_spec.svh'
+      - 'formal/converter_reference.svh'
       - 'rtl/mx_csa.sv'
       - '.github/workflows/arithmetic-components.yml'
       - 'rtl/mx_pe.sv'
@@ -44,6 +48,12 @@ jobs:
           print(p.read_text() if p.exists() else '{"status":"unavailable","scope":"partial arithmetic component"}')
           PY
 
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: arithmetic-component-streaming
+          path: reports/streaming-refinement.json
+          if-no-files-found: error
   csa:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
@@ -66,6 +76,12 @@ jobs:
           print(p.read_text() if p.exists() else '{"status":"unavailable","scope":"CSA component"}')
           PY
 
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: arithmetic-component-csa
+          path: reports/csa-composition.json
+          if-no-files-found: error
   normalization:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
@@ -89,6 +105,12 @@ jobs:
           print(p.read_text() if p.exists() else '{"status":"unavailable","scope":"normalization component"}')
           PY
 
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: arithmetic-component-normalization
+          path: reports/normalization-refinement.json
+          if-no-files-found: error
   product-bindings:
     runs-on: ubuntu-24.04
     timeout-minutes: 100
@@ -111,3 +133,55 @@ jobs:
           p=pathlib.Path('reports/product-bindings.json')
           print(p.read_text() if p.exists() else '{"status":"unavailable","scope":"product bindings"}')
           PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: arithmetic-component-bindings
+          path: reports/product-bindings.json
+          if-no-files-found: error
+
+  compose:
+    needs: [streaming, csa, normalization, product-bindings]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Remove any historical certificate
+        run: python -c "import pathlib; pathlib.Path('reports/arithmetic-equivalence.json').unlink(missing_ok=True)"
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: arithmetic-component-*
+          merge-multiple: true
+          path: reports
+      - run: python -m py_compile scripts/arithmetic_composition.py scripts/product_exhaustive.py scripts/converter_formal.py
+      - run: make product-exhaustive converter-formal
+      - run: python scripts/arithmetic_composition.py
+      - name: Print arithmetic certificate
+        if: always()
+        run: |
+          python - <<'PY'
+          import pathlib
+          p=pathlib.Path('reports/arithmetic-equivalence.json')
+          print(p.read_text() if p.exists() else '{"status":"unavailable","scope":"full_pe_independent_spec"}')
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: arithmetic-certificate
+          if-no-files-found: error
+          path: |
+            reports/arithmetic-equivalence.json
+            reports/streaming-refinement.json
+            reports/csa-composition.json
+            reports/normalization-refinement.json
+            reports/product-bindings.json
+            reports/product-exhaustive.json
+            reports/converter-equivalence.json
+            reports/converter-specification.json

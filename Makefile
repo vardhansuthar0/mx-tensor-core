@@ -17,7 +17,7 @@ mutation:
 	$(PYTHON) scripts/mutate.py
 physical:
 	$(PYTHON) scripts/physical.py
-signoff: reproduce physical
+signoff: reproduce arithmetic-composed physical
 	$(PYTHON) scripts/signoff_check.py
 clean:
 	$(PYTHON) -c "import shutil; shutil.rmtree('build', ignore_errors=True)"
@@ -68,3 +68,11 @@ coverage-closure: coverage-constants coverage-paths
 .PHONY: streaming-formal
 streaming-formal:
 	$(PYTHON) scripts/streaming_formal.py
+
+.PHONY: arithmetic-composed
+arithmetic-composed: product-exhaustive converter-formal
+	$(PYTHON) scripts/csa_composition.py
+	$(PYTHON) scripts/streaming_formal.py
+	$(PYTHON) scripts/product_bindings.py
+	$(PYTHON) scripts/normalization_formal.py
+	$(PYTHON) scripts/arithmetic_composition.py

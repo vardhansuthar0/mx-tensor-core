@@ -22,7 +22,7 @@ def run():
             result=subprocess.run([yosys,'-Q','-T','-p',f'read_verilog -formal -sv build/{source.name}; prep -top converter_proof -flatten; chformal -lower; opt; sat -verify -prove-asserts -timeout 300'],cwd=ROOT,stdout=f,stderr=subprocess.STDOUT,timeout=360)
         success=result.returncode==0 and 'SUCCESS!' in log.read_text()
         report={'status':'pass' if success else 'fail','method':'combinational SAT','scope':scope+'; all 70-bit sums, 10-bit scales, output formats and special flags. Not full PE arithmetic equivalence.',
-                'source_sha256':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [ROOT/'rtl/mx_pe.sv',ROOT/'formal'/file]},'log':str(log.relative_to(ROOT))}
+                'source_sha256':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [ROOT/'rtl/mx_pe.sv',ROOT/'formal'/file,ROOT/'scripts/converter_formal.py']},'harness_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'log':str(log.relative_to(ROOT))}
         (ROOT/'reports'/report_name).write_text(json.dumps(report,indent=2)+'\n')
         print(report,flush=True)
         if not success:raise SystemExit(1)
