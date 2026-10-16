@@ -13,22 +13,25 @@ tensor-core designs are proprietary.
 
 ## Reproduce
 
-On Linux x86-64 with Python 3.12, a C++ compiler and Make:
+On Linux x86-64 with Python 3.12, a C++ compiler, Make and native Yosys:
 
 ```sh
 python3 -m venv .venv
 . .venv/bin/activate
 python -m pip install -r requirements.txt
+# Ubuntu/Debian: sudo apt-get install yosys
 make reproduce
 ```
 
 After setup, **`make reproduce`** runs model checks, warning-fatal lint,
 all nine PE configurations, three array sizes, structural/protocol/converter formal jobs and the nine-
-mutant campaign, native SV UVM and instrumented RTL coverage. It stops on failures and writes evidence under `reports/`.
+mutant campaign, exhaustive product-pair enumeration, native SV UVM and instrumented RTL coverage with proven-unreachable-point auditing. It stops on failures and writes evidence under `reports/`.
 The pinned Verilator wheel reports a development engine version; both wheel
 version and raw simulator banners are retained. A local Make override avoids
 its precompiled-header include issue. Yosys uses the pinned WebAssembly build
-with its slang SystemVerilog frontend; a native Yosys needs that frontend too.
+with its slang SystemVerilog frontend. Coverage induction uses a native SAT
+backend (`yosys` on PATH or `YOSYS_NATIVE`); that backend reads lowered JSON
+and does not need the slang plugin.
 
 Individual targets: `make model lint sim array formal mutation converter-formal native-uvm code-coverage`.
 `make physical` requires an OpenLane 2 tool environment and SKY130 PDK.

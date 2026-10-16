@@ -66,3 +66,12 @@ def test_reject_coverage_claim_without_hits(passing):
     p=passing/'reports/code-coverage.json';d=json.loads(p.read_text());d['configurations'][0]['metrics']['toggle']['hit']=2
     write(passing,'code-coverage.json',d)
     assert gate.evaluate(passing)
+
+def test_reject_exclusion_without_proof(passing):
+    p=passing/'reports/code-coverage.json';d=json.loads(p.read_text())
+    d['closure_status']='complete_with_exclusions'
+    d['configurations'][0]['metrics']['toggle']['hit']=2
+    d['configurations'][0]['uncovered']=[{'file':'rtl/mx_pe.sv','line':1,'type':'toggle','detail':'beat[2]:0->1','instance':'mx_pe'}]
+    write(passing,'code-coverage.json',d)
+    write(passing,'coverage-constants.json',{'status':'pass','configurations':[]})
+    assert any('coverage closure remains open' in x for x in gate.evaluate(passing))

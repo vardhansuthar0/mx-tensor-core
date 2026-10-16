@@ -43,7 +43,7 @@ not a completed physical signoff. `make check-signoff` is the acceptance gate;
   corners, electrical violations and KLayout/XOR checks. The report generator
   renders observed metrics instead of historical hardcoded pass counts.
 - A regression snapshots its sources before running and requires unchanged
-  sources plus fresh result files before writing a passing summary. Fifteen
+  sources plus fresh result files before writing a passing summary. Sixteen
   validator tests exercise stale data, missing checks/corners, non-finite
   metrics, relaxed clock targets and false completion claims.
 
@@ -61,18 +61,21 @@ attempt expanded to 11,439,943 variables and 33,454,884 clauses and was killed.
 No numerical-equivalence pass is inferred from that attempt. An SMT attempt reached the final assertion but its completion was not recovered
 after the execution environment disconnected. No SMT pass is claimed.
 
-Raw coverage is measured, but remaining counters require reachable stimulus or
-explicit, justified exclusions. Parameter-constant branches and structural
-constant bits are retained in the raw report. Array/APB code coverage and
-four-state X-propagation coverage have not been established.
+Raw coverage retains parameter-constant branches and structural constant bits.
+The reachable PE/CSA coverage audit passes all nine configurations using
+unbounded constant-state induction, a separate phase/flag branch proof and
+explicit elaboration constants. Every point is individually listed in
+`reports/coverage-closure.json`; raw counts are unchanged. All proof campaigns
+require deliberately wrong properties to produce actual counterexamples.
+Array/APB code coverage and four-state X-propagation coverage have not been
+established.
 
-The resumed campaign adds sparse fixed-point powers, mixed carry populations
-and per-lane special events. Five-stage raw toggle coverage is now 99.676% at
-eight lanes, 99.596% at sixteen lanes and 98.731% at thirty-two lanes. Line
-coverage is 100% in all nine configurations. These are still incomplete raw
-coverage results. `make coverage-constants` attempts unbounded induction for
-individual simulator-derived constant-zero candidates and requires an inverted
-property counterexample; a failed campaign never grants exclusions.
+The resumed campaign checks 13,612 blocks per configuration and adds sparse
+fixed-point powers, mixed carry populations and per-lane special events.
+Five-stage raw toggle coverage is 99.676% at eight lanes, 99.596% at sixteen
+lanes and 98.731% at thirty-two lanes. Line coverage is 100% in all nine
+configurations. `make coverage-closure` proves and audits every remaining
+PE/CSA counter; a failed or stale campaign never grants exclusions.
 
 `make product-exhaustive` checks all 20,971,520 assignments to a one-lane
 product cone extracted verbatim from the production RTL: both full input bytes,

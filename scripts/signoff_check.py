@@ -51,13 +51,18 @@ def evaluate(root):
     require(arithmetic.get('status')=='pass' and arithmetic.get('scope')=='full_pe_independent_spec','Full PE arithmetic equivalence against independent specification remains open')
     fresh(arithmetic.get('rtl_sha256',{}),'Arithmetic proof')
     coverage=read('code-coverage.json');fresh(coverage.get('rtl_sha256',{}),'Code coverage')
-    require(coverage.get('closure_status')=='complete','Code/toggle coverage closure remains open')
+    raw_complete=coverage.get('closure_status')=='complete'
     configs=coverage.get('configurations',[])
     require({(r.get('lanes'),r.get('stages')) for r in configs}=={(l,p) for l in (8,16,32) for p in (3,4,5)},'Coverage missing PE configurations')
     for r in configs:
         for kind in ('line','branch','expr','toggle'):
             metric=r.get('metrics',{}).get(kind,{})
-            require(metric.get('total',0)>0 and metric.get('hit')==metric.get('total'),f'Coverage l{r.get("lanes")}/p{r.get("stages")}: {kind} unclosed')
+            if not (metric.get('total',0)>0 and metric.get('hit')==metric.get('total')):raw_complete=False
+    if not raw_complete:
+        try:from coverage_closure import evaluate as evaluate_coverage
+        except ModuleNotFoundError:from scripts.coverage_closure import evaluate as evaluate_coverage
+        closure=evaluate_coverage(root)
+        require(closure['status']=='pass','Code/toggle coverage closure remains open: '+str(closure['failures'][:3]))
     return failures
 
 def main():
