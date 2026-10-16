@@ -7,6 +7,7 @@ on:
       - 'formal/streaming_pipeline.sv'
       - 'scripts/streaming_formal.py'
       - 'scripts/csa_composition.py'
+      - 'scripts/normalization_formal.py'
       - 'rtl/mx_csa.sv'
       - '.github/workflows/arithmetic-components.yml'
       - 'rtl/mx_pe.sv'
@@ -59,4 +60,27 @@ jobs:
           import pathlib
           p=pathlib.Path('reports/csa-composition.json')
           print(p.read_text() if p.exists() else '{"status":"unavailable","scope":"CSA component"}')
+          PY
+
+  normalization:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install yowasp-yosys==0.69.0.0.post1233
+      - run: sudo apt-get update && sudo apt-get install -y yosys
+      - run: python -m py_compile scripts/normalization_formal.py
+      - run: python scripts/normalization_formal.py
+      - name: Print scoped result
+        if: always()
+        run: |
+          python - <<'PY'
+          import pathlib
+          p=pathlib.Path('reports/normalization-refinement.json')
+          print(p.read_text() if p.exists() else '{"status":"unavailable","scope":"normalization component"}')
           PY

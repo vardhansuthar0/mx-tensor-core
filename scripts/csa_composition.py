@@ -110,10 +110,11 @@ def run():
         harness=work/'primitive.sv'
         harness.write_text("module primitive(input [69:0] a,b,c); wire [69:0] actual; mx_csa #(.N(3),.W(70)) dut({c,b,a},actual); wire [69:0] reference=a+b+c; always @* assert(actual "+("!=" if negative else "==")+" reference); endmodule\n")
         log=ROOT/'reports'/('csa-primitive-negative.log' if negative else 'csa-primitive.log')
-        command=f'read_verilog -sv -formal rtl/mx_csa.sv {harness.relative_to(ROOT)}; prep -top primitive -flatten; sat -timeout 90 -verify -prove-asserts -show-inputs'
+        command=f'read_verilog -sv -formal rtl/mx_csa.sv {harness.relative_to(ROOT)}; prep -top primitive -flatten; sat -timeout 90 '+('' if negative else '-verify ')+'-prove-asserts -show-inputs'
         with log.open('w') as f:p=subprocess.run([backend,'-Q','-T','-p',command],cwd=ROOT,stdout=f,stderr=subprocess.STDOUT,timeout=110)
         text=log.read_text()
-        require(('model found: FAIL!' in text and p.returncode!=0) if negative else ('SUCCESS!' in text and p.returncode==0),'Primitive SAT obligation unclosed')
+        print('CSA primitive',negative,'exit',p.returncode,text[-3500:],flush=True)
+        require(('model found: FAIL!' in text and p.returncode==0) if negative else ('SUCCESS!' in text and p.returncode==0),'Primitive SAT obligation unclosed')
     require(all(hashlib.sha256((ROOT/p).read_bytes()).hexdigest()==h for p,h in source.items()),'Sources changed')
     report={'status':'pass','scope':'CSA trees for 8, 16 and 32 arbitrary 70-bit terms, exact modulo 2^70; not full PE equivalence',
             'method':'Induction over elaborated hierarchy; exact Boolean polynomial check of every reduced bit; independent 70-bit 3:2 SAT identity and counterexample control',
