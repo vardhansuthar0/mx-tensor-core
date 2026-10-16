@@ -1,17 +1,6 @@
 name: SKY130 PE physical closure
 on:
   workflow_dispatch:
-  push:
-    branches: [signoff-closure]
-    paths:
-      - '.github/workflows/physical-signoff.yml'
-      - 'rtl/**'
-      - 'physical/config.json'
-      - 'physical/mx_pe_sky130.sv'
-      - 'scripts/physical.py'
-      - 'scripts/closure_flow.py'
-      - 'scripts/protect_antenna_pins.py'
-      - 'scripts/repair_clocks.tcl'
 permissions:
   contents: read
 concurrency:
