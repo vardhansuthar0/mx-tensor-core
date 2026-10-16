@@ -26,7 +26,8 @@ def run():
 int main(int argc,char**argv){
 Verilated::commandArgs(argc,argv);Vproduct_proof dut;unsigned long checked=0;
 dut.negative_control=0;
-for(unsigned fmt=0;fmt<5;++fmt)for(unsigned a=0;a<256;++a)for(unsigned b=0;b<256;++b)for(unsigned t=0;t<32;++t)for(unsigned p=0;p<2;++p){
+for(unsigned fmt=0;fmt<8;++fmt)for(unsigned a=0;a<256;++a)for(unsigned b=0;b<256;++b)for(unsigned t=0;t<32;++t)for(unsigned p=0;p<2;++p){
+if(fmt>4 && p==0)continue;
 dut.fmt=fmt;dut.in_a=a;dut.in_b=b;dut.trunc=t;dut.poison=p;dut.eval();
 if(!dut.ok){printf("FAIL %u %u %u %u %u\\n",fmt,a,b,t,p);return 1;}++checked;}
 // A deliberately wrong production product bit must be detected.
@@ -40,11 +41,11 @@ printf("PASS %lu exhaustive product inputs; inverted product bit rejected\\n",ch
         subprocess.run(['verilator','--cc','--exe','--build','-j','2','-Wno-fatal','--top-module','product_proof','--Mdir',str(work),str(source),str(cpp)],cwd=ROOT,stdout=f,stderr=subprocess.STDOUT,check=True,timeout=120)
     with log.open('w') as f:
         result=subprocess.run([str(work/'Vproduct_proof')],cwd=ROOT,stdout=f,stderr=subprocess.STDOUT,timeout=120)
-    passed=result.returncode==0 and 'PASS 20971520 exhaustive product inputs; inverted product bit rejected' in log.read_text()
+    passed=result.returncode==0 and 'PASS 27262976 exhaustive product inputs; inverted product bit rejected' in log.read_text()
     paths=['rtl/mx_pe.sv','formal/arithmetic_reference.svh','formal/product_check.svh','scripts/product_exhaustive.py']
-    report={'status':'pass' if passed else 'fail','input_assignments':20971520,
+    report={'status':'pass' if passed else 'fail','input_assignments':27262976,
             'method':'exhaustive compiled combinational enumeration with independent integer reference',
-            'scope':'One lane: all 256 A/B byte encodings, five supported formats, 32 truncations, poison on/off. Checks signed 70-bit product and all four special/approximation flags. Not PE sequencing or full arithmetic equivalence.',
+            'scope':'One lane: all 256 A/B byte encodings, five supported formats with poison on/off, plus all three reserved formats with required poison, and 32 truncations. Checks signed 70-bit product and all four special/approximation flags. Not PE sequencing or full arithmetic equivalence.',
             'negative_control':'Inverted production product bit must fail on a known zero input',
             'source_sha256':{p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in paths},
             'harness_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'log':str(log.relative_to(ROOT))}

@@ -74,13 +74,14 @@ endmodule
             for port,width in [('sum3',70),('conversion_oracle',37)]:
                 bits=ports[port]['bits']
                 if len(bits)!=width or not all(type(b) is int for b in bits):raise RuntimeError('Lost symbolic port '+port)
-            sat='sat -seq 2 -timeout 60 -set-assumes -prove-asserts -verify' if negative else 'sat -seq 2 -tempinduct -maxsteps 5 -timeout 60 -set-assumes -prove-asserts -verify'
+            sat='sat -seq 2 -timeout 60 -set-assumes -prove-asserts' if negative else 'sat -seq 2 -tempinduct -maxsteps 5 -timeout 60 -set-assumes -prove-asserts -verify'
             with log.open('w') as f:
                 try:
                     p=subprocess.run([backend,'-Q','-T','-p',f'read_json {design.relative_to(ROOT)}; '+sat],cwd=ROOT,stdout=f,stderr=subprocess.STDOUT,timeout=240,preexec_fn=limit)
                     text=log.read_text()
-                    ok=(p.returncode!=0 and ('model found for base case: FAIL!' in text or 'model found: FAIL!' in text)) if negative else (p.returncode==0 and 'Induction step proven: SUCCESS!' in text)
+                    ok=(p.returncode==0 and ('model found for base case: FAIL!' in text or 'model found: FAIL!' in text)) if negative else (p.returncode==0 and 'Induction step proven: SUCCESS!' in text)
                 except subprocess.TimeoutExpired:ok=False
+            if negative and not ok:print(log.read_text()[-3500:],flush=True)
             results.append({'stages':stages,'negative_control':negative,'status':'pass' if ok else 'unclosed'})
             print(name,results[-1]['status'],flush=True)
     if any(hashlib.sha256((ROOT/p).read_bytes()).hexdigest()!=h for p,h in hashes.items()):raise RuntimeError('Sources changed')
